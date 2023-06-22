@@ -1,0 +1,26 @@
+import BackButton from "@/components/back-button";
+import SideSlipCreateForm from "@/components/sideSlip-create-form";
+import SideSlipUpdateForm from "@/components/sideSlip-update-form";
+import { getVehicleById } from "@/lib/db/vehicle";
+
+const SideSlipResultPage = async ({ params }: { params: { id: string } }) => {
+  const vehicleId = Number(params.id);
+  const { vehicle } = await getVehicleById(vehicleId);
+
+  const hasResult = !!vehicle?.sideSlip;
+
+  if (!vehicle) {
+    return <div>vehicle not found</div>;
+  }
+  return (
+    <section className="">
+      <BackButton to={`/results/${vehicleId}`} />
+      {hasResult ? (
+        <SideSlipUpdateForm sideSlipResult={vehicle.sideSlip!} />
+      ) : (
+        <SideSlipCreateForm vehicleId={vehicle.id} />
+      )}
+    </section>
+  );
+};
+export default SideSlipResultPage;
