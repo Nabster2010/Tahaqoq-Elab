@@ -7,7 +7,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   Table,
@@ -21,6 +20,11 @@ import { siteConfig } from "@/config/site";
 import { getPaginatedManufacturers } from "@/lib/db/manufacturer";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+
+export const metadata = {
+  title: "Manufacturers",
+  description: "add and edit Vehicles Manufacturers",
+};
 
 const ManufacturersPage = async ({
   searchParams,

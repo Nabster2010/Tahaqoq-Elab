@@ -3,6 +3,11 @@ import { canIssueReport } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
 import ReportViewer from "./ReportViewer";
 
+export const metadata = {
+  title: "Report",
+  description: "Vehicle test report as pdf",
+};
+
 const page = async ({ params }: { params: { id: string } }) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);

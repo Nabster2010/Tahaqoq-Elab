@@ -21,6 +21,11 @@ import { getPaginatedVehicleTypes } from "@/lib/db/vehicleType";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+export const metadata = {
+  title: " Vehicle Types",
+  description: "Add and update vehicle types",
+};
+
 const VehicleTypesPage = async ({
   searchParams,
 }: {

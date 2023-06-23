@@ -1,7 +1,5 @@
-import { AuthProvider } from "@/components/AuthProvider";
 import { SiteHeader } from "@/components/site-header";
 import { TailwindIndicator } from "@/components/tailwind-indicator";
-import { Toaster } from "@/components/ui/toaster";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (

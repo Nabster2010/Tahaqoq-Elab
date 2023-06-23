@@ -20,8 +20,11 @@ import { siteConfig } from "@/config/site";
 import { getPaginatedCustomers } from "@/lib/db/customer";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Customers",
+  description: "add and edit Customers",
+};
 const CustomersPage = async ({
   searchParams,
 }: {

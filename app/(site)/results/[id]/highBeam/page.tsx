@@ -3,6 +3,10 @@ import HighBeamLevelCreateForm from "@/components/highBeamLevel-create-form";
 import HighBeamLevelUpdateForm from "@/components/highBeamLevel-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
 
+export const metadata = {
+  title: "HighBeam Results",
+  description: "Add HighBeam results for Vehicle",
+};
 const HighBeamLevelResultPage = async ({
   params,
 }: {

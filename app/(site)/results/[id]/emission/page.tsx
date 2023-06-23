@@ -6,6 +6,11 @@ import { getVehicleById } from "@/lib/db/vehicle";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Emission Results",
+  description: "Add Emission results for Vehicle",
+};
+
 const EmissionResultPage = async ({ params }: { params: { id: string } }) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);

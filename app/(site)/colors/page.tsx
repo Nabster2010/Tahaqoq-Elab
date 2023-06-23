@@ -17,11 +17,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { siteConfig } from "@/config/site";
-import { authOptions } from "@/lib/auth";
 import { getPaginatedColors } from "@/lib/db/color";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Colors",
+  description: "add and edit colors",
+};
 const ColorsPage = async ({
   searchParams,
 }: {

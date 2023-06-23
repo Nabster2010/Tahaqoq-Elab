@@ -3,6 +3,10 @@ import VisualInspectionCreateForm from "@/components/visualInspection-create-for
 import VisualInspectionUpdateForm from "@/components/visualInspection-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
 
+export const metadata = {
+  title: "Visual Results",
+  description: "Add Visual inspection results for Vehicle",
+};
 const VisualInspectionResultPage = async ({
   params,
 }: {

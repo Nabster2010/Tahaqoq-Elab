@@ -5,6 +5,10 @@ import { getColors } from "@/lib/db/color";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getVehicleTypes } from "@/lib/db/vehicleType";
 
+export const metadata = {
+  title: "Vehicle Info Results",
+  description: "Add Vehicle Info results for Vehicle",
+};
 const VehicleInfoResultPage = async ({
   params,
 }: {

@@ -1,12 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
 import { UserAuthForm } from "@/components/login-form";
-import { Card, CardHeader } from "@/components/ui/card";
 import Logo from "@/components/Logo";
+import SubTitle from "@/components/SubTitle";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -19,9 +16,8 @@ export default function LoginPage() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <Logo className="mx-auto" />
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome back
-          </h1>
+          <SubTitle className="pb-4 text-3xl ">TAHAQOQ</SubTitle>
+          <h1 className="text-xl font-semibold tracking-tight">Welcome back</h1>
           <p className="text-sm text-muted-foreground">
             Enter your credentials to sign in to your account
           </p>

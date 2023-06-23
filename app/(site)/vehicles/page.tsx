@@ -25,6 +25,11 @@ import { ExtendedVehicle } from "@/types";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+  title: "Vehicles",
+  description: "List all  Vehicle",
+};
+
 const VehiclesPage = async ({
   searchParams,
 }: {

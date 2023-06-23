@@ -4,9 +4,12 @@ import Title from "@/components/Title";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getAppliedTests, slugify } from "@/lib/helpers";
-
 import { ExtendedVehicle } from "@/types";
 
+export const metadata = {
+  title: "Results",
+  description: "Add inspection results for Vehicle",
+};
 const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
