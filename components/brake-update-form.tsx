@@ -33,6 +33,7 @@ import { Brake } from "@prisma/client";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
   const router = useRouter();
@@ -82,9 +83,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">
-                Update Brake Level results
-              </h1>
+              <SubTitle>Update Brake Level results</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -99,7 +98,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>
@@ -109,7 +108,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                 <TableRow>
                   <TableCell className="font-medium">Front Brake</TableCell>
                   <TableCell> &ge; {testLimits.mainBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="front"
@@ -145,7 +144,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                 <TableRow>
                   <TableCell className="font-medium">Rear Brake</TableCell>
                   <TableCell> &ge; {testLimits.mainBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="rear"
@@ -181,7 +180,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                 <TableRow>
                   <TableCell className="font-medium">Parking Brake</TableCell>
                   <TableCell> &ge; {testLimits.parkingBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="parking"

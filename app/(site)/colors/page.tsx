@@ -53,7 +53,7 @@ const ColorsPage = async ({
           />
           <Link
             href="/colors/create"
-            className={cn(buttonVariants({}), "ml-auto")}
+            className={cn(buttonVariants({}), "ml-auto w-full md:w-auto")}
           >
             Create New
           </Link>

@@ -31,6 +31,7 @@ import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import { Textarea } from "./ui/textarea";
+import SubTitle from "./SubTitle";
 
 type VehicleInfoCreateFormProps = {
   vehicleId: number;
@@ -93,9 +94,7 @@ const VehicleInfoCreateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">
-                Add vehicleInfo results
-              </h1>
+              <SubTitle>Add vehicleInfo results</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"

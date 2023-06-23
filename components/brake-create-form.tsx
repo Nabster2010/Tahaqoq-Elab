@@ -32,6 +32,7 @@ import { getBrakeTestResult } from "@/lib/helpers";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const router = useRouter();
@@ -80,9 +81,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">
-                Add Brake Level results
-              </h1>
+              <SubTitle>Add Brake Level results</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -97,7 +96,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>
@@ -107,7 +106,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                 <TableRow>
                   <TableCell className="font-medium">Front Brake</TableCell>
                   <TableCell> &ge; {testLimits.mainBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="front"
@@ -143,7 +142,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                 <TableRow>
                   <TableCell className="font-medium">Rear Brake</TableCell>
                   <TableCell> &ge; {testLimits.mainBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="rear"
@@ -179,7 +178,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                 <TableRow>
                   <TableCell className="font-medium">Parking Brake</TableCell>
                   <TableCell> &ge; {testLimits.parkingBrake}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="parking"

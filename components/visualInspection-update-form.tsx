@@ -49,6 +49,7 @@ import {
 } from "./ui/accordion";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
+import SubTitle from "./SubTitle";
 
 const VisualInspectionUpateForm = ({
   visualInspectionResult,
@@ -102,9 +103,7 @@ const VisualInspectionUpateForm = ({
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-          <h1 className="mt-8 mb-8 text-xl font-bold ">
-            Update Visual Inspection test results
-          </h1>
+          <SubTitle>Update Visual Inspection test results</SubTitle>
 
           <Button
             disabled={isPending}
@@ -152,8 +151,8 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
-                      <TableHead className="w-8">More</TableHead>
+                      <TableHead className="w-16 ">Result</TableHead>
+                      <TableHead className="w-8 ">More</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>

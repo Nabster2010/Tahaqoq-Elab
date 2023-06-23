@@ -32,6 +32,7 @@ import { updateSideSlipAction } from "@/lib/serverActions/_sideSlipAction";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const SideSlipUpdateForm = ({
   sideSlipResult,
@@ -81,9 +82,7 @@ const SideSlipUpdateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">
-                Update SideSlip Level results
-              </h1>
+              <SubTitle>Update SideSlip Result</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -98,7 +97,7 @@ const SideSlipUpdateForm = ({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>
@@ -108,7 +107,7 @@ const SideSlipUpdateForm = ({
                 <TableRow>
                   <TableCell className="font-medium">Reading </TableCell>
                   <TableCell> &le; {testLimits.sideSlip}</TableCell>
-                  <TableCell>
+                  <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
                       name="reading"

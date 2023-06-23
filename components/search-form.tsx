@@ -16,14 +16,13 @@ const SearchForm = ({ action, defaultValue }: SearchFormProps) => {
       // action={action}
       className="flex items-center w-full gap-2 md:max-w-lg"
     >
-      <div className="relative">
-        <Input
-          type={"search"}
-          name="search"
-          // defaultValue={defaultValue}
-          placeholder={"Search"}
-        />
-      </div>
+      <Input
+        type={"search"}
+        name="search"
+        // defaultValue={defaultValue}
+        placeholder={"Search"}
+      />
+
       <Button variant={"secondary"} type={"submit"}>
         <Icons.search className="w-6 h-6" />
       </Button>

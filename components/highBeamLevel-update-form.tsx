@@ -31,6 +31,7 @@ import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
 import { updateHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAction";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const HighBeamLevelUpdateForm = ({
   highBeamLevelResult,
@@ -83,7 +84,7 @@ const HighBeamLevelUpdateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">Update Result</h1>
+              <SubTitle>Update HighBeam Level Result</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -98,7 +99,7 @@ const HighBeamLevelUpdateForm = ({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>

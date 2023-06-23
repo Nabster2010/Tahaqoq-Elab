@@ -31,6 +31,7 @@ import { createNewHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevel
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const router = useRouter();
@@ -78,7 +79,7 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">Add Result</h1>
+              <SubTitle>Add HighBeam Level Result</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -93,7 +94,7 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>

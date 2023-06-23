@@ -36,6 +36,7 @@ import { Emission } from "@prisma/client";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 const EmissionUpdateForm = ({
   emissionResult,
@@ -94,7 +95,7 @@ const EmissionUpdateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">Update Result</h1>
+              <SubTitle>Update Emission Result</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"
@@ -109,7 +110,7 @@ const EmissionUpdateForm = ({
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="text-right">Test</TableHead>
+                  <TableHead className="text-left">Test</TableHead>
                   <TableHead>Limit</TableHead>
                   <TableHead>Value</TableHead>
                   <TableHead className="text-right">Result</TableHead>
@@ -120,10 +121,10 @@ const EmissionUpdateForm = ({
                   <>
                     <TableRow>
                       <TableCell className="font-medium">
-                        Carbon Monoxide{" "}
+                        Carbon Monoxide
                       </TableCell>
                       <TableCell> &le; {testLimits.co}</TableCell>
-                      <TableCell>
+                      <TableCell className="px-0 md:px-3">
                         <FormField
                           control={form.control}
                           name="co"
@@ -158,10 +159,10 @@ const EmissionUpdateForm = ({
                     </TableRow>
                     <TableRow>
                       <TableCell className="font-medium">
-                        Hydrocarbons{" "}
+                        Hydrocarbons
                       </TableCell>
                       <TableCell> &le; {testLimits.hc}</TableCell>
-                      <TableCell>
+                      <TableCell className="px-0 md:px-3">
                         <FormField
                           control={form.control}
                           name="hc"
@@ -202,7 +203,7 @@ const EmissionUpdateForm = ({
                       Diesel Carbon Particles
                     </TableCell>
                     <TableCell> &le; {testLimits.diesel}</TableCell>
-                    <TableCell>
+                    <TableCell className="px-0 md:px-3">
                       <FormField
                         control={form.control}
                         name="diesel"

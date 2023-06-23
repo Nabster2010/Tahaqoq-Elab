@@ -45,11 +45,11 @@ const VehiclesPage = async ({
     pageSize
   );
 
-  const searchAction = async (data: FormData) => {
-    "use server";
-    const search = data.get("search")?.toString();
-    redirect(`/vehicles?search=${search}&pageSize=${pageSize}`);
-  };
+  // const searchAction = async (data: FormData) => {
+  //   "use server";
+  //   const search = data.get("search")?.toString();
+  //   redirect(`/vehicles?search=${search}&pageSize=${pageSize}`);
+  // };
 
   return (
     <Card className="mt-4 ">
@@ -73,7 +73,7 @@ const VehiclesPage = async ({
         <Table>
           <TableHeader>
             <TableRow className="font-bold ">
-              <TableHead className="w-fit ">Vehicle No</TableHead>
+              <TableHead className="w-fit ">No</TableHead>
               <TableHead className="hidden md:table-cell">Vin</TableHead>
               <TableHead className="hidden md:table-cell">Request No</TableHead>
               <TableHead className="hidden md:table-cell">Bayan No</TableHead>

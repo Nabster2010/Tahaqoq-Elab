@@ -42,9 +42,14 @@ export default function CustomerSelectComboBox({
           aria-expanded={open}
           className="justify-between "
         >
-          {name
-            ? customers.find((customer) => customer.name === name)?.name
-            : "Select Customer..."}
+          {name ? (
+            <span>
+              {name}
+              {/* {customers.find((customer) => customer.name === name)?.name} */}
+            </span>
+          ) : (
+            "Select Customer..."
+          )}
           <ChevronsUpDown className="w-4 h-4 ml-2 opacity-50 shrink-0" />
         </Button>
       </PopoverTrigger>

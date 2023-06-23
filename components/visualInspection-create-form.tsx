@@ -48,6 +48,7 @@ import {
 import { cn } from "@/lib/utils";
 import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
+import SubTitle from "./SubTitle";
 
 const VisualInspectionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const defaultValues = transferObjects(visualInspectionData);
@@ -93,9 +94,7 @@ const VisualInspectionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-          <h1 className="mt-8 mb-8 text-xl font-bold ">
-            Add Visual Inspection test results
-          </h1>
+          <SubTitle>Add Visual Inspection test results</SubTitle>
 
           <Button
             disabled={isPending}

@@ -28,9 +28,9 @@ import { VehicleInfoSchema } from "@/lib/validations/vehicleInfo";
 import { updateVehicleInfoAction } from "@/lib/serverActions/_vehicleInfoActions";
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
+import SubTitle from "./SubTitle";
 
 type VehicleInfoUpdateFormProps = {
   colors: Color[];
@@ -95,9 +95,7 @@ const VehicleInfoUpdateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <h1 className="mt-8 mb-8 text-xl font-bold ">
-                Update vehicleInfo
-              </h1>
+              <SubTitle>Update vehicleInfo</SubTitle>
               <Button
                 disabled={isPending}
                 className="w-full sm:w-auto"

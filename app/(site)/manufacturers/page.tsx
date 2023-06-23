@@ -40,12 +40,12 @@ const ManufacturersPage = async ({
     <Card className="mt-4">
       <CardHeader className="space-y-4">
         <Title>Manufacturers</Title>
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+        <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm searchParams={searchParams} />
 
           <Link
             href="/manufacturers/create"
-            className={cn(buttonVariants({}), "ml-auto")}
+            className={cn(buttonVariants({}), "ml-auto w-full md:w-auto")}
           >
             Create New
           </Link>
