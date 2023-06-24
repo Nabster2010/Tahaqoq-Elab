@@ -45,10 +45,10 @@ export async function updateUser(id: User["id"], data: any) {
     const user = await db.user.update({
       where: {
         id: id,
-        email: data.email,
       },
       data: {
         ...data,
+        role: data.role.toLowerCase() || "user",
       },
     });
     return { user };

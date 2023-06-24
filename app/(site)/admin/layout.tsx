@@ -6,16 +6,10 @@ export const metadata = {
 };
 const AdminLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
-  if (!session) {
-    notFound();
+  if (!session || session.user.role.toLowerCase() !== "admin") {
+    return notFound();
   }
-  if (session.user.role !== "admin") {
-    return (
-      <div className="mt-16 text-2xl font-bold text-center">
-        You are not authorized to view this page
-      </div>
-    );
-  }
+
   return <div>{children}</div>;
 };
 

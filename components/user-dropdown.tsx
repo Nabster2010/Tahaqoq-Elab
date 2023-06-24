@@ -28,7 +28,7 @@ const UserDropDown = () => {
         <DropdownMenuItem>{session?.user.name}</DropdownMenuItem>
         <DropdownMenuSeparator />
         {session?.user.role === "admin" && (
-          <DropdownMenuItem>
+          <DropdownMenuItem asChild>
             <Link href={"/admin"}>Admin</Link>
           </DropdownMenuItem>
         )}

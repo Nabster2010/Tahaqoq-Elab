@@ -19,11 +19,13 @@ import {
   FileText,
   Search,
   ChevronRight,
+  Trash2,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
 
 export const Icons = {
+  trash: Trash2,
   chevronRight: ChevronRight,
   search: Search,
   download: Save,
