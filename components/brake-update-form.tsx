@@ -18,7 +18,6 @@ import { Icons } from "@/components/icons";
 import { BrakeSchema } from "@/lib/validations/brake";
 import { updateBrakeTestAction } from "@/lib/serverActions/_brakeActions";
 import { useRouter } from "next/navigation";
-import { testLimits } from "@/config/testConfig";
 import {
   Table,
   TableBody,

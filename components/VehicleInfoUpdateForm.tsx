@@ -167,7 +167,7 @@ const VehicleInfoUpdateForm = ({
                 name="engine"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Engine:</FormLabel>
+                    <FormLabel variant="optional">Engine:</FormLabel>
                     <FormControl>
                       <Input placeholder="Engine " {...field} />
                     </FormControl>
@@ -180,7 +180,7 @@ const VehicleInfoUpdateForm = ({
                 name="engineSize"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Engine Size:</FormLabel>
+                    <FormLabel variant="optional">Engine Size:</FormLabel>
                     <FormControl>
                       <Input placeholder="Engine Size " {...field} />
                     </FormControl>

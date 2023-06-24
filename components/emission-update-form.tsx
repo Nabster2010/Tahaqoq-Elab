@@ -1,5 +1,4 @@
 "use client";
-
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,10 +15,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { EmissionSchema } from "@/lib/validations/emission";
-import {
-  createNewEmissionAction,
-  updateEmissionAction,
-} from "@/lib/serverActions/_emissionTestActions";
+import { updateEmissionAction } from "@/lib/serverActions/_emissionTestActions";
 import { useRouter } from "next/navigation";
 import {
   Table,
@@ -29,11 +25,9 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { testLimits } from "@/config/testConfig";
 import Indicator from "./Indicator";
 import { getEmissionResult } from "@/lib/helpers";
 import { Emission } from "@prisma/client";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";

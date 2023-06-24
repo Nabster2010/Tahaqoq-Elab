@@ -23,7 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { testLimits } from "@/config/testConfig";
 import Indicator from "./Indicator";
 import { getHighBeamLevelResult } from "@/lib/helpers";
 import { HighBeamLevel } from "@prisma/client";

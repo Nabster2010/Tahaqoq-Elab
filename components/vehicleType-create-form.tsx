@@ -28,7 +28,6 @@ import {
 } from "./ui/select";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
-import { Textarea } from "./ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const VehicleTypeCreateForm = ({

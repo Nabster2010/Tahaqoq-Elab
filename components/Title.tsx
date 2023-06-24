@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import React, { HtmlHTMLAttributes } from "react";
+import React from "react";
 
 type TitleProps = {
   children: React.ReactNode;

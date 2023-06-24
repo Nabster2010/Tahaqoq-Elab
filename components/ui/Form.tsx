@@ -11,7 +11,8 @@ import {
 } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
-import { Label } from "@/components/ui/label";
+import { Label, labelVariants } from "@/components/ui/label";
+import { VariantProps } from "class-variance-authority";
 
 const Form = FormProvider;
 
@@ -84,16 +85,24 @@ const FormItem = React.forwardRef<
 });
 FormItem.displayName = "FormItem";
 
+interface FormLalProps
+  extends React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>,
+    VariantProps<typeof labelVariants> {}
+
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({ className, ...props }, ref) => {
+  FormLalProps
+>(({ className, variant, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(
+        labelVariants({ variant }),
+        error && "text-destructive",
+        className
+      )}
       htmlFor={formItemId}
       {...props}
     />

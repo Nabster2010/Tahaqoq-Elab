@@ -29,9 +29,7 @@ import { Icons } from "@/components/icons";
 import { useSession } from "next-auth/react";
 import CustomerSelectComboBox from "./select-comboBox";
 import { useRouter } from "next/navigation";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
-import { Session } from "next-auth";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type VehicleCreateFormProps = {

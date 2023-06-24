@@ -23,15 +23,12 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { testLimits } from "@/config/testConfig";
 import Indicator from "./Indicator";
 import { getSideSlipResult } from "@/lib/helpers";
 import { SideSlipSchema } from "@/lib/validations/sideSlip";
 import { createNewSideSlipAction } from "@/lib/serverActions/_sideSlipAction";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
-import { Subtitles } from "lucide-react";
 import SubTitle from "./SubTitle";
 import LimitDescription from "./LimitDescription";
 

@@ -27,7 +27,6 @@ import { Icons } from "@/components/icons";
 import { VehicleInfoSchema } from "@/lib/validations/vehicleInfo";
 import { createNewVehicleInfoAction } from "@/lib/serverActions/_vehicleInfoActions";
 import { useRouter } from "next/navigation";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import { Textarea } from "./ui/textarea";
@@ -166,7 +165,7 @@ const VehicleInfoCreateForm = ({
                 name="engine"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Engine:</FormLabel>
+                    <FormLabel variant="optional">Engine:</FormLabel>
                     <FormControl>
                       <Input placeholder="Engine " {...field} />
                     </FormControl>
@@ -179,7 +178,7 @@ const VehicleInfoCreateForm = ({
                 name="engineSize"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Engine Size:</FormLabel>
+                    <FormLabel variant="optional">Engine Size:</FormLabel>
                     <FormControl>
                       <Input placeholder="Engine Size " {...field} />
                     </FormControl>

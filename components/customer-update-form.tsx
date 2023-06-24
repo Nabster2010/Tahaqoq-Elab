@@ -95,7 +95,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone No:</FormLabel>
+                    <FormLabel variant="optional">Phone No:</FormLabel>
                     <FormControl>
                       <Input placeholder="Phone No " {...field} />
                     </FormControl>
@@ -108,7 +108,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email :</FormLabel>
+                    <FormLabel variant="optional">Email :</FormLabel>
                     <FormControl>
                       <Input placeholder="name@example.com" {...field} />
                     </FormControl>
@@ -121,7 +121,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
                 name="address"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Customer Address:</FormLabel>
+                    <FormLabel variant="optional">Customer Address:</FormLabel>
                     <FormControl>
                       <Input placeholder="Customer Address" {...field} />
                     </FormControl>
@@ -134,7 +134,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
                 name="website"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Custom Website:</FormLabel>
+                    <FormLabel variant="optional">Custom Website:</FormLabel>
                     <FormControl>
                       <Input placeholder=" Customer website" {...field} />
                     </FormControl>
@@ -147,7 +147,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
                 name="customerType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Customer Type</FormLabel>
+                    <FormLabel>Customer Type:</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}

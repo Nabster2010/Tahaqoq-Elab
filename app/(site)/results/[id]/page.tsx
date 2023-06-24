@@ -52,15 +52,21 @@ const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
         <CardFooter className="justify-center gap-2 px-4 pt-8 pb-2 md:px-4 md:pb-2 ">
           <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
             ⚪️
-            <Label className="text-xs">Incomplete</Label>
+            <Label variant="optional" className="text-xs">
+              Incomplete
+            </Label>
           </div>
           <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
             🟢
-            <Label className="text-xs">Pass</Label>
+            <Label variant="optional" className="text-xs">
+              Pass
+            </Label>
           </div>
           <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
             🔴
-            <Label className="text-xs">Fail</Label>
+            <Label variant="optional" className="text-xs">
+              Fail
+            </Label>
           </div>
         </CardFooter>
       </Card>
