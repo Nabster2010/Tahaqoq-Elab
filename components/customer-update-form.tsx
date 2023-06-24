@@ -71,7 +71,9 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Update Customer</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Update Customer
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

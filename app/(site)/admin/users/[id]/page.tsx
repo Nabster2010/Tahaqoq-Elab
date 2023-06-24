@@ -58,7 +58,9 @@ const UserPage = async ({
       <BackButton to="/admin/users" />
       <Card className="max-w-4xl mx-auto mt-8">
         <CardHeader>
-          <CardTitle>Update User</CardTitle>
+          <CardTitle className="underline underline-offset-4">
+            Update User
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form action={updateAction} className="space-y-8">

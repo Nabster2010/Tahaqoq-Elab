@@ -60,7 +60,9 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Update Color</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Update Color
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {" "}

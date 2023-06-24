@@ -69,7 +69,9 @@ const ManufacturerCreateForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create New Manufacturer</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Create New Manufacturer
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

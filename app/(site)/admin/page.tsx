@@ -7,7 +7,9 @@ const AdminPage = () => {
   return (
     <Card className="mt-8">
       <CardHeader>
-        <CardTitle>Admin Section</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Admin Section
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Link

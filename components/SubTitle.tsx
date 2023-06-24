@@ -11,7 +11,7 @@ const SubTitle = ({
   return (
     <h3
       className={cn(
-        "mt-8 mb-8 text-lg font-semibold leading-none tracking-tight",
+        "mt-8 underline underline-offset-4 mb-8 text-lg font-semibold leading-none tracking-tight",
         className
       )}
     >

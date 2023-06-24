@@ -73,7 +73,9 @@ const VehicleTypeCreateForm = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create New Vehicle Type</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Create New Vehicle Type
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

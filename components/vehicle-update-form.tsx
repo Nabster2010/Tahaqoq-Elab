@@ -89,7 +89,9 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Update Vehicle - {slugify(vehicle.id)}</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Update Vehicle - {slugify(vehicle.id)}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

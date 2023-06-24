@@ -77,7 +77,9 @@ const VehicleTypeUpdateForm = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Update Vehicle Type</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Update Vehicle Type
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

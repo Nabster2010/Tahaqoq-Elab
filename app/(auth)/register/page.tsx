@@ -18,7 +18,7 @@ export default function RegisterPage() {
           <Logo className="mx-auto" />
           <SubTitle className="pb-4 text-3xl ">TAHAQOQ</SubTitle>
           <h1 className="text-xl font-semibold tracking-tight">Welcome back</h1>
-          <p className="text-sm text-muted-foreground">Signup</p>
+          <p className="font-semibold  text-muted-foreground">Signup</p>
         </div>
         <SignUpForm />
         <p className="px-8 text-sm text-center text-muted-foreground">

@@ -72,7 +72,9 @@ const CustomerCreateForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create New Customer</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Create New Customer
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>

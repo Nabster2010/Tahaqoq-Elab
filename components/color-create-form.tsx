@@ -61,7 +61,9 @@ const ColorCreateForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create New Color</CardTitle>
+        <CardTitle className="underline underline-offset-4">
+          Create New Color
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
