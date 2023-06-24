@@ -195,7 +195,9 @@ const VisualInspectionUpateForm = ({
                                           PASS
                                         </SelectItem>
                                         <SelectItem value={"FAIL"}>
-                                          FAIL
+                                          <span className="text-destructive">
+                                            FAIL
+                                          </span>
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
@@ -312,7 +314,9 @@ const VisualInspectionUpateForm = ({
                                           PASS
                                         </SelectItem>
                                         <SelectItem value={"FAIL"}>
-                                          FAIL
+                                          <span className="text-destructive">
+                                            FAIL
+                                          </span>
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
@@ -429,7 +433,9 @@ const VisualInspectionUpateForm = ({
                                           PASS
                                         </SelectItem>
                                         <SelectItem value={"FAIL"}>
-                                          FAIL
+                                          <span className="text-destructive">
+                                            FAIL
+                                          </span>
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
@@ -546,7 +552,9 @@ const VisualInspectionUpateForm = ({
                                           PASS
                                         </SelectItem>
                                         <SelectItem value={"FAIL"}>
-                                          FAIL
+                                          <span className="text-destructive">
+                                            FAIL
+                                          </span>
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
@@ -662,7 +670,9 @@ const VisualInspectionUpateForm = ({
                                         PASS
                                       </SelectItem>
                                       <SelectItem value={"FAIL"}>
-                                        FAIL
+                                        <span className="text-destructive">
+                                          FAIL
+                                        </span>
                                       </SelectItem>
                                     </SelectContent>
                                   </Select>
@@ -776,7 +786,9 @@ const VisualInspectionUpateForm = ({
                                           PASS
                                         </SelectItem>
                                         <SelectItem value={"FAIL"}>
-                                          FAIL
+                                          <span className="text-destructive">
+                                            FAIL
+                                          </span>
                                         </SelectItem>
                                       </SelectContent>
                                     </Select>
