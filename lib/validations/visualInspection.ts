@@ -54,6 +54,7 @@ export const VisualInspectionSchema = z.object({
   truckBarriers: z.string().default("PASS"),
   wheelDeviation: z.string().default("PASS"),
   fifthWheel: z.string().default("PASS"),
+  gaseousPollutants: z.string().default("PASS"),
   exhaustGasesGasoline: z.string().default("PASS"),
   exhaustGasesDiesel: z.string().default("PASS"),
   horn: z.string().default("PASS"),

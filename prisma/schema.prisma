@@ -128,7 +128,7 @@ model Emission {
 model HighBeamLevel {
   vehicleId Int       @id
   vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  level     Float?
+//  level     Float?
   left      Float?
   right     Float?
   result    String?   @default("PASS")
@@ -223,6 +223,7 @@ model VisualInspection {
   truckBarriers        String    @default("PASS")
   wheelDeviation       String    @default("PASS")
   fifthWheel           String    @default("PASS")
+  gaseousPollutants    String    @default("PASS")
   exhaustGasesGasoline String    @default("PASS")
   exhaustGasesDiesel   String    @default("PASS")
   horn                 String    @default("PASS")

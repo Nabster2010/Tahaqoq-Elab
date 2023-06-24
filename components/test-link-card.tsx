@@ -18,9 +18,9 @@ const TestLinkCard = ({ href, test, status }: TestLinkCardProps) => {
       href={href}
       className={cn(
         "relative flex flex-col border-b-[7px] items-center p-2 justify-center w-36 h-32 gap-3 transition-transform rounded-lg shadow-md bg-border hover:scale-105",
-        status === "INCOMPLETE" && "border-gray-400 ",
+        status === "INCOMPLETE" && "border-slate-300 ",
         status === "PASS" && "border-green-700 ",
-        status === "FAIL" && "border-destructive "
+        status === "FAIL" && "border-red-600 "
       )}
     >
       <>

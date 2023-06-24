@@ -46,7 +46,6 @@ const HighBeamLevelUpdateForm = ({
     defaultValues: {
       left: highBeamLevelResult.left || 0,
       right: highBeamLevelResult.right || 0,
-      level: highBeamLevelResult.level || 0,
       vehicleId: highBeamLevelResult.vehicleId,
       result: highBeamLevelResult.result || "PASS",
     },
@@ -169,38 +168,6 @@ const HighBeamLevelUpdateForm = ({
                   </TableCell>
                   <TableCell className="flex justify-end">
                     <Indicator value={form.watch("right")} test="highBeam" />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Level</TableCell>
-                  <TableCell>
-                    <LimitDescription limit="highBeam" />
-                  </TableCell>
-                  <TableCell>
-                    <FormField
-                      control={form.control}
-                      name="level"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl
-                            onChange={(e) =>
-                              //@ts-ignore
-                              field.onChange(Number(e.target.value))
-                            }
-                          >
-                            <Input
-                              type={"number"}
-                              placeholder="Level"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </TableCell>
-                  <TableCell className="flex justify-end">
-                    <Indicator value={form.watch("level")} test="highBeam" />
                   </TableCell>
                 </TableRow>
               </TableBody>

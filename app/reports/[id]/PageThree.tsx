@@ -365,9 +365,10 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={{
               width: "5%",
               border: "1px solid #e5e5e5",
+              borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
@@ -377,9 +378,10 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={{
               width: "12%",
               border: "1px solid #e5e5e5",
+              borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
@@ -389,9 +391,10 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={{
               width: "8%",
               border: "1px solid #e5e5e5",
+              borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
@@ -401,35 +404,51 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={{
               width: "20%",
               border: "1px solid #e5e5e5",
+              borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
             <Text>فحص استقامة</Text>
-            <Text>وشدة شعاع الانوار</Text>
           </View>
-          <View
-            style={{
-              width: "45%",
-              flexDirection: "row",
-              border: "1px solid #e5e5e5",
-              borderLeft: 0,
-              borderTop: 0,
-              justifyContent: "center",
-              alignItems: "center",
-              height: 40,
-            }}
-          >
-            <Text>{vehicle?.highBeamLevel?.left} cd</Text>
+          {/*  */}
+          <View style={{ width: "45%", flexDirection: "row" }}>
+            <View
+              style={{
+                flex: 1,
+                borderRight: "1px solid #e5e5e5",
+                borderBottom: "1px solid #e5e5e5",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 40,
+              }}
+            >
+              <Text>يمين </Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                borderRight: "1px solid #e5e5e5",
+                borderBottom: "1px solid #e5e5e5",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 40,
+              }}
+            >
+              <Text> يسار</Text>
+            </View>
           </View>
+
+          {/*  */}
           <View
             style={{
               width: "10%",
               border: "1px solid #e5e5e5",
+              borderBottom: "1px solid white",
               borderTop: 0,
-              justifyContent: "center",
+              justifyContent: "flex-end",
               alignItems: "center",
             }}
           >
@@ -441,6 +460,99 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               {vehicle?.highBeamLevel?.result}
             </Text>
           </View>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row-reverse",
+            height: 40,
+          }}
+        >
+          <View
+            style={{
+              width: "5%",
+              border: "1px solid #e5e5e5",
+              borderLeft: 0,
+              borderTop: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          ></View>
+          <View
+            style={{
+              width: "12%",
+              border: "1px solid #e5e5e5",
+              borderLeft: 0,
+              borderTop: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          ></View>
+          <View
+            style={{
+              width: "8%",
+              border: "1px solid #e5e5e5",
+              borderLeft: 0,
+              borderTop: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          ></View>
+          <View
+            style={{
+              width: "20%",
+              border: "1px solid #e5e5e5",
+              borderLeft: 0,
+              borderTop: 0,
+              justifyContent: "flex-start",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                borderTop: 0,
+                flexDirection: "row-reverse",
+              }}
+            >
+              <Text>وشدة شعاع الانوار</Text>
+            </View>
+          </View>
+          <View style={{ width: "45%", flexDirection: "row" }}>
+            <View
+              style={{
+                flex: 1,
+                borderRight: "1px solid #e5e5e5",
+                borderBottom: "1px solid #e5e5e5",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 40,
+              }}
+            >
+              <Text>{vehicle?.highBeamLevel?.right} cd</Text>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                borderRight: "1px solid #e5e5e5",
+                borderBottom: "1px solid #e5e5e5",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 40,
+              }}
+            >
+              <Text>{vehicle?.highBeamLevel?.left} cd</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "10%",
+              border: "1px solid #e5e5e5",
+              borderTop: 0,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          ></View>
         </View>
         {/* tr */}
         <View

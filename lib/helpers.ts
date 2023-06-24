@@ -106,8 +106,8 @@ export const getEmissionResult = (
 export const getHighBeamLevelResult = (
   highBeamResult: Partial<HighBeamLevel>
 ) => {
-  const { left, right, level } = highBeamResult;
-  return [left, right, level].every(
+  const { left, right } = highBeamResult;
+  return [left, right].every(
     (item: any) =>
       item <= testLimits.highBeam.max && item >= testLimits.highBeam.min
   )

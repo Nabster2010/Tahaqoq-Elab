@@ -2362,7 +2362,7 @@ export const categorizedVisualInspectionData = {
     //TODO: add to db or check
     {
       no: 53,
-      name: "GaseousPollutants",
+      name: "gaseousPollutants",
       technicalRequirements: "Gaseous Pollutants",
       placeholder: "",
       standard: "SASO ",

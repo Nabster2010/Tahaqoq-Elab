@@ -23,12 +23,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
-import { testLimits } from "@/config/testConfig";
 import Indicator from "./Indicator";
 import { getHighBeamLevelResult } from "@/lib/helpers";
 import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
 import { createNewHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAction";
-import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";
@@ -42,7 +40,6 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
     defaultValues: {
       left: 0,
       right: 0,
-      level: 0,
       vehicleId: vehicleId,
       result: "PASS",
     },
@@ -91,7 +88,7 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                 )}
                 <span>Create</span>
               </Button>
-            </div>{" "}
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -164,38 +161,6 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                   </TableCell>
                   <TableCell className="flex justify-end">
                     <Indicator value={form.watch("right")} test="highBeam" />
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">Level</TableCell>
-                  <TableCell>
-                    <LimitDescription limit="highBeam" />
-                  </TableCell>
-                  <TableCell>
-                    <FormField
-                      control={form.control}
-                      name="level"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl
-                            onChange={(e) =>
-                              //@ts-ignore
-                              field.onChange(Number(e.target.value))
-                            }
-                          >
-                            <Input
-                              type={"number"}
-                              placeholder="Level"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </TableCell>
-                  <TableCell className="flex justify-end">
-                    <Indicator value={form.watch("level")} test="highBeam" />
                   </TableCell>
                 </TableRow>
               </TableBody>

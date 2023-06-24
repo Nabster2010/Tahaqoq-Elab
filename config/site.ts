@@ -145,6 +145,14 @@ export const siteConfig = {
       id: 5,
       name: "BUS",
     },
+    {
+      id: 6,
+      name: "M/TRUK",
+    },
+    {
+      id: 7,
+      name: "S/TRUCK",
+    },
   ],
   conditions: [
     {

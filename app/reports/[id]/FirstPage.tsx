@@ -1,6 +1,6 @@
 "use client";
 import { siteConfig } from "@/config/site";
-import { getFinalResult } from "@/lib/helpers";
+import { englishDateFormat, getFinalResult } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
 import { Image, Text, View } from "@react-pdf/renderer";
 import { styles } from "./styles";
@@ -80,6 +80,19 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               </View>
               <View style={styles.tableRow}>
                 <View style={[styles.tableHead, { width: "40%" }]}>
+                  <Text>تاريخ الفحص</Text>
+                </View>
+                <View
+                  style={[
+                    styles.tableCol,
+                    { width: "60%", borderRight: "none" },
+                  ]}
+                >
+                  <Text>{englishDateFormat(vehicle?.createdAt!)}</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={[styles.tableHead, { width: "40%" }]}>
                   <Text>رقـم بيان الاستيراد </Text>
                 </View>
                 <View
@@ -104,19 +117,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   <Text>{vehicle.bayanDate}</Text>
                 </View>
               </View>
-              <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
-                  <Text>رقـم الشاسيــة </Text>
-                </View>
-                <View
-                  style={[
-                    styles.tableCol,
-                    { width: "60%", borderRight: "none" },
-                  ]}
-                >
-                  <Text>{vehicle.vin}</Text>
-                </View>
-              </View>
+
               <View style={styles.tableRow}>
                 <View style={[styles.tableHead, { width: "40%" }]}>
                   <Text>رقـم الاحالة </Text>
@@ -209,7 +210,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.vehicleType.description}</Text>
+                  <Text>{vehicle.vehicleInfo.vehicleType.modelType}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
