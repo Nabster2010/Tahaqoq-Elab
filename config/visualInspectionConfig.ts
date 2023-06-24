@@ -2367,7 +2367,7 @@ export const categorizedVisualInspectionData = {
       placeholder: "",
       standard: "SASO ",
       label: "",
-      item: "1,23",
+      item: "1.23",
       arabicDescription: "الملوثات الغازية",
       isHeading: false,
       subHeadung: true,
