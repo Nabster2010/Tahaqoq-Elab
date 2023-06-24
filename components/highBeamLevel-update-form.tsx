@@ -32,6 +32,7 @@ import { updateHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAct
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";
+import LimitDescription from "./LimitDescription";
 
 const HighBeamLevelUpdateForm = ({
   highBeamLevelResult,
@@ -108,7 +109,9 @@ const HighBeamLevelUpdateForm = ({
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">Left </TableCell>
-                  <TableCell> &le; {testLimits.highBeam}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="highBeam" />
+                  </TableCell>
                   <TableCell>
                     <FormField
                       control={form.control}
@@ -133,18 +136,14 @@ const HighBeamLevelUpdateForm = ({
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("level")
-                          ? form.watch("level") <= testLimits.highBeam
-                          : true
-                      }
-                    />
+                    <Indicator value={form.watch("left")} test="highBeam" />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Right </TableCell>
-                  <TableCell> &le; {testLimits.highBeam}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="highBeam" />
+                  </TableCell>
                   <TableCell>
                     <FormField
                       control={form.control}
@@ -169,18 +168,14 @@ const HighBeamLevelUpdateForm = ({
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("right")
-                          ? form.watch("right") <= testLimits.highBeam
-                          : true
-                      }
-                    />
+                    <Indicator value={form.watch("right")} test="highBeam" />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Level</TableCell>
-                  <TableCell> &le; {testLimits.highBeam}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="highBeam" />
+                  </TableCell>
                   <TableCell>
                     <FormField
                       control={form.control}
@@ -205,13 +200,7 @@ const HighBeamLevelUpdateForm = ({
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("level")
-                          ? form.watch("level") <= testLimits.highBeam
-                          : true
-                      }
-                    />
+                    <Indicator value={form.watch("level")} test="highBeam" />
                   </TableCell>
                 </TableRow>
               </TableBody>

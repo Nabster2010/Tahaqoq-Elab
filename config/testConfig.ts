@@ -1,28 +1,19 @@
 export const testLimits = {
-  hc: 1200,
-  co: 3.5,
-  diesel: 40,
-  highBeam: 250,
-  sideSlip: 7,
-  suspension: 100,
-  rearSuspension: 20,
-  frontSuspension: 30,
-  brake: 100,
-  mainBrake: 30,
-  parkingBrake: 20,
-};
-
-const technicalTests = {
-  emission: {},
-  suspension: {
-    standardNo: "",
-    standardArabicNo: "",
-    standardSubNo: "",
-    standardSubNoArabic: "",
-    standardDescription: "",
-    standardArabicDescription: "",
+  hc: {
+    min: 0,
+    max: 1200,
+    unit: " ppm",
   },
-  brake: {},
-  highBeamLevel: {},
-  sideSlip: {},
+  co: {
+    min: 0,
+    max: 3.5,
+    unit: "%",
+  },
+  diesel: { min: 0, max: 40, unit: "%" },
+  highBeam: { min: 0, max: 250, unit: " cd" },
+  sideSlip: { min: 0, max: 7, unit: " m/km" },
+  rearSuspension: { min: 20, max: 100, unit: "%" },
+  frontSuspension: { min: 30, max: 100, unit: "%" },
+  mainBrake: { min: 30, max: 100, unit: "%" },
+  parkingBrake: { min: 20, max: 100, unit: "%" },
 };

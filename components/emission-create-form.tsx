@@ -33,6 +33,7 @@ import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";
+import LimitDescription from "./LimitDescription";
 
 const EmissionCreateForm = ({
   vehicleId,
@@ -117,10 +118,12 @@ const EmissionCreateForm = ({
                 {fuelType === "PETROL" && (
                   <>
                     <TableRow>
-                      <TableCell className="font-medium ">
-                        Carbon Monoxide{" "}
+                      <TableCell className="font-medium">
+                        Carbon Monoxide
                       </TableCell>
-                      <TableCell> &le; {testLimits.co}</TableCell>
+                      <TableCell>
+                        <LimitDescription limit="co" />
+                      </TableCell>
                       <TableCell className="px-0 md:px-3">
                         <FormField
                           control={form.control}
@@ -145,20 +148,16 @@ const EmissionCreateForm = ({
                         />
                       </TableCell>
                       <TableCell className="flex justify-end">
-                        <Indicator
-                          value={
-                            form.watch("co")
-                              ? form.watch("co") <= testLimits.co
-                              : true
-                          }
-                        />
+                        <Indicator value={form.watch("co")} test="co" />
                       </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell className="font-medium">
-                        Hydrocarbons{" "}
+                        Hydrocarbons
                       </TableCell>
-                      <TableCell> &le; {testLimits.hc}</TableCell>
+                      <TableCell>
+                        <LimitDescription limit="hc" />
+                      </TableCell>
                       <TableCell className="px-0 md:px-3">
                         <FormField
                           control={form.control}
@@ -183,13 +182,7 @@ const EmissionCreateForm = ({
                         />
                       </TableCell>
                       <TableCell className="flex justify-end">
-                        <Indicator
-                          value={
-                            form.watch("hc")
-                              ? form.watch("hc") <= testLimits.hc
-                              : true
-                          }
-                        />
+                        <Indicator value={form.watch("hc")} test="hc" />
                       </TableCell>
                     </TableRow>
                   </>
@@ -199,7 +192,9 @@ const EmissionCreateForm = ({
                     <TableCell className="font-medium">
                       Diesel Carbon Particles
                     </TableCell>
-                    <TableCell> &le; {testLimits.diesel}</TableCell>
+                    <TableCell>
+                      <LimitDescription limit="diesel" />
+                    </TableCell>
                     <TableCell className="px-0 md:px-3">
                       <FormField
                         control={form.control}
@@ -224,13 +219,7 @@ const EmissionCreateForm = ({
                       />
                     </TableCell>
                     <TableCell className="">
-                      <Indicator
-                        value={
-                          form.watch("diesel")
-                            ? form.watch("diesel") <= testLimits.diesel
-                            : true
-                        }
-                      />
+                      <Indicator value={form.watch("diesel")} test="diesel" />
                     </TableCell>
                   </TableRow>
                 )}

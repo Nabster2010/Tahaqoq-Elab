@@ -32,6 +32,7 @@ import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";
+import LimitDescription from "./LimitDescription";
 
 const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const router = useRouter();
@@ -104,7 +105,9 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">Front Right </TableCell>
-                  <TableCell> &ge; {testLimits.frontSuspension}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="frontSuspension" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -130,17 +133,16 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                   </TableCell>
                   <TableCell className="flex justify-end">
                     <Indicator
-                      value={
-                        form.watch("fr") >= testLimits.frontSuspension
-                          ? true
-                          : false
-                      }
+                      value={form.watch("fr")}
+                      test="frontSuspension"
                     />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Front Left </TableCell>
-                  <TableCell> &ge; {testLimits.frontSuspension}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="frontSuspension" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -166,17 +168,17 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                   </TableCell>
                   <TableCell className="flex justify-end">
                     <Indicator
-                      value={
-                        form.watch("fl") >= testLimits.frontSuspension
-                          ? true
-                          : false
-                      }
+                      value={form.watch("fl")}
+                      test="frontSuspension"
                     />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Rear Right </TableCell>
-                  <TableCell> &ge; {testLimits.rearSuspension}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <LimitDescription limit="rearSuspension" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -201,18 +203,14 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("rr") >= testLimits.rearSuspension
-                          ? true
-                          : false
-                      }
-                    />
+                    <Indicator value={form.watch("rr")} test="rearSuspension" />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Rear Left </TableCell>
-                  <TableCell> &le; {testLimits.rearSuspension}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="rearSuspension" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -237,13 +235,7 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("rl") >= testLimits.rearSuspension
-                          ? true
-                          : false
-                      }
-                    />
+                    <Indicator value={form.watch("rl")} test="rearSuspension" />
                   </TableCell>
                 </TableRow>
               </TableBody>

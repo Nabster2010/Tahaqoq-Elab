@@ -33,6 +33,7 @@ import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import SubTitle from "./SubTitle";
+import LimitDescription from "./LimitDescription";
 
 const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const router = useRouter();
@@ -105,7 +106,9 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">Front Brake</TableCell>
-                  <TableCell> &ge; {testLimits.mainBrake}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="mainBrake" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -130,18 +133,14 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("front") >= testLimits.mainBrake
-                          ? true
-                          : false
-                      }
-                    />
+                    <Indicator value={form.watch("front")} test="mainBrake" />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Rear Brake</TableCell>
-                  <TableCell> &ge; {testLimits.mainBrake}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="mainBrake" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -166,18 +165,14 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("rear") >= testLimits.mainBrake
-                          ? true
-                          : false
-                      }
-                    />
+                    <Indicator value={form.watch("rear")} test="mainBrake" />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className="font-medium">Parking Brake</TableCell>
-                  <TableCell> &ge; {testLimits.parkingBrake}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="parkingBrake" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -203,11 +198,8 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                   </TableCell>
                   <TableCell className="flex justify-end">
                     <Indicator
-                      value={
-                        form.watch("parking") >= testLimits.parkingBrake
-                          ? true
-                          : false
-                      }
+                      value={form.watch("parking")}
+                      test="parkingBrake"
                     />
                   </TableCell>
                 </TableRow>

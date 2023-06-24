@@ -1,5 +1,9 @@
-const Indicator = ({ value }: { value: boolean }) => {
-  return value ? (
+import { testLimits } from "@/config/testConfig";
+
+const Indicator = ({ value, test }: { value: number; test: string }) => {
+  const { min, max } = testLimits[test as keyof typeof testLimits];
+  const result = value >= min && value <= max;
+  return result ? (
     <svg
       className="w-8 h-8 text-green-600"
       fill="none"

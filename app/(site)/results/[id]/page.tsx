@@ -1,7 +1,14 @@
 import BackButton from "@/components/back-button";
 import TestLinkCard from "@/components/test-link-card";
 import Title from "@/components/Title";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getAppliedTests, slugify } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
@@ -22,10 +29,11 @@ const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
     <>
       <BackButton to={`/vehicles`} />
 
-      <Card className="">
+      <Card>
         <CardHeader>
           <Title> Vehicle {slugify(vehicleId)} Results</Title>
         </CardHeader>
+
         <CardContent className="flex flex-wrap items-center justify-center gap-4">
           {Object.keys(completedTests).map((test) => (
             <TestLinkCard
@@ -38,11 +46,23 @@ const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
                   | "INCOMPLETE"
               }
               href={`/results/${vehicleId}/${test}`}
-              src={`/images/${test}.png`}
-              title={test}
             />
           ))}
         </CardContent>
+        <CardFooter className="justify-center gap-2 px-4 pt-8 pb-2 md:px-4 md:pb-2 ">
+          <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
+            ⚪️
+            <Label className="text-xs">Incomplete</Label>
+          </div>
+          <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
+            🟢
+            <Label className="text-xs">Pass</Label>
+          </div>
+          <div className="flex flex-row items-center justify-center gap-1 px-2 border rounded border-slate-400 ">
+            🔴
+            <Label className="text-xs">Fail</Label>
+          </div>
+        </CardFooter>
       </Card>
     </>
   );

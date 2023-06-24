@@ -72,11 +72,13 @@ export const getVisualInspectionResult = (
 
 export const getBrakeTestResult = (brakeTest: Partial<Brake>) => {
   const { front, rear, parking } = brakeTest;
-  if (!front || !rear || !parking) {
-    return "FAIL";
-  }
-  const mainBrake = [front, rear].every((item) => item >= testLimits.mainBrake);
-  const parkingBrake = parking >= testLimits.parkingBrake;
+  const mainBrake = [front, rear].every(
+    (item) =>
+      item! >= testLimits.mainBrake.min && item! <= testLimits.mainBrake.max
+  );
+  const parkingBrake =
+    parking! >= testLimits.parkingBrake.min &&
+    parking! <= testLimits.parkingBrake.max;
   return mainBrake && parkingBrake ? "PASS" : "FAIL";
 };
 
@@ -85,16 +87,17 @@ export const getEmissionResult = (
   fuelType: string
 ) => {
   const { co, hc, diesel } = emissionData;
+  const coResult = co! <= testLimits.co.max && co! >= testLimits.co.min;
+  const hcResult = hc! <= testLimits.hc.max && hc! >= testLimits.co.min;
+  const dieselResult =
+    diesel! <= testLimits.diesel.max && diesel! >= testLimits.co.min;
   switch (fuelType) {
     case "HYBRID":
       return "FAIL";
-
     case "PETROL":
-      return co! <= testLimits.co && hc! <= testLimits.hc ? "PASS" : "FAIL";
-
+      return coResult && hcResult ? "PASS" : "FAIL";
     case "DIESEL":
-      return diesel! <= testLimits.diesel ? "PASS" : "FAIL";
-
+      return dieselResult ? "PASS" : "FAIL";
     default:
       return "PASS";
   }
@@ -104,24 +107,34 @@ export const getHighBeamLevelResult = (
   highBeamResult: Partial<HighBeamLevel>
 ) => {
   const { left, right, level } = highBeamResult;
-  return [left, right, level].every((item: any) => item <= testLimits.highBeam)
+  return [left, right, level].every(
+    (item: any) =>
+      item <= testLimits.highBeam.max && item >= testLimits.highBeam.min
+  )
     ? "PASS"
     : "FAIL";
 };
 export const getSuspensionResult = (suspensionResult: Partial<Suspension>) => {
   const { fl, fr, rl, rr } = suspensionResult;
-  if (!fr || !fl || !rl || !rr) {
-    return "FAIL";
-  }
-  let rear = [rl, rr].every((item) => item >= testLimits.rearSuspension);
-  let front = [fl, fr].every((item) => item >= testLimits.frontSuspension);
-
+  let rear = [rl, rr].every(
+    (item) =>
+      item! >= testLimits.rearSuspension.min &&
+      item! <= testLimits.rearSuspension.max
+  );
+  let front = [fl, fr].every(
+    (item) =>
+      item! >= testLimits.frontSuspension.min &&
+      item! <= testLimits.frontSuspension.max
+  );
   return rear && front ? "PASS" : "FAIL";
 };
 export const getSideSlipResult = (sideSlipResult: Partial<SideSlip>) => {
   const { reading } = sideSlipResult;
-  if (reading === 0) return "PASS";
-  return reading && reading <= testLimits.sideSlip ? "PASS" : "FAIL";
+
+  return reading! <= testLimits.sideSlip.max &&
+    reading! >= testLimits.sideSlip.min
+    ? "PASS"
+    : "FAIL";
 };
 
 export const getAppliedTests = (vehicle: ExtendedVehicle) => {

@@ -33,6 +33,7 @@ import BackButton from "./back-button";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent } from "./ui/card";
 import SubTitle from "./SubTitle";
+import LimitDescription from "./LimitDescription";
 
 const SideSlipUpdateForm = ({
   sideSlipResult,
@@ -93,7 +94,7 @@ const SideSlipUpdateForm = ({
                 )}
                 <span>Update</span>
               </Button>
-            </div>{" "}
+            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -106,7 +107,9 @@ const SideSlipUpdateForm = ({
               <TableBody>
                 <TableRow>
                   <TableCell className="font-medium">Reading </TableCell>
-                  <TableCell> &le; {testLimits.sideSlip}</TableCell>
+                  <TableCell>
+                    <LimitDescription limit="sideSlip" />
+                  </TableCell>
                   <TableCell className="px-0 md:px-3">
                     <FormField
                       control={form.control}
@@ -131,14 +134,7 @@ const SideSlipUpdateForm = ({
                     />
                   </TableCell>
                   <TableCell className="flex justify-end">
-                    <Indicator
-                      value={
-                        form.watch("reading") <= testLimits.sideSlip &&
-                        form.watch("reading") >= 0
-                          ? true
-                          : false
-                      }
-                    />
+                    <Indicator value={form.watch("reading")} test="sideSlip" />
                   </TableCell>
                 </TableRow>
               </TableBody>
