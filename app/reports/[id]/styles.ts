@@ -123,6 +123,15 @@ export const styles = StyleSheet.create({
   title: { fontSize: 14, fontWeight: "semibold" },
   tableHeadText: { fontSize: 12, fontWeight: "medium" },
   tableCellText: { fontSize: 10, fontWeight: "normal" },
+  qrContainer: {
+    alignSelf: "flex-start",
+  },
 
-  //
+  qrImg: {
+    width: 90,
+    height: 90,
+    border: "1px solid gray",
+    padding: 1,
+    marginBottom: 10,
+  },
 });

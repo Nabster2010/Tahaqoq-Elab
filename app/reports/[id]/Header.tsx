@@ -1,7 +1,6 @@
 "use client";
 import { siteConfig } from "@/config/site";
 import { arabicDateFormat, englishDateFormat, slugify } from "@/lib/helpers";
-import { Vehicle } from "@prisma/client";
 import { Text, View, Image } from "@react-pdf/renderer";
 import { styles } from "./styles";
 const Header = ({

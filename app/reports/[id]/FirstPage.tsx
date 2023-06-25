@@ -1,11 +1,26 @@
 "use client";
 import { siteConfig } from "@/config/site";
-import { englishDateFormat, getFinalResult } from "@/lib/helpers";
+import { englishDateFormat, getFinalResult, slugify } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
 import { Image, Text, View } from "@react-pdf/renderer";
 import { styles } from "./styles";
-
+import QRCode from "qrcode";
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
+  const finalResult = getFinalResult(vehicle);
+
+  const data = JSON.stringify({
+    Company: siteConfig.title,
+    ReportNo: slugify(vehicle.id),
+    Date: englishDateFormat(vehicle.createdAt!),
+    Result: finalResult,
+  });
+  const result = QRCode.toDataURL(
+    data,
+
+    {
+      margin: 2,
+    }
+  );
   return (
     <View>
       <View
@@ -265,8 +280,10 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
         </View>
       </View>
+
       <View style={styles.column}>
         {/* نتيجة الفحص */}
+
         <View style={[styles.row, { gap: 0, width: "40%", marginTop: 80 }]}>
           <View
             style={[
@@ -289,10 +306,11 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 fontWeight: "bold",
               }}
             >
-              {getFinalResult(vehicle) === "PASS" ? "مطابق" : "غيرمطابق"}
+              {finalResult === "PASS" ? "مطابق" : "غيرمطابق"}
             </Text>
           </View>
         </View>
+
         {/* المدير الفني */}
         <View style={[{ marginTop: 40, width: "100%" }]}>
           <View
@@ -315,6 +333,10 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View>
             <Image style={{ width: 200 }} src={"/images/sign.jpeg"} />
           </View>
+        </View>
+        {/* qr code */}
+        <View style={[styles.qrContainer]}>
+          <Image src={result} style={[styles.qrImg]} />
         </View>
       </View>
     </View>
