@@ -8,19 +8,16 @@ import QRCode from "qrcode";
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
   const finalResult = getFinalResult(vehicle);
 
-  const data = JSON.stringify({
-    Company: siteConfig.title,
-    ReportNo: slugify(vehicle.id),
-    Date: englishDateFormat(vehicle.createdAt!),
-    Result: finalResult,
+  const data = `
+  Company Name : ${siteConfig.title}
+  Report Number : ${slugify(vehicle.id)}
+  Inspection Date : ${englishDateFormat(vehicle.createdAt!)}
+  Vin : ${vehicle.vin}
+  Result : ${finalResult}
+  `;
+  const result = QRCode.toDataURL(data, {
+    margin: 2,
   });
-  const result = QRCode.toDataURL(
-    data,
-
-    {
-      margin: 2,
-    }
-  );
   return (
     <View>
       <View
@@ -38,7 +35,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   { width: "23.5%" },
                 ]}
               >
-                <Text>رقـم الشاسيــة </Text>
+                <Text>رقـم الهيكل </Text>
               </View>
               <View
                 style={[
