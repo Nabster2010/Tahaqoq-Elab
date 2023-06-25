@@ -29,8 +29,7 @@ import {
 import Indicator from "./Indicator";
 import { getEmissionResult } from "@/lib/helpers";
 import ToastDesc from "./ToastDesc";
-import { Card, CardContent } from "./ui/card";
-import SubTitle from "./SubTitle";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
 
 const EmissionCreateForm = ({
@@ -87,22 +86,14 @@ const EmissionCreateForm = ({
   }
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="my-4 underline underline-offset-4">
+          Add Emission results
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <SubTitle>Add Emission results</SubTitle>
-              <Button
-                disabled={isPending}
-                className="w-full sm:w-auto"
-                type="submit"
-              >
-                {isPending && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                <span>Add Result</span>
-              </Button>
-            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -145,7 +136,7 @@ const EmissionCreateForm = ({
                           )}
                         />
                       </TableCell>
-                      <TableCell className="flex justify-end">
+                      <TableCell className="text-end">
                         <Indicator value={form.watch("co")} test="co" />
                       </TableCell>
                     </TableRow>
@@ -179,7 +170,7 @@ const EmissionCreateForm = ({
                           )}
                         />
                       </TableCell>
-                      <TableCell className="flex justify-end">
+                      <TableCell className="text-end">
                         <Indicator value={form.watch("hc")} test="hc" />
                       </TableCell>
                     </TableRow>
@@ -230,6 +221,18 @@ const EmissionCreateForm = ({
                 )}
               </TableBody>
             </Table>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Result</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

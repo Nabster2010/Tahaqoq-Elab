@@ -129,7 +129,7 @@ const VehiclesPage = async ({
                       Update
                     </Link>
                   </TableCell>
-                  <TableCell className="flex justify-end ">
+                  <TableCell className="text-end">
                     <Button
                       variant="secondary"
                       className="ring-2 ring-gray-300"

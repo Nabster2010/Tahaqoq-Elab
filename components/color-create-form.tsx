@@ -20,7 +20,6 @@ import { ColorSchema } from "@/lib/validations/colors";
 import { createNewColorAction } from "@/lib/serverActions/_colorActions";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
-import { useSession } from "next-auth/react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const ColorCreateForm = () => {
@@ -61,14 +60,14 @@ const ColorCreateForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="underline underline-offset-4">
+        <CardTitle className="my-4 underline underline-offset-4">
           Create New Color
         </CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
+            <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
               <FormField
                 control={form.control}
                 name="color"
@@ -96,16 +95,18 @@ const ColorCreateForm = () => {
                 )}
               />
             </div>
-            <Button
-              disabled={isPending}
-              className="w-full sm:w-auto"
-              type="submit"
-            >
-              {isPending && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-              )}
-              <span>Add Color</span>
-            </Button>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Color</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

@@ -72,7 +72,7 @@ const CustomerCreateForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="underline underline-offset-4">
+        <CardTitle className="my-4 underline underline-offset-4">
           Create New Customer
         </CardTitle>
       </CardHeader>
@@ -170,16 +170,18 @@ const CustomerCreateForm = () => {
                 )}
               />
             </div>
-            <Button
-              disabled={isPending}
-              className="w-full sm:w-auto"
-              type="submit"
-            >
-              {isPending && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-              )}
-              <span>Add Customer</span>
-            </Button>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Customer</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

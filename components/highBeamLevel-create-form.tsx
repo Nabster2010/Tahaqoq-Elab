@@ -28,8 +28,7 @@ import { getHighBeamLevelResult } from "@/lib/helpers";
 import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
 import { createNewHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAction";
 import ToastDesc from "./ToastDesc";
-import { Card, CardContent } from "./ui/card";
-import SubTitle from "./SubTitle";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
 
 const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
@@ -73,22 +72,14 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   }
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="my-4 underline underline-offset-4">
+          Add HighBeam Level Result
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <SubTitle>Add HighBeam Level Result</SubTitle>
-              <Button
-                disabled={isPending}
-                className="w-full sm:w-auto"
-                type="submit"
-              >
-                {isPending && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                <span>Create</span>
-              </Button>
-            </div>
             <Table>
               <TableHeader>
                 <TableRow>
@@ -127,7 +118,7 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("left")} test="highBeam" />
                   </TableCell>
                 </TableRow>
@@ -159,12 +150,24 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("right")} test="highBeam" />
                   </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Create</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

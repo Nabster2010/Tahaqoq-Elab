@@ -29,7 +29,7 @@ import { updateVehicleInfoAction } from "@/lib/serverActions/_vehicleInfoActions
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import ToastDesc from "./ToastDesc";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import SubTitle from "./SubTitle";
 
 type VehicleInfoUpdateFormProps = {
@@ -91,22 +91,14 @@ const VehicleInfoUpdateForm = ({
   }
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="my-4 underline underline-offset-4">
+          Update vehicleInfo
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <SubTitle>Update vehicleInfo</SubTitle>
-              <Button
-                disabled={isPending}
-                className="w-full sm:w-auto"
-                type="submit"
-              >
-                {isPending && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                <span>Update</span>
-              </Button>
-            </div>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
               <FormField
                 control={form.control}
@@ -353,6 +345,18 @@ const VehicleInfoUpdateForm = ({
                 </FormItem>
               )}
             />
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Update</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

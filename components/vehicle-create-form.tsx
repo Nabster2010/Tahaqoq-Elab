@@ -31,7 +31,6 @@ import CustomerSelectComboBox from "./select-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import SubTitle from "./SubTitle";
 
 type VehicleCreateFormProps = {
   customers: Customer[];
@@ -95,7 +94,7 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="underline underline-offset-4">
+        <CardTitle className="my-4 underline underline-offset-4">
           Create New Vehicle
         </CardTitle>
       </CardHeader>
@@ -291,16 +290,18 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                 )}
               />
             </div>
-            <Button
-              disabled={isPending}
-              className="w-full sm:w-auto"
-              type="submit"
-            >
-              {isPending && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-              )}
-              <span>Add Vehicle</span>
-            </Button>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Vehicle</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

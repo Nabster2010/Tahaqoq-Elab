@@ -75,7 +75,7 @@ const ManufacturerUpdateForm = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="underline underline-offset-4">
+        <CardTitle className="my-4 underline underline-offset-4">
           Update Manufacturer
         </CardTitle>
       </CardHeader>
@@ -140,16 +140,18 @@ const ManufacturerUpdateForm = ({
                 )}
               />
             </div>
-            <Button
-              disabled={isPending}
-              className="w-full sm:w-auto"
-              type="submit"
-            >
-              {isPending && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-              )}
-              <span>Update Manufacturer</span>
-            </Button>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Update Manufacturer</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

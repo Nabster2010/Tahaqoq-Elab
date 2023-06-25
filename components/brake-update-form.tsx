@@ -30,7 +30,7 @@ import Indicator from "./Indicator";
 import { getBrakeTestResult } from "@/lib/helpers";
 import { Brake } from "@prisma/client";
 import ToastDesc from "./ToastDesc";
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import SubTitle from "./SubTitle";
 import LimitDescription from "./LimitDescription";
 
@@ -78,22 +78,14 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
 
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="my-4 underline underline-offset-4">
+          Update Brake Level results
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <SubTitle>Update Brake Level results</SubTitle>
-              <Button
-                disabled={isPending}
-                className="w-full sm:w-auto"
-                type="submit"
-              >
-                {isPending && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                <span>Update</span>
-              </Button>
-            </div>{" "}
             <Table>
               <TableHeader>
                 <TableRow>
@@ -132,7 +124,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("front")} test="mainBrake" />
                   </TableCell>
                 </TableRow>
@@ -164,7 +156,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("rear")} test="mainBrake" />
                   </TableCell>
                 </TableRow>
@@ -196,7 +188,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator
                       value={form.watch("parking")}
                       test="parkingBrake"
@@ -205,6 +197,18 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
                 </TableRow>
               </TableBody>
             </Table>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Update</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

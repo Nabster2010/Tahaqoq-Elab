@@ -28,8 +28,7 @@ import { getSuspensionResult } from "@/lib/helpers";
 import { SuspensionSchema } from "@/lib/validations/suspension";
 import { createNewSuspensionAction } from "@/lib/serverActions/_suspensionActions";
 import ToastDesc from "./ToastDesc";
-import { Card, CardContent } from "./ui/card";
-import SubTitle from "./SubTitle";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
 
 const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
@@ -75,22 +74,14 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   }
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="my-4 underline underline-offset-4">
+          Add Suspension Level results
+        </CardTitle>
+      </CardHeader>
       <CardContent>
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <SubTitle>Add Suspension Level results</SubTitle>
-              <Button
-                disabled={isPending}
-                className="w-full sm:w-auto"
-                type="submit"
-              >
-                {isPending && (
-                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-                )}
-                <span>Add Result</span>
-              </Button>
-            </div>{" "}
             <Table>
               <TableHeader>
                 <TableRow>
@@ -129,7 +120,7 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator
                       value={form.watch("fr")}
                       test="frontSuspension"
@@ -164,7 +155,7 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator
                       value={form.watch("fl")}
                       test="frontSuspension"
@@ -200,7 +191,7 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("rr")} test="rearSuspension" />
                   </TableCell>
                 </TableRow>
@@ -232,12 +223,24 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
                       )}
                     />
                   </TableCell>
-                  <TableCell className="flex justify-end">
+                  <TableCell className="text-end">
                     <Indicator value={form.watch("rl")} test="rearSuspension" />
                   </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Result</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

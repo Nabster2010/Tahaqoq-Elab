@@ -73,8 +73,8 @@ const VehicleTypeCreateForm = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="underline underline-offset-4">
-          Create New Vehicle Type
+        <CardTitle className="my-4 underline underline-offset-4">
+          Create New Vehicle Model Type
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -138,16 +138,18 @@ const VehicleTypeCreateForm = ({
                 )}
               />
             </div>
-            <Button
-              disabled={isPending}
-              className="w-full sm:w-auto"
-              type="submit"
-            >
-              {isPending && (
-                <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
-              )}
-              <span>Add Type</span>
-            </Button>
+            <div className="flex justify-end">
+              <Button
+                disabled={isPending}
+                className="w-full sm:w-auto"
+                type="submit"
+              >
+                {isPending && (
+                  <Icons.spinner className="w-4 h-4 mr-2 animate-spin" />
+                )}
+                <span>Add Model Type</span>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

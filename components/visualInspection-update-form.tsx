@@ -149,8 +149,10 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16 ">Result</TableHead>
-                      <TableHead className="w-8 ">More</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
+                      <TableHead className="hidden w-8 md:table-cell ">
+                        More
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -171,7 +173,7 @@ const VisualInspectionUpateForm = ({
                             <TableCell className={cn("capitalize")}>
                               {item.technicalRequirements}
                             </TableCell>
-                            <TableCell className={cn()}>
+                            <TableCell className={cn("text-end")}>
                               <FormField
                                 key={item.name}
                                 control={form.control}
@@ -206,11 +208,11 @@ const VisualInspectionUpateForm = ({
                                 )}
                               />
                             </TableCell>
-                            <TableCell />
+                            <TableCell className="hidden md:table-cell" />
                           </TableRow>
                           {item.itemsToCheck &&
                             item.itemsToCheck.length > 0 && (
-                              <TableRow className="relative border-none">
+                              <TableRow className="relative hidden border-none md:table-row">
                                 <TableCell colSpan={5} className="p-0 m-0">
                                   <Accordion type="single" collapsible>
                                     <AccordionItem
@@ -268,8 +270,10 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
-                      <TableHead className="w-8">More</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
+                      <TableHead className="hidden w-8 md:table-cell">
+                        More
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -290,7 +294,7 @@ const VisualInspectionUpateForm = ({
                             <TableCell className={cn("capitalize")}>
                               {item.technicalRequirements}
                             </TableCell>
-                            <TableCell className={cn()}>
+                            <TableCell className={cn("text-end")}>
                               <FormField
                                 key={item.name}
                                 control={form.control}
@@ -325,11 +329,11 @@ const VisualInspectionUpateForm = ({
                                 )}
                               />
                             </TableCell>
-                            <TableCell />
+                            <TableCell className="hidden md:table-cell" />
                           </TableRow>
                           {item.itemsToCheck &&
                             item.itemsToCheck.length > 0 && (
-                              <TableRow className="relative border-none">
+                              <TableRow className="relative hidden border-none md:table-row">
                                 <TableCell colSpan={5} className="p-0 m-0">
                                   <Accordion type="single" collapsible>
                                     <AccordionItem
@@ -387,8 +391,10 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
-                      <TableHead className="w-8">More</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
+                      <TableHead className="hidden w-8 md:table-cell">
+                        More
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -409,7 +415,7 @@ const VisualInspectionUpateForm = ({
                             <TableCell className={cn("capitalize")}>
                               {item.technicalRequirements}
                             </TableCell>
-                            <TableCell className={cn()}>
+                            <TableCell className={cn("text-end")}>
                               <FormField
                                 key={item.name}
                                 control={form.control}
@@ -444,11 +450,11 @@ const VisualInspectionUpateForm = ({
                                 )}
                               />
                             </TableCell>
-                            <TableCell />
+                            <TableCell className="hidden md:table-cell" />
                           </TableRow>
                           {item.itemsToCheck &&
                             item.itemsToCheck.length > 0 && (
-                              <TableRow className="relative border-none">
+                              <TableRow className="relative hidden border-none md:table-row">
                                 <TableCell colSpan={5} className="p-0 m-0">
                                   <Accordion type="single" collapsible>
                                     <AccordionItem
@@ -506,8 +512,10 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
-                      <TableHead className="w-8">More</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
+                      <TableHead className="hidden w-8 md:table-cell">
+                        More
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -528,7 +536,7 @@ const VisualInspectionUpateForm = ({
                             <TableCell className={cn("capitalize")}>
                               {item.technicalRequirements}
                             </TableCell>
-                            <TableCell className={cn()}>
+                            <TableCell className={cn("text-end")}>
                               <FormField
                                 key={item.name}
                                 control={form.control}
@@ -563,11 +571,11 @@ const VisualInspectionUpateForm = ({
                                 )}
                               />
                             </TableCell>
-                            <TableCell />
+                            <TableCell className="hidden md:table-cell" />
                           </TableRow>
                           {item.itemsToCheck &&
                             item.itemsToCheck.length > 0 && (
-                              <TableRow className="relative border-none">
+                              <TableRow className="relative hidden border-none md:table-row">
                                 <TableCell colSpan={5} className="p-0 m-0">
                                   <Accordion type="single" collapsible>
                                     <AccordionItem
@@ -625,8 +633,10 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
-                      <TableHead className="w-8">More</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
+                      <TableHead className="hidden w-8 md:table-cell">
+                        More
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -646,7 +656,7 @@ const VisualInspectionUpateForm = ({
                           <TableCell className={cn("capitalize")}>
                             {item.technicalRequirements}
                           </TableCell>
-                          <TableCell className={cn()}>
+                          <TableCell className={cn("text-end")}>
                             <FormField
                               key={item.name}
                               control={form.control}
@@ -681,10 +691,10 @@ const VisualInspectionUpateForm = ({
                               )}
                             />
                           </TableCell>
-                          <TableCell />
+                          <TableCell className="hidden md:table-cell" />
                         </TableRow>
                         {item.itemsToCheck && item.itemsToCheck.length > 0 && (
-                          <TableRow className="relative border-none">
+                          <TableRow className="relative hidden border-none md:table-row">
                             <TableCell colSpan={5} className="p-0 m-0">
                               <Accordion type="single" collapsible>
                                 <AccordionItem
@@ -741,7 +751,7 @@ const VisualInspectionUpateForm = ({
                         Item
                       </TableHead>
                       <TableHead>Technical Requirements</TableHead>
-                      <TableHead className="w-16">Result</TableHead>
+                      <TableHead className="w-16 text-end">Result</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -762,7 +772,7 @@ const VisualInspectionUpateForm = ({
                             <TableCell className={cn("capitalize")}>
                               {item.technicalRequirements}
                             </TableCell>
-                            <TableCell className={cn()}>
+                            <TableCell className={cn("text-end")}>
                               <FormField
                                 key={item.name}
                                 control={form.control}

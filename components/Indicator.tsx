@@ -1,11 +1,20 @@
 import { testLimits } from "@/config/testConfig";
+import { cn } from "@/lib/utils";
 
-const Indicator = ({ value, test }: { value: number; test: string }) => {
+const Indicator = ({
+  value,
+  test,
+  className,
+}: {
+  value: number;
+  test: string;
+  className?: string;
+}) => {
   const { min, max } = testLimits[test as keyof typeof testLimits];
   const result = value >= min && value <= max;
   return result ? (
     <svg
-      className="w-8 h-8 text-green-600"
+      className={cn("w-8 h-8 ml-auto text-green-600", className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -20,7 +29,7 @@ const Indicator = ({ value, test }: { value: number; test: string }) => {
     </svg>
   ) : (
     <svg
-      className="w-8 h-8 text-red-600"
+      className={cn("w-8 h-8 ml-auto text-red-600", className)}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"

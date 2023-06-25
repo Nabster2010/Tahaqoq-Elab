@@ -16,7 +16,7 @@ const VehiclePage = async ({ params }: { params: { id: string } }) => {
   return (
     <section>
       <BackButton to="/vehicles" />
-      <VehicleUpdateForm customers={customers || []} vehicle={vehicle} />;
+      <VehicleUpdateForm customers={customers || []} vehicle={vehicle} />
     </section>
   );
 };
