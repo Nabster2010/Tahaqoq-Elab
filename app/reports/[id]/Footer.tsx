@@ -55,6 +55,23 @@ const Footer = () => {
           <Text>Address: {siteConfig.address}</Text>
           <Text>Phone: {siteConfig.phone}</Text>
           <Text>Email:{siteConfig.email}</Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              gap: 1,
+              fontFamily: "Cairo",
+              fontSize: 8,
+              fontWeight: "medium",
+            }}
+          >
+            <Text>ن-</Text>
+            <Text>1.4.7</Text>
+            <Text>اصدار رقم</Text>
+            <Text> 4 </Text>
+            <Text>بتاريخ</Text>
+            <Text> 01/07/2023 </Text>
+          </View>
         </View>
       </View>
     </View>
