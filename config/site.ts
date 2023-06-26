@@ -12,9 +12,9 @@ export const siteConfig = {
   manager: "عبدالحكيم البريه",
   url: "https://tahaqoq.com/",
   inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بالدمام",
+  reportLeadingChars: "TD",
 
   //JEDDAH
-
   //   title: "TAHAQOQ ",
   //   branch: "JEDDAH",
   //   ar_branch: "جدة",
@@ -25,13 +25,10 @@ export const siteConfig = {
   //   description: "VEHICLE INSPECTION CENTER",
   //   manager: "عبدالعزيز بانواس",
   //   url: "https://tahaqoq.com/",
-  //   ogImage: "",
+  //  inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بجدة",
+  //reportLeadingChars: "TJ",
   ogImage: "",
   mainNav: [
-    // {
-    //   title: "Home",
-    //   href: "/",
-    // },
     {
       title: "Vehicles",
       href: "/vehicles",
@@ -173,10 +170,6 @@ export const siteConfig = {
       id: 2,
       name: "DIESEL",
     },
-    // {
-    //   id: 3,
-    //   name: "HYBRID",
-    // },
   ],
   gearTypes: [
     {
@@ -192,7 +185,5 @@ export const siteConfig = {
       name: "CVT",
     },
   ],
-  reportLeadingChars: "TD",
-  //reportLeadingChars: "TJ",
   pageSize: 5,
 };
