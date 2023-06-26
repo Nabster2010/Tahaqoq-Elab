@@ -1,5 +1,4 @@
 "use client";
-
 import { Icons } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { slugify } from "@/lib/helpers";

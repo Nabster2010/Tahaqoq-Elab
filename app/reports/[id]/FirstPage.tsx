@@ -317,9 +317,18 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               { width: "40%" },
             ]}
           >
-            <Text style={{ textAlign: "center" }}>
-              المدير الفني : عبدالحكيم البريه{" "}
-            </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row-reverse",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 2,
+              }}
+            >
+              <Text style={{ textAlign: "center" }}>المدير الفني : </Text>
+              <Text style={{ textAlign: "center" }}>{siteConfig.manager}</Text>
+            </View>
           </View>
         </View>
         {/* الختم والتوقيع */}
