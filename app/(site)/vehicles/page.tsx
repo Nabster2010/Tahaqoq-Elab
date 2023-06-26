@@ -113,6 +113,7 @@ const VehiclesPage = async ({
                   </TableCell>
                   <TableCell className="">
                     <Link
+                      prefetch={false}
                       className={cn(buttonVariants({}), "whitespace-nowrap ")}
                       href={`/results/${vehicle.id}`}
                     >

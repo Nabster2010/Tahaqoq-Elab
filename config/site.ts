@@ -180,10 +180,6 @@ export const siteConfig = {
       id: 2,
       name: "MANUAL",
     },
-    {
-      id: 3,
-      name: "CVT",
-    },
   ],
   pageSize: 5,
 };

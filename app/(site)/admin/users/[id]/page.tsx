@@ -35,10 +35,12 @@ const UserPage = async ({
     const name = data.get("name") || user.name;
     const active = data.get("active") === "on" ? true : false;
     const role = data.get("role") || user.role;
+    const branch = data.get("branch") || user.branch;
     const { user: updatedUser } = await updateUser(user.id, {
       name,
       active,
       role,
+      branch,
     });
     if (updatedUser) {
       revalidatePath(`/admin/users`);
@@ -99,6 +101,15 @@ const UserPage = async ({
                   Active
                 </label>
               </div>
+              <Select defaultValue={user.branch as string} name="branch">
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select  Branch" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="DMM">DMM</SelectItem>
+                  <SelectItem value="JED">JED</SelectItem>
+                </SelectContent>
+              </Select>
               <Select defaultValue={user.role} name="role">
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Select  Role" />

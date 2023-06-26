@@ -19,7 +19,7 @@ export const tests = [
   "vehicleInfo",
   "visualInspection",
 ];
-export function addLeadingZeros(num: number, totalLength: number = 4) {
+export function addLeadingZeros(num: number, totalLength: number = 5) {
   return String(num).padStart(totalLength, "0");
 }
 

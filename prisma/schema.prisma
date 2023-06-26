@@ -11,16 +11,24 @@ datasource db {
   relationMode = "prisma"
 }
 
+
+
+
+
+
+
 model User {
   id        String    @id @default(cuid())
   name      String?
-  email     String?   @unique
+  email     String    @unique
   password  String
-  role      String    @default("USER")
+  role      String    @default("user")
   active    Boolean   @default(false)
   vehicles  Vehicle[]
+  branch    String?   @default("DMM") //or "JED"
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
+
 }
 
 model Customer {
@@ -31,41 +39,46 @@ model Customer {
   address      String?
   website      String?
   taxId        String?
-  customerType String    @default("INDIVIDUAL") // TODO: enum
+  customerType String    @default("INDIVIDUAL") 
   vehicles     Vehicle[]
-  createdAt    DateTime? @default(now())
-  updatedAt    DateTime? @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
 }
 
 model VehicleManufacturer {
   id           String        @id @default(cuid())
-  name         String?
-  description  String?
-  country      String?
+  name         String
+  description  String
+  country      String
   vehicleTypes VehicleType[]
-  createdAt    DateTime?     @default(now())
-  updatedAt    DateTime?     @updatedAt
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
 }
 
 model VehicleType {
   id             String              @id @default(cuid())
-  modelType      String?
-  description    String?
+  modelType      String
+  description    String
   manufacturer   VehicleManufacturer @relation(fields: [manufacturerId], references: [id])
   manufacturerId String
   vehiclesInfo   VehicleInfo[]
-  createdAt      DateTime?           @default(now())
-  updatedAt      DateTime?           @updatedAt
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([manufacturerId])
 }
 
 model Color {
   id           String        @id @default(cuid())
-  color        String?
-  description  String? //arabic representation
+  color        String
+  description  String 
   vehiclesInfo VehicleInfo[]
-  createdAt    DateTime?     @default(now())
-  updatedAt    DateTime?     @updatedAt
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
+
 
 model Vehicle {
   id               Int               @id @default(autoincrement())
@@ -74,12 +87,12 @@ model Vehicle {
   reqDate          String
   bayanNo          String
   bayanDate        String
-  port             String // TODO: add enum
-  paymentType      String            @default("CARD") // TODO: add enum
+  port             String 
+  paymentType      String            
   price            Float
   tax              Float
-  customer         Customer?         @relation(fields: [customerId], references: [id])
-  customerId       String?
+  customer         Customer         @relation(fields: [customerId], references: [id])
+  customerId       String
   vehicleInfo      VehicleInfo?
   visualInspection VisualInspection?
   emissionTest     Emission?
@@ -89,8 +102,11 @@ model Vehicle {
   brakeTest        Brake?
   userId           String
   user             User              @relation(fields: [userId], references: [id], onDelete: NoAction)
-  createdAt        DateTime?         @default(now())
-  updatedAt        DateTime?         @updatedAt
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([customerId])
+  @@index([userId])
 }
 
 model VehicleInfo {
@@ -101,48 +117,57 @@ model VehicleInfo {
   year          String
   vehicleType   VehicleType @relation(fields: [vehicleTypeId], references: [id])
   vehicleTypeId String
-  category      String      @default("PASSENGER") // TODO: add enum
-  condition     String      @default("USED") // TODO: add enum
-  fuelType      String      @default("PETROL") // TODO: add enum
-  engine        String?
-  engineSize    String?
-  gear          String?     @default("AUTOMATIC") // TODO: add enum
+  category      String      
+  condition     String      
+  fuelType      String      
+  engine        String?     @default("N/A")
+  engineSize    String?     @default("N/A")
+  gear          String?     @default("AUTOMATIC") 
   mileage       String
   seats         String
   remarks       String?
-  createdAt     DateTime?   @default(now())
-  updatedAt     DateTime?   @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([vehicleId])
+  @@index([colorId])
+  @@index([vehicleTypeId])
 }
 
 model Emission {
   vehicleId Int       @id
   vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  co        Float? //gasoline
-  hc        Float? //gasoline
-  diesel    Float? //diesel
-  result    String?   @default("PASS")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  co        Float? 
+  hc        Float? 
+  diesel    Float? 
+  result    String   @default("PASS")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vehicleId])
 }
 
 model HighBeamLevel {
   vehicleId Int       @id
   vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-//  level     Float?
-  left      Float?
-  right     Float?
-  result    String?   @default("PASS")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  left      Float
+  right     Float
+  result    String   @default("PASS")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vehicleId])
 }
 
 model SideSlip {
   vehicleId Int       @id
   vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  reading   Float?
-  result    String?   @default("PASS")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  reading   Float
+  result    String   @default("PASS")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vehicleId])
 }
 
 model Suspension {
@@ -152,9 +177,11 @@ model Suspension {
   fr        Float //front right
   rl        Float //rear left
   rr        Float //rear right
-  result    String?   @default("PASS")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  result    String   @default("PASS")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vehicleId])
 }
 
 model Brake {
@@ -163,9 +190,11 @@ model Brake {
   parking   Float //parking brake
   front     Float //front brake
   rear      Float //rear brake
-  result    String?   @default("PASS")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  result    String   @default("PASS")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([vehicleId])
 }
 
 model VisualInspection {
@@ -244,6 +273,8 @@ model VisualInspection {
   notTaxi              String    @default("PASS")
   notSalvage           String    @default("PASS")
   notPolice            String    @default("PASS")
-  createdAt            DateTime? @default(now())
-  updatedAt            DateTime? @updatedAt
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@index([vehicleId])
 }

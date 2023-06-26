@@ -6,6 +6,7 @@ interface User {
   email: string;
   active: boolean;
   role: string;
+  branch: string;
 }
 declare module "next-auth" {
   /**
@@ -18,7 +19,7 @@ declare module "next-auth" {
       email: string;
       active: boolean;
       role: string;
-      address: string;
+      branch: string;
     } & DefaultSession["user"];
   }
   interface JWT {
@@ -28,7 +29,7 @@ declare module "next-auth" {
       email: string;
       active: boolean;
       role: string;
-      address: string;
+      branch: string;
     } & DefaultJWT["user"];
   }
 }

@@ -47,6 +47,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           active: user.active,
           role: user.role,
+          branch: user.branch,
         };
       },
     }),
@@ -59,6 +60,7 @@ export const authOptions: NextAuthOptions = {
         token.name = user.name;
         token.active = user.active;
         token.role = user.role;
+        token.branch = user.branch;
       }
       return token;
     },
@@ -71,6 +73,7 @@ export const authOptions: NextAuthOptions = {
           id: token.id,
           active: token.active,
           role: token.role,
+          branch: token.branch,
         },
       };
     },

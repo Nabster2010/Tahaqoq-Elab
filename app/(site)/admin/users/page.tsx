@@ -28,6 +28,7 @@ const UsersPage = async () => {
               <TableHead className="hidden md:table-cell">Email</TableHead>
               <TableHead className="hidden md:table-cell">Active</TableHead>
               <TableHead className="hidden md:table-cell">Role</TableHead>
+              <TableHead className="hidden md:table-cell">Branch</TableHead>
               <TableHead className="text-right">Edit</TableHead>
             </TableRow>
           </TableHeader>
@@ -44,6 +45,9 @@ const UsersPage = async () => {
                   </TableCell>
                   <TableCell className="hidden md:table-cell">
                     {user.role}
+                  </TableCell>
+                  <TableCell className="hidden md:table-cell">
+                    {user.branch}
                   </TableCell>
                   <TableCell className="text-right">
                     <Link
