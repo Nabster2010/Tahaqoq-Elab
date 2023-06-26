@@ -99,107 +99,13 @@ const VehicleInfoCreateForm = ({
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
               <FormField
                 control={form.control}
-                name="colorId"
+                name="year"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Color</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Color" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {colors.map((color) => (
-                          <SelectItem key={color.id} value={color.id}>
-                            {color.color}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Category" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {siteConfig.categories.map((category) => (
-                          <SelectItem key={category.id} value={category.name}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="engine"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel variant="optional">Engine:</FormLabel>
+                    <FormLabel>Model Year:</FormLabel>
                     <FormControl>
-                      <Input placeholder="Engine " {...field} />
+                      <Input placeholder="Year" {...field} />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="engineSize"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel variant="optional">Engine Size:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Engine Size " {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="gear"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Gearbox</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select GearBox Type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {siteConfig.gearTypes.map((type) => (
-                          <SelectItem key={type.id} value={type.name}>
-                            {type.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -232,23 +138,23 @@ const VehicleInfoCreateForm = ({
               />
               <FormField
                 control={form.control}
-                name="fuelType"
+                name="colorId"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Fuel Type</FormLabel>
+                    <FormLabel>Color</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select Fuel Type" />
+                          <SelectValue placeholder="Select Color" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {siteConfig.fuelTypes.map((type) => (
-                          <SelectItem key={type.id} value={type.name}>
-                            {type.name}
+                        {colors.map((color) => (
+                          <SelectItem key={color.id} value={color.id}>
+                            {color.color}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -286,17 +192,87 @@ const VehicleInfoCreateForm = ({
               />
               <FormField
                 control={form.control}
-                name="year"
+                name="fuelType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Model Year:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Year" {...field} />
-                    </FormControl>
+                    <FormLabel>Fuel Type</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Fuel Type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {siteConfig.fuelTypes.map((type) => (
+                          <SelectItem key={type.id} value={type.name}>
+                            {type.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {siteConfig.categories.map((category) => (
+                          <SelectItem key={category.id} value={category.name}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="gear"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Gearbox</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select GearBox Type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {siteConfig.gearTypes.map((type) => (
+                          <SelectItem key={type.id} value={type.name}>
+                            {type.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="condition"
@@ -320,6 +296,32 @@ const VehicleInfoCreateForm = ({
                         ))}
                       </SelectContent>
                     </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="engine"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel variant="optional">Engine:</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Engine " {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="engineSize"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel variant="optional">Engine Size:</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Engine Size " {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
