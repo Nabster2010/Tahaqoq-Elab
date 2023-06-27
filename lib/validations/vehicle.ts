@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 export const VehicleSchema = z.object({
-  vin: z.string().min(17, { message: "Please enter a valid VIN" }),
+  vin: z
+    .string()
+    .min(17, { message: "Please enter a valid VIN . min length 17 digits" })
+    .max(17, { message: "Please enter a valid VIN . max length 17 digits" }),
   reqNo: z.string().nonempty("Request number is required"),
   reqDate: z.string().nonempty("Request Date is required"),
   bayanNo: z.string().nonempty("Bayan number is required"),

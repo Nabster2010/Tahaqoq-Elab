@@ -28,7 +28,7 @@ import { Icons } from "@/components/icons";
 
 import { slugify } from "@/lib/helpers";
 import { updateVehicleAction } from "@/lib/serverActions/_vehicleActions";
-import CustomerSelectComboBox from "./select-comboBox";
+import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";

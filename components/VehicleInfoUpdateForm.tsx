@@ -334,7 +334,7 @@ const VehicleInfoUpdateForm = ({
               name="remarks"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Remarks</FormLabel>
+                  <FormLabel variant="optional">Remarks</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Remarks...."

@@ -1,6 +1,7 @@
 "use server";
 import { createCustomer, updateCustomer } from "@/lib/db/customer";
 import { CustomerSchemaType } from "@/types";
+import { revalidatePath } from "next/cache";
 export async function createNewCustomerAction(data: CustomerSchemaType) {
   const newCustomer = await createCustomer(data);
   return newCustomer;

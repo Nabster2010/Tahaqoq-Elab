@@ -27,7 +27,7 @@ import { useTransition } from "react";
 import { createNewVehicleAction } from "@/lib/serverActions/_vehicleActions";
 import { Icons } from "@/components/icons";
 import { useSession } from "next-auth/react";
-import CustomerSelectComboBox from "./select-comboBox";
+import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
