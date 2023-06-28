@@ -85,7 +85,7 @@ const ColorsPage = async ({
                   <TableCell className="text-right">
                     <Link
                       className={cn(buttonVariants({}))}
-                      href={`/colors/${color.id}`}
+                      href={`/colors/${color.id}?search=${search}&page=${page}&pageSize=${pageSize}`}
                     >
                       Update
                     </Link>

@@ -68,7 +68,7 @@ const EmissionCreateForm = ({
             ),
           });
           form.reset();
-          return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

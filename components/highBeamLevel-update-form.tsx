@@ -60,7 +60,8 @@ const HighBeamLevelUpdateForm = ({
               <ToastDesc>HighBeam Result Updated Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${highBeamLevelResult.vehicleId}`);
+          // return router.push(`/results/${highBeamLevelResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

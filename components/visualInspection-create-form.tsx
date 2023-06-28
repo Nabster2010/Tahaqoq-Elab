@@ -73,7 +73,8 @@ const VisualInspectionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
             ),
           });
           form.reset();
-          return router.push(`/results/${vehicleId}`);
+          // return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

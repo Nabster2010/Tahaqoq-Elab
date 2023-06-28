@@ -57,8 +57,7 @@ const VehicleTypeUpdateForm = ({
               <ToastDesc>Vehicle Type Updated Successfully</ToastDesc>
             ),
           });
-
-          return router.push(`/vehicleTypes`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

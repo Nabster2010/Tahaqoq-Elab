@@ -70,7 +70,8 @@ const VehicleInfoCreateForm = ({
             description: <ToastDesc>Vehicle Info Added Successfully</ToastDesc>,
           });
           form.reset();
-          return router.push(`/results/${vehicleId}`);
+          // return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

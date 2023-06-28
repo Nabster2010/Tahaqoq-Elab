@@ -63,7 +63,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
             title: "Success",
             description: <ToastDesc>Vehicle Updated Successfully</ToastDesc>,
           });
-          return router.push("/vehicles");
+          return router.back();
         } else {
           toast({
             variant: "destructive",

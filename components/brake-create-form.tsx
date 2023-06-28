@@ -30,7 +30,6 @@ import Indicator from "./Indicator";
 import { getBrakeTestResult } from "@/lib/helpers";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import SubTitle from "./SubTitle";
 import LimitDescription from "./LimitDescription";
 
 const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
@@ -57,7 +56,7 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
             ),
           });
           form.reset();
-          return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

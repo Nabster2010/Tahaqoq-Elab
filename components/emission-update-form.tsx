@@ -67,7 +67,7 @@ const EmissionUpdateForm = ({
               <ToastDesc>Emission Result Updated Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${emissionResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

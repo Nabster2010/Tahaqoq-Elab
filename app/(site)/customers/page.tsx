@@ -92,7 +92,7 @@ const CustomersPage = async ({
                   <TableCell className="text-right">
                     <Link
                       className={cn(buttonVariants({}))}
-                      href={`/customers/${customer.id}`}
+                      href={`/customers/${customer.id}?page=${page}&pageSize=${pageSize}&search=${search}`}
                     >
                       Update
                     </Link>

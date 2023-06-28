@@ -41,7 +41,7 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
             title: "Success",
             description: <ToastDesc>Color Updated Successfully</ToastDesc>,
           });
-          return router.push("/colors");
+          return router.back();
         } else {
           toast({
             variant: "destructive",

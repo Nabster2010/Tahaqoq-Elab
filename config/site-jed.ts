@@ -1,32 +1,19 @@
-export type SiteConfig = typeof siteConfig;
+//rename to site.ts to activate jed profile
 
+export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   title: "TAHAQOQ ",
-  branch: "DAMMAM",
-  ar_branch: "الدمام",
-  address: "Alkhalidiyah , Dammam ,KSA",
-  ar_address: " الخالدية الجنوبية،الدمام،السعودية",
-  phone: "0577929189",
+  branch: "JEDDAH",
+  ar_branch: "جدة",
+  address: "Jawhara , Jeddah ,KSA",
+  ar_address: " الجوهرة،معارض السيارات،جدة،السعودية",
+  phone: "0502956801",
   email: "info@tahaqoq.com",
   description: "VEHICLE INSPECTION CENTER",
-  manager: "عبدالحكيم البريه",
+  manager: "عبدالعزيز بانواس",
   url: "https://tahaqoq.com/",
-  inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بالدمام",
-  reportLeadingChars: "TD",
-
-  //JEDDAH
-  // title: "TAHAQOQ ",
-  // branch: "JEDDAH",
-  // ar_branch: "جدة",
-  // address: "Jawhara , Jeddah ,KSA",
-  // ar_address: " الجوهرة،معارض السيارات،جدة،السعودية",
-  // phone: "0502956801",
-  // email: "info@tahaqoq.com",
-  // description: "VEHICLE INSPECTION CENTER",
-  // manager: "عبدالعزيز بانواس",
-  // url: "https://tahaqoq.com/",
-  // inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بجدة",
-  // reportLeadingChars: "TJ",
+  inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بجدة",
+  reportLeadingChars: "TJ",
   ogImage: "",
   mainNav: [
     {

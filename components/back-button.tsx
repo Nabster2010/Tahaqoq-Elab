@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Icons } from "./icons";
@@ -18,7 +19,7 @@ const BackButton = ({
 }: BackBtnProps) => {
   return (
     <Link
-      href={to}
+      href={`${to}`}
       className={cn(buttonVariants({ variant: "ghost" }), " my-2", className)}
     >
       <>

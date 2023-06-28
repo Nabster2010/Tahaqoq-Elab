@@ -72,7 +72,8 @@ const VehicleInfoUpdateForm = ({
             ),
           });
 
-          return router.push(`/results/${vehicleInfo.vehicleId}`);
+          // return router.push(`/results/${vehicleInfo.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

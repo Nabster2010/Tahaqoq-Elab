@@ -80,7 +80,8 @@ const VisualInspectionUpateForm = ({
             ),
           });
 
-          return router.push(`/results/${visualInspectionResult.vehicleId}`);
+          // return router.push(`/results/${visualInspectionResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

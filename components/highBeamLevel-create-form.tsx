@@ -54,7 +54,8 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
               <ToastDesc>HighBeam Result Added Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${vehicleId}`);
+          //return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

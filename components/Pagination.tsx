@@ -43,7 +43,7 @@ const Pagination = ({
             className={cn("text-sm font-medium  rounded-l-none")}
           >
             <Link
-              href={`/${pathName}/?search=${search}&page=${
+              href={`/${pathName}/?search=${search || ""}&page=${
                 currentPage + 1
               }&pageSize=${pageSize}`}
             >

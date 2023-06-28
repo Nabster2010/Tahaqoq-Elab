@@ -334,10 +334,16 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         {/* الختم والتوقيع */}
         <View style={[styles.row, { marginTop: 10 }]}>
           <View>
-            <Image style={{ width: 180 }} src={"/images/stamp.jpeg"} />
+            <Image
+              style={{ width: 180 }}
+              src={`/images/stamp-${siteConfig.branch}.jpeg`}
+            />
           </View>
           <View>
-            <Image style={{ width: 200 }} src={"/images/sign.jpeg"} />
+            <Image
+              style={{ width: 200 }}
+              src={`/images/sign-${siteConfig.branch}.jpeg`}
+            />
           </View>
         </View>
         {/* qr code */}

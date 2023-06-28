@@ -1,3 +1,5 @@
+//rename to site.ts to activate dmm profile
+
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
@@ -13,20 +15,6 @@ export const siteConfig = {
   url: "https://tahaqoq.com/",
   inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بالدمام",
   reportLeadingChars: "TD",
-
-  //JEDDAH
-  // title: "TAHAQOQ ",
-  // branch: "JEDDAH",
-  // ar_branch: "جدة",
-  // address: "Jawhara , Jeddah ,KSA",
-  // ar_address: " الجوهرة،معارض السيارات،جدة،السعودية",
-  // phone: "0502956801",
-  // email: "info@tahaqoq.com",
-  // description: "VEHICLE INSPECTION CENTER",
-  // manager: "عبدالعزيز بانواس",
-  // url: "https://tahaqoq.com/",
-  // inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بجدة",
-  // reportLeadingChars: "TJ",
   ogImage: "",
   mainNav: [
     {

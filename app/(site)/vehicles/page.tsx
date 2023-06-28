@@ -39,11 +39,9 @@ const VehiclesPage = async ({
   const pageSize = searchParams.pageSize
     ? parseInt(searchParams.pageSize)
     : siteConfig.pageSize;
-  const search =
-    searchParams.search && typeof parseInt(searchParams.search) === "number"
-      ? parseInt(searchParams.search)
-      : undefined;
-
+  const search = searchParams.search
+    ? decodeURIComponent(searchParams.search as string)
+    : "";
   const { vehicles, currentPage, totalPages } = await getPaginatedVehicles(
     search,
     page,
@@ -115,7 +113,9 @@ const VehiclesPage = async ({
                     <Link
                       prefetch={false}
                       className={cn(buttonVariants({}), "whitespace-nowrap ")}
-                      href={`/results/${vehicle.id}`}
+                      href={`/results/${vehicle.id}?search=${
+                        search ? search : ""
+                      }&page=${page}&pageSize=${pageSize}`}
                     >
                       {canIssueReport(vehicle as ExtendedVehicle)
                         ? "View Result"
@@ -125,7 +125,9 @@ const VehiclesPage = async ({
                   <TableCell className="">
                     <Link
                       className={cn(buttonVariants({}))}
-                      href={`/vehicles/${vehicle.id}`}
+                      href={`/vehicles/${vehicle.id}?search=${
+                        String(search) || ""
+                      }&page=${page}&pageSize=${pageSize}`}
                     >
                       Update
                     </Link>
@@ -179,6 +181,7 @@ const VehiclesPage = async ({
               currentPage={page}
               totalPages={totalPages}
               pageSize={pageSize}
+              search={search}
             />
           ) : (
             ""

@@ -35,8 +35,9 @@ const ManufacturersPage = async ({
   const pageSize = searchParams.pageSize
     ? parseInt(searchParams.pageSize)
     : siteConfig.pageSize;
-  const search = searchParams.search ? searchParams.search : "";
-
+  const search = searchParams.search
+    ? decodeURIComponent(searchParams.search as string)
+    : "";
   const { manufacturers, currentPage, totalPages } =
     await getPaginatedManufacturers(search, page, pageSize);
 
@@ -84,7 +85,7 @@ const ManufacturersPage = async ({
                   <TableCell className="text-right">
                     <Link
                       className={cn(buttonVariants({}))}
-                      href={`/manufacturers/${manufacturer.id}`}
+                      href={`/manufacturers/${manufacturer.id}?search=${search}&page=${page}&pageSize=${pageSize}`}
                     >
                       Update
                     </Link>

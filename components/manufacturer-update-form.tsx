@@ -56,7 +56,7 @@ const ManufacturerUpdateForm = ({
               <ToastDesc>Manufacturer Updated Successfully</ToastDesc>
             ),
           });
-          return router.push("/manufacturers");
+          return router.back();
         } else {
           toast({
             variant: "destructive",

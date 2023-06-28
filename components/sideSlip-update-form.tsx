@@ -58,7 +58,8 @@ const SideSlipUpdateForm = ({
               <ToastDesc>SideSlip Result Updated Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${sideSlipResult.vehicleId}`);
+          //return router.push(`/results/${sideSlipResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

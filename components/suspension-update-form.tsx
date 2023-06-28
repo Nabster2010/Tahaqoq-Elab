@@ -61,7 +61,8 @@ const SuspensionUpdateForm = ({
               <ToastDesc>Suspension Result Updated Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${suspensionResult.vehicleId}`);
+          // return router.push(`/results/${suspensionResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

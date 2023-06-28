@@ -1,9 +1,22 @@
 import BackButton from "@/components/back-button";
 import VehicleTypeUpdateForm from "@/components/vehicleType-update-form";
+import { siteConfig } from "@/config/site";
 import { getManufacturers } from "@/lib/db/manufacturer";
 import { getVehicleTypeById } from "@/lib/db/vehicleType";
 
-const VehicleTypePage = async ({ params }: { params: { id: string } }) => {
+const VehicleTypePage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | undefined };
+}) => {
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
+  const pageSize = searchParams.pageSize
+    ? parseInt(searchParams.pageSize)
+    : siteConfig.pageSize;
+  const search = searchParams.search ? searchParams.search : "";
+
   const { manufacturers } = await getManufacturers();
   const { vehicleType } = await getVehicleTypeById(params.id);
   if (!vehicleType) {
@@ -15,7 +28,9 @@ const VehicleTypePage = async ({ params }: { params: { id: string } }) => {
   }
   return (
     <section>
-      <BackButton to={"/vehicleTypes"} />
+      <BackButton
+        to={`/vehicleTypes?search=${search}&page=${page}&pageSize=${pageSize}`}
+      />
 
       <VehicleTypeUpdateForm
         vehicleType={vehicleType}

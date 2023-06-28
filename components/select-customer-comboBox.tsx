@@ -76,7 +76,7 @@ export default function CustomerSelectComboBox({
             <CommandGroup className="overflow-scroll max-h-64">
               {customers.map((customer) => (
                 <CommandItem
-                  key={customer.name}
+                  key={customer.id}
                   onSelect={(currentValue) => {
                     handleChange(customer.id);
                     setName(currentValue === name ? "" : currentValue);

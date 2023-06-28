@@ -56,7 +56,8 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
               <ToastDesc>Suspension Result Added Successfully</ToastDesc>
             ),
           });
-          return router.push(`/results/${vehicleId}`);
+          // return router.push(`/results/${vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",

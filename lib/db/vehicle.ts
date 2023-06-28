@@ -12,11 +12,13 @@ export async function getVehicles() {
   }
 }
 export async function getPaginatedVehicles(
-  search: number | undefined,
+  search: string | undefined,
   page = 1,
   pageSize = siteConfig.pageSize
 ) {
-  const id = Number(search);
+  const id = !!parseInt(search as string)
+    ? parseInt(search as string)
+    : undefined;
   const skip: number = (page - 1) * pageSize;
   try {
     const vehicles = await db.vehicle.findMany({

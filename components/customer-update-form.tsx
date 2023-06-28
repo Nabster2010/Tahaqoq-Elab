@@ -52,7 +52,7 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
             title: "Success",
             description: <ToastDesc>Customer Updated Successfully</ToastDesc>,
           });
-          return router.push("/customers");
+          return router.back();
         } else {
           toast({
             variant: "destructive",

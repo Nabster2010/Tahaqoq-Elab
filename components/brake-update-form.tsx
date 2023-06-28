@@ -59,7 +59,7 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
             ),
           });
 
-          return router.push(`/results/${brakeTestResult.vehicleId}`);
+          return router.back();
         } else {
           toast({
             variant: "destructive",
