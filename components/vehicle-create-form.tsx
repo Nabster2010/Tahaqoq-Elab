@@ -112,7 +112,6 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                 render={({ field }) => (
                   <FormItem className="">
                     <FormLabel>Customer</FormLabel>
-
                     <FormControl>
                       <CustomerSelectComboBox
                         field={field}

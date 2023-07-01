@@ -31,6 +31,7 @@ import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Textarea } from "./ui/textarea";
 import { ExtendedVehicleType } from "@/types";
+import VehicleTypeSelectComboBox from "./select-vehicleType-comboBox";
 
 type VehicleInfoCreateFormProps = {
   vehicleId: number;
@@ -170,28 +171,14 @@ const VehicleInfoCreateForm = ({
                 control={form.control}
                 name="vehicleTypeId"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="">
                     <FormLabel>Model Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Model Type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {vehicleTypes.map((type) => (
-                          <SelectItem key={type.id} value={type.id}>
-                            <span className="">{type.modelType}</span>
-                            <span className="py-1 px-1.5  ml-10 text-[10px] rounded-md bg-foreground text-background font-bold">
-                              {type.manufacturer.name}
-                            </span>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <VehicleTypeSelectComboBox
+                        field={field}
+                        vehicleTypes={vehicleTypes}
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
