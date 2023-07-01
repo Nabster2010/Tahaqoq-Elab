@@ -49,7 +49,7 @@ const VehicleInfoCreateForm = ({
     resolver: zodResolver(VehicleInfoSchema),
     defaultValues: {
       category: "PASSENGER",
-      colorId: "cliwcmk9j0002n1x6s48mgqh9",
+      colorId: "1",
       condition: "USED",
       engine: "",
       engineSize: "",
