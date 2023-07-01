@@ -26,7 +26,7 @@ import {
 import Indicator from "./Indicator";
 import { getHighBeamLevelResult } from "@/lib/helpers";
 import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
-import { createNewHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAction";
+import { createNewHighBeamLevelAction } from "@/app/_actions/_highBeamLevelAction";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -46,7 +46,8 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   function onSubmit(data: z.infer<typeof HighBeamLevelSchema>) {
     const result = getHighBeamLevelResult(data);
     startTransition(() => {
-      createNewHighBeamLevelAction({ ...data, result }).then((res) => {
+      createNewHighBeamLevelAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.newHighBeamLevel) {
           toast({
             title: "Success",

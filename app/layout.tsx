@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <AuthProvider>
-              {children}
+              <div className="relative">{children}</div>
               <Toaster />
             </AuthProvider>
           </ThemeProvider>

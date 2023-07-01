@@ -27,7 +27,7 @@ import Indicator from "./Indicator";
 import { getHighBeamLevelResult } from "@/lib/helpers";
 import { HighBeamLevel } from "@prisma/client";
 import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
-import { updateHighBeamLevelAction } from "@/lib/serverActions/_highBeamLevelAction";
+import { updateHighBeamLevelAction } from "@/app/_actions/_highBeamLevelAction";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -52,7 +52,8 @@ const HighBeamLevelUpdateForm = ({
     const result = getHighBeamLevelResult(data);
 
     startTransition(() => {
-      updateHighBeamLevelAction({ ...data, result }).then((res) => {
+      updateHighBeamLevelAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedHighBeamLevel) {
           toast({
             title: "Success",

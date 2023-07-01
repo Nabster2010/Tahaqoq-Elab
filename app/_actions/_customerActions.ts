@@ -1,10 +1,13 @@
 "use server";
-import { createCustomer, updateCustomer } from "@/lib/db/customer";
+import {
+  createCustomer,
+  deleteCustomer,
+  updateCustomer,
+} from "@/lib/db/customer";
 import { CustomerSchemaType } from "@/types";
-import { revalidatePath } from "next/cache";
 export async function createNewCustomerAction(data: CustomerSchemaType) {
   const newCustomer = await createCustomer(data);
-  return newCustomer;
+  return JSON.stringify(newCustomer);
 }
 
 export async function updateCustomerAction(
@@ -12,5 +15,10 @@ export async function updateCustomerAction(
   id: string
 ) {
   const updatedCustomer = await updateCustomer(data, id);
-  return updatedCustomer;
+  return JSON.stringify(updatedCustomer);
+}
+
+export async function deleteCustomerAction(id: string) {
+  const deletedCustomer = await deleteCustomer(id);
+  return JSON.stringify(deletedCustomer);
 }

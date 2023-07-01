@@ -4,7 +4,11 @@ import { db } from ".";
 
 export async function getManufacturers() {
   try {
-    const manufacturers = await db.vehicleManufacturer.findMany();
+    const manufacturers = await db.vehicleManufacturer.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    });
     return { manufacturers };
   } catch (error) {
     console.log("error fetching manufacturers", { error });
@@ -93,5 +97,27 @@ export async function updateManufacturer(
   } catch (error) {
     console.log("error updating manufacturer");
     return { error };
+  }
+}
+
+export async function deleteManufacturer(id: string) {
+  try {
+    const deletedModelTypes = db.vehicleType.deleteMany({
+      where: {
+        manufacturerId: id,
+      },
+    });
+    const deleteManufacturer = db.vehicleManufacturer.delete({
+      where: {
+        id,
+      },
+    });
+    await db.$transaction([deletedModelTypes, deleteManufacturer]);
+
+    return { success: true };
+  } catch (error) {
+    console.log("error deleting manufacturer");
+    console.log(error);
+    return { success: false, error };
   }
 }

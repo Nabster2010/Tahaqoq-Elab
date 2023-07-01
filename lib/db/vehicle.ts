@@ -121,6 +121,7 @@ export async function createVehicle(
     return { newVehicle };
   } catch (error: any) {
     console.log("error creating vehicle");
+    console.log(error);
     return { error };
   }
 }
@@ -139,5 +140,20 @@ export async function updateVehicle(data: VehicleSchemaType, id: number) {
   } catch (error: any) {
     console.log("error updating vehicle");
     return { error };
+  }
+}
+
+export async function deleteVehicle(id: number) {
+  try {
+    const deleteVehicle = await db.vehicle.delete({
+      where: {
+        id,
+      },
+    });
+    return { success: true };
+  } catch (error) {
+    console.log("error deleting vehicle");
+    console.log(error);
+    return { success: false, error };
   }
 }

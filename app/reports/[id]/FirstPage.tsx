@@ -87,7 +87,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "60%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.port}</Text>
+                  <Text>{vehicle?.port}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -113,7 +113,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "60%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.bayanNo}</Text>
+                  <Text>{vehicle?.bayanNo}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -126,7 +126,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "60%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.bayanDate}</Text>
+                  <Text>{vehicle?.bayanDate}</Text>
                 </View>
               </View>
 
@@ -140,7 +140,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "60%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.reqNo}</Text>
+                  <Text>{vehicle?.reqNo}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -160,7 +160,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "60%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.customer.name}</Text>
+                  <Text>{vehicle?.customer?.name}</Text>
                 </View>
               </View>
             </View>
@@ -181,7 +181,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.seats}</Text>
+                  <Text>{vehicle.vehicleInfo?.seats}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -194,7 +194,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.mileage}</Text>
+                  <Text>{vehicle.vehicleInfo?.mileage}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -208,7 +208,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   ]}
                 >
                   <Text>
-                    {vehicle.vehicleInfo.vehicleType.manufacturer.description}
+                    {vehicle.vehicleInfo.vehicleType?.manufacturer?.description}
                   </Text>
                 </View>
               </View>
@@ -222,7 +222,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.vehicleType.modelType}</Text>
+                  <Text>{vehicle.vehicleInfo?.vehicleType?.modelType}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -235,7 +235,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.year}</Text>
+                  <Text>{vehicle.vehicleInfo?.year}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -248,7 +248,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "50%", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle.vehicleInfo.color.description}</Text>
+                  <Text>{vehicle.vehicleInfo.color?.description}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -269,7 +269,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   ]}
                 >
                   <Text>
-                    {vehicle.vehicleInfo.vehicleType.manufacturer.country}
+                    {vehicle.vehicleInfo.vehicleType?.manufacturer?.country}
                   </Text>
                 </View>
               </View>

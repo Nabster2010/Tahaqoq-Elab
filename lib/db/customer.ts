@@ -4,7 +4,11 @@ import { db } from ".";
 
 export async function getCustomers() {
   try {
-    const customers = await db.customer.findMany();
+    const customers = await db.customer.findMany({
+      orderBy: {
+        name: "asc",
+      },
+    });
     return {
       customers,
     };
@@ -19,7 +23,6 @@ export async function getPaginatedCustomers(
   pageSize = siteConfig.pageSize
 ) {
   const skip: number = (page - 1) * pageSize;
-  console.log(search);
   try {
     const customers = await db.customer.findMany({
       where: {
@@ -29,7 +32,7 @@ export async function getPaginatedCustomers(
       },
 
       orderBy: {
-        createdAt: "desc",
+        name: "asc",
       },
       skip,
       include: {
@@ -81,6 +84,7 @@ export async function createCustomer(customer: CustomerSchemaType) {
     return { newCustomer };
   } catch (error) {
     console.log("error creating customer");
+    console.log(error);
     return { error };
   }
 }
@@ -98,6 +102,21 @@ export async function updateCustomer(data: CustomerSchemaType, id: string) {
     return { updatedCustomer };
   } catch (error) {
     console.log("error updating customer");
+    console.log(error);
+    return { error };
+  }
+}
+
+export async function deleteCustomer(id: string) {
+  try {
+    const deletedCustomer = await db.customer.delete({
+      where: {
+        id,
+      },
+    });
+    return { deletedCustomer };
+  } catch (error) {
+    console.log("error deleting customer");
     return { error };
   }
 }

@@ -27,7 +27,7 @@ import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 
 import { slugify } from "@/lib/helpers";
-import { updateVehicleAction } from "@/lib/serverActions/_vehicleActions";
+import { updateVehicleAction } from "@/app/_actions/_vehicleActions";
 import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
@@ -57,7 +57,8 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
   });
   function onSubmit(data: z.infer<typeof VehicleSchema>) {
     startTransition(() => {
-      updateVehicleAction(data, vehicle.id).then((res) => {
+      updateVehicleAction(data, vehicle.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedVehicle) {
           toast({
             title: "Success",
@@ -109,8 +110,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
 
                     <FormControl>
                       <CustomerSelectComboBox
-                        handleChange={field.onChange}
-                        defaultValue={field.value}
+                        field={field}
                         customers={customers}
                       />
                     </FormControl>

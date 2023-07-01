@@ -26,7 +26,7 @@ import {
 import Indicator from "./Indicator";
 import { getSideSlipResult } from "@/lib/helpers";
 import { SideSlipSchema } from "@/lib/validations/sideSlip";
-import { createNewSideSlipAction } from "@/lib/serverActions/_sideSlipAction";
+import { createNewSideSlipAction } from "@/app/_actions/_sideSlipAction";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -45,7 +45,8 @@ const SideSlipCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   function onSubmit(data: z.infer<typeof SideSlipSchema>) {
     const result = getSideSlipResult(data);
     startTransition(() => {
-      createNewSideSlipAction({ ...data, result }).then((res) => {
+      createNewSideSlipAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.newSideSlip) {
           toast({
             title: "Success",

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { ColorSchema } from "@/lib/validations/colors";
-import { createNewColorAction } from "@/lib/serverActions/_colorActions";
+import { createNewColorAction } from "@/app/_actions/_colorActions";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -34,7 +34,8 @@ const ColorCreateForm = () => {
   });
   function onSubmit(data: z.infer<typeof ColorSchema>) {
     startTransition(() => {
-      createNewColorAction(data).then((res) => {
+      createNewColorAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newColor) {
           toast({
             title: "Success",

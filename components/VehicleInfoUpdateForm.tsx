@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { VehicleInfoSchema } from "@/lib/validations/vehicleInfo";
-import { updateVehicleInfoAction } from "@/lib/serverActions/_vehicleInfoActions";
+import { updateVehicleInfoAction } from "@/app/_actions/_vehicleInfoActions";
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import ToastDesc from "./ToastDesc";
@@ -47,7 +47,7 @@ const VehicleInfoUpdateForm = ({
     resolver: zodResolver(VehicleInfoSchema),
     defaultValues: {
       category: vehicleInfo.category,
-      colorId: vehicleInfo.colorId,
+      colorId: vehicleInfo.colorId || "",
       condition: vehicleInfo.condition,
       engine: vehicleInfo.engine || "",
       engineSize: vehicleInfo.engineSize || "",
@@ -56,14 +56,15 @@ const VehicleInfoUpdateForm = ({
       mileage: vehicleInfo.mileage,
       seats: vehicleInfo.seats,
       vehicleId: vehicleInfo.vehicleId,
-      vehicleTypeId: vehicleInfo.vehicleTypeId,
+      vehicleTypeId: vehicleInfo.vehicleTypeId || "",
       year: vehicleInfo.year,
       remarks: vehicleInfo.remarks || "",
     },
   });
   function onSubmit(data: z.infer<typeof VehicleInfoSchema>) {
     startTransition(() => {
-      updateVehicleInfoAction(data).then((res) => {
+      updateVehicleInfoAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedVehicleInfo) {
           toast({
             title: "Success",

@@ -27,7 +27,7 @@ import Indicator from "./Indicator";
 import { getSideSlipResult } from "@/lib/helpers";
 import { SideSlip } from "@prisma/client";
 import { SideSlipSchema } from "@/lib/validations/sideSlip";
-import { updateSideSlipAction } from "@/lib/serverActions/_sideSlipAction";
+import { updateSideSlipAction } from "@/app/_actions/_sideSlipAction";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -50,7 +50,8 @@ const SideSlipUpdateForm = ({
   function onSubmit(data: z.infer<typeof SideSlipSchema>) {
     const result = getSideSlipResult(data);
     startTransition(() => {
-      updateSideSlipAction({ ...data, result }).then((res) => {
+      updateSideSlipAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedSideSlip) {
           toast({
             title: "Success",

@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { EmissionSchema } from "@/lib/validations/emission";
-import { updateEmissionAction } from "@/lib/serverActions/_emissionTestActions";
+import { updateEmissionAction } from "@/app/_actions/_emissionTestActions";
 import { useRouter } from "next/navigation";
 import {
   Table,
@@ -59,7 +59,8 @@ const EmissionUpdateForm = ({
     }
     const result = getEmissionResult(data, fuelType);
     startTransition(() => {
-      updateEmissionAction({ ...data, result }).then((res) => {
+      updateEmissionAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedEmission) {
           toast({
             title: "Success",

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { ManufacturerSchema } from "@/lib/validations/manufacturer";
-import { updateManufacturerAction } from "@/lib/serverActions/_manufacturerActions";
+import { updateManufacturerAction } from "@/app/_actions/_manufacturerActions";
 import { VehicleManufacturer } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import {
@@ -48,7 +48,8 @@ const ManufacturerUpdateForm = ({
   });
   function onSubmit(data: z.infer<typeof ManufacturerSchema>) {
     startTransition(() => {
-      updateManufacturerAction(data, manufacturer.id).then((res) => {
+      updateManufacturerAction(data, manufacturer.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedManufacturer) {
           toast({
             title: "Success",

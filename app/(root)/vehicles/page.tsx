@@ -17,11 +17,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import VehicleListItem from "@/components/vehicle-list-item";
 import { siteConfig } from "@/config/site";
+import { authOptions } from "@/lib/auth";
 import { getPaginatedVehicles } from "@/lib/db/vehicle";
 import { canIssueReport, slugify } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import { ExtendedVehicle } from "@/types";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -35,6 +38,8 @@ const VehiclesPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
+  const session = await getServerSession(authOptions);
+  const isAdminUser = session?.user?.role === "admin";
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const pageSize = searchParams.pageSize
     ? parseInt(searchParams.pageSize)
@@ -84,84 +89,22 @@ const VehiclesPage = async ({
               <TableHead>Test Results</TableHead>
               <TableHead>Edit</TableHead>
               <TableHead className="text-right ">Report</TableHead>
+              {isAdminUser && (
+                <TableHead className="text-right ">Delete</TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {vehicles && vehicles?.length > 0 ? (
               vehicles.map((vehicle) => (
-                <TableRow key={vehicle.id}>
-                  <TableCell className="font-medium">
-                    {slugify(vehicle.id)}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {vehicle.vin}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {vehicle.reqNo}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {vehicle.bayanNo}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {
-                      siteConfig.ports.find(
-                        (v) => v.description === vehicle.port
-                      )?.name
-                    }
-                  </TableCell>
-                  <TableCell className="">
-                    <Link
-                      prefetch={false}
-                      className={cn(buttonVariants({}), "whitespace-nowrap ")}
-                      href={`/results/${vehicle.id}?search=${
-                        search ? search : ""
-                      }&page=${page}&pageSize=${pageSize}`}
-                    >
-                      {canIssueReport(vehicle as ExtendedVehicle)
-                        ? "View Result"
-                        : "Add Result"}
-                    </Link>
-                  </TableCell>
-                  <TableCell className="">
-                    <Link
-                      className={cn(buttonVariants({}))}
-                      href={`/vehicles/${vehicle.id}?search=${
-                        String(search) || ""
-                      }&page=${page}&pageSize=${pageSize}`}
-                    >
-                      Update
-                    </Link>
-                  </TableCell>
-                  <TableCell className="text-end">
-                    <Button
-                      variant="secondary"
-                      className="ring-2 ring-gray-300"
-                      disabled={!canIssueReport(vehicle as ExtendedVehicle)}
-                    >
-                      <Link target={"_blank"} href={`/reports/${vehicle.id}`}>
-                        {canIssueReport(vehicle as ExtendedVehicle) ? (
-                          <Icons.report className="w-6 h-6" />
-                        ) : (
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-ban"
-                          >
-                            <circle cx="12" cy="12" r="10" />
-                            <path d="m4.9 4.9 14.2 14.2" />
-                          </svg>
-                        )}
-                      </Link>
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                <VehicleListItem
+                  key={vehicle.id}
+                  vehicle={vehicle as ExtendedVehicle}
+                  page={page}
+                  pageSize={pageSize}
+                  search={search}
+                  isAdminUser={isAdminUser}
+                />
               ))
             ) : (
               <TableRow>

@@ -1,14 +1,13 @@
 "use server";
 import { createBrakeTest, updateBrakeTest } from "@/lib/db/brake";
 import { BrakeSchemaType } from "@/types";
-import { revalidatePath } from "next/cache";
 
-export async function createNewBrakeTest(data: BrakeSchemaType) {
+export async function createNewBrakeTestAction(data: BrakeSchemaType) {
   const newBrakeTest = await createBrakeTest(data);
-  return newBrakeTest;
+  return JSON.stringify(newBrakeTest);
 }
 
 export async function updateBrakeTestAction(data: BrakeSchemaType) {
   const updatedBrakeTest = await updateBrakeTest(data);
-  return updatedBrakeTest;
+  return JSON.stringify(updatedBrakeTest);
 }

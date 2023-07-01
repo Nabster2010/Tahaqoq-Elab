@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { BrakeSchema } from "@/lib/validations/brake";
-import { updateBrakeTestAction } from "@/lib/serverActions/_brakeActions";
+import { updateBrakeTestAction } from "@/app/_actions/_brakeActions";
 import { useRouter } from "next/navigation";
 import {
   Table,
@@ -50,7 +50,8 @@ const BrakeUpdateForm = ({ brakeTestResult }: { brakeTestResult: Brake }) => {
   function onSubmit(data: z.infer<typeof BrakeSchema>) {
     const result = getBrakeTestResult(data);
     startTransition(() => {
-      updateBrakeTestAction({ ...data, result }).then((res) => {
+      updateBrakeTestAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedBrakeTest) {
           toast({
             title: "Success",

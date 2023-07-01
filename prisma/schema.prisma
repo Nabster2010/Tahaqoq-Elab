@@ -33,7 +33,7 @@ model User {
 
 model Customer {
   id           String    @id() @default(cuid())
-  name         String
+  name         String    @unique
   email        String?
   phone        String?
   address      String?
@@ -61,7 +61,7 @@ model VehicleType {
   id             String              @id @default(cuid())
   modelType      String
   description    String
-  manufacturer   VehicleManufacturer @relation(fields: [manufacturerId], references: [id])
+  manufacturer   VehicleManufacturer @relation(fields: [manufacturerId], references: [id],onDelete: Cascade)   
   manufacturerId String
   vehiclesInfo   VehicleInfo[]
   createdAt      DateTime           @default(now())
@@ -91,8 +91,8 @@ model Vehicle {
   paymentType      String            
   price            Float
   tax              Float
-  customer         Customer         @relation(fields: [customerId], references: [id])
-  customerId       String
+  customer         Customer         @relation(fields: [customerId], references: [id],onDelete: Restrict)
+  customerId       String 
   vehicleInfo      VehicleInfo?
   visualInspection VisualInspection?
   emissionTest     Emission?
@@ -100,8 +100,8 @@ model Vehicle {
   sideSlip         SideSlip?
   suspensionTest   Suspension?
   brakeTest        Brake?
-  userId           String
-  user             User              @relation(fields: [userId], references: [id], onDelete: NoAction)
+  userId           String?
+  user             User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 
@@ -112,11 +112,11 @@ model Vehicle {
 model VehicleInfo {
   vehicleId     Int         @id
   vehicle       Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  color         Color       @relation(fields: [colorId], references: [id])
-  colorId       String
+  color         Color?       @relation(fields: [colorId], references: [id],onDelete: SetNull)
+  colorId       String?
   year          String
-  vehicleType   VehicleType @relation(fields: [vehicleTypeId], references: [id])
-  vehicleTypeId String
+  vehicleType   VehicleType? @relation(fields: [vehicleTypeId], references: [id],onDelete: SetNull)
+  vehicleTypeId String?
   category      String      
   condition     String      
   fuelType      String      

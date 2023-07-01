@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { BrakeSchema } from "@/lib/validations/brake";
-import { createNewBrakeTest } from "@/lib/serverActions/_brakeActions";
+import { createNewBrakeTestAction } from "@/app/_actions/_brakeActions";
 import { useRouter } from "next/navigation";
 import {
   Table,
@@ -47,7 +47,8 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   function onSubmit(data: z.infer<typeof BrakeSchema>) {
     const result = getBrakeTestResult(data);
     startTransition(() => {
-      createNewBrakeTest({ ...data, result, vehicleId }).then((res) => {
+      createNewBrakeTestAction({ ...data, result, vehicleId }).then((data) => {
+        const res = JSON.parse(data);
         if (res.newBrakeTest) {
           toast({
             title: "Success",

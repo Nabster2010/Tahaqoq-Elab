@@ -1,12 +1,16 @@
 "use server";
-import { createManufacturer, updateManufacturer } from "@/lib/db/manufacturer";
+import {
+  createManufacturer,
+  deleteManufacturer,
+  updateManufacturer,
+} from "@/lib/db/manufacturer";
 import { ManufacturerSchemaType } from "@/types";
 
 export async function createNewManufacturerAction(
   data: ManufacturerSchemaType
 ) {
   const newManufacturer = await createManufacturer(data);
-  return newManufacturer;
+  return JSON.stringify(newManufacturer);
 }
 
 export async function updateManufacturerAction(
@@ -14,5 +18,9 @@ export async function updateManufacturerAction(
   id: string
 ) {
   const updatedManufacturer = await updateManufacturer(data, id);
-  return updatedManufacturer;
+  return JSON.stringify(updatedManufacturer);
+}
+export async function deleteManufacturerAction(id: string) {
+  const deletedManufacturer = await deleteManufacturer(id);
+  return JSON.stringify(deletedManufacturer);
 }

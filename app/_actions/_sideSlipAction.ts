@@ -4,10 +4,10 @@ import { SideSlipSchemaType } from "@/types";
 
 export async function createNewSideSlipAction(data: SideSlipSchemaType) {
   const newSideSlip = await createSideSlip(data);
-  return newSideSlip;
+  return JSON.stringify(newSideSlip);
 }
 
 export async function updateSideSlipAction(data: SideSlipSchemaType) {
   const updatedSideSlip = await updateSideSlip(data);
-  return updatedSideSlip;
+  return JSON.stringify(updatedSideSlip);
 }

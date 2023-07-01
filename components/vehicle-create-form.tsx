@@ -24,7 +24,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { VehicleSchema } from "@/lib/validations/vehicle";
 import { useTransition } from "react";
-import { createNewVehicleAction } from "@/lib/serverActions/_vehicleActions";
+import { createNewVehicleAction } from "@/app/_actions/_vehicleActions";
 import { Icons } from "@/components/icons";
 import { useSession } from "next-auth/react";
 import CustomerSelectComboBox from "./select-customer-comboBox";
@@ -61,7 +61,8 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
       if (!session) {
         return;
       }
-      createNewVehicleAction(data, session.user.id).then((res) => {
+      createNewVehicleAction(data, session.user.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.newVehicle) {
           toast({
             title: "Success",
@@ -114,8 +115,7 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
 
                     <FormControl>
                       <CustomerSelectComboBox
-                        handleChange={field.onChange}
-                        defaultValue={field.value}
+                        field={field}
                         customers={customers}
                       />
                     </FormControl>

@@ -4,7 +4,13 @@ import { db } from ".";
 
 export async function getVehicleTypes() {
   try {
-    const vehicleTypes = await db.vehicleType.findMany();
+    const vehicleTypes = await db.vehicleType.findMany({
+      orderBy: {
+        manufacturer: {
+          name: "asc",
+        },
+      },
+    });
     return { vehicleTypes };
   } catch (error) {
     console.log("error fetching vehicle types", { error });
@@ -33,7 +39,9 @@ export async function getPaginatedVehicleTypes(
       },
 
       orderBy: {
-        modelType: "desc",
+        manufacturer: {
+          name: "asc",
+        },
       },
       skip,
       take: pageSize,
@@ -101,5 +109,19 @@ export async function updateVehicleType(
   } catch (error) {
     console.log("error updating vehicle type");
     return { error };
+  }
+}
+
+export async function deleteVehicleType(id: string) {
+  try {
+    const deleteVehicleType = await db.vehicleType.delete({
+      where: {
+        id,
+      },
+    });
+    return { success: true };
+  } catch (error) {
+    console.log("error deleting vehicle type");
+    return { success: false, error };
   }
 }

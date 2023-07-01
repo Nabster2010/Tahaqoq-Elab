@@ -18,7 +18,7 @@ import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { VehicleTypeSchema } from "@/lib/validations/vehicleType";
 import { VehicleManufacturer } from "@prisma/client";
-import { createNewVehicleTypeAction } from "@/lib/serverActions/_vehicleTypeActions";
+import { createNewVehicleTypeAction } from "@/app/_actions/_vehicleTypeActions";
 import {
   Select,
   SelectContent,
@@ -47,7 +47,8 @@ const VehicleTypeCreateForm = ({
   });
   function onSubmit(data: z.infer<typeof VehicleTypeSchema>) {
     startTransition(() => {
-      createNewVehicleTypeAction(data).then((res) => {
+      createNewVehicleTypeAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newVehicleType) {
           toast({
             title: "Success",

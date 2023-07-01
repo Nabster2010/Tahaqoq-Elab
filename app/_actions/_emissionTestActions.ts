@@ -4,10 +4,10 @@ import { EmissionSchemaType } from "@/types";
 
 export async function createNewEmissionAction(data: EmissionSchemaType) {
   const newEmission = await createEmission(data);
-  return newEmission;
+  return JSON.stringify(newEmission);
 }
 
 export async function updateEmissionAction(data: EmissionSchemaType) {
   const updatedEmission = await updateEmission(data);
-  return updatedEmission;
+  return JSON.stringify(updatedEmission);
 }

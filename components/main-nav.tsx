@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import { MobileNav } from "@/components/mobile-nav";
 import Logo from "./Logo";
-import { buttonVariants } from "./ui/button";
 
 interface MainNavProps {
   items?: MainNavItem[];

@@ -9,12 +9,12 @@ export async function createNewVisualInspectionAction(
   data: VisualInspectionSchemaType
 ) {
   const newVisualInspection = await createVisualInspection(data);
-  return newVisualInspection;
+  return JSON.stringify(newVisualInspection);
 }
 
 export async function updateVisualInspectionAction(
   data: VisualInspectionSchemaType
 ) {
   const updatedVisualInspection = await updateVisualInspection(data);
-  return updatedVisualInspection;
+  return JSON.stringify(updatedVisualInspection);
 }

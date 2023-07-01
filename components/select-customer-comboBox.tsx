@@ -19,25 +19,38 @@ import {
 import { Customer } from "@prisma/client";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import CustomerCreateModal from "./CustomerCreateModal";
+import { ControllerRenderProps } from "react-hook-form";
 
 export default function CustomerSelectComboBox({
   customers,
-  handleChange,
-  defaultValue,
+  field,
 }: {
   customers: Customer[];
-  handleChange: (id: Customer["id"]) => void;
-  defaultValue?: Customer["id"];
+  field: ControllerRenderProps<
+    {
+      vin: string;
+      reqNo: string;
+      reqDate: string;
+      bayanNo: string;
+      bayanDate: string;
+      port: string;
+      paymentType: string;
+      price: number;
+      tax: number;
+      customerId: string;
+    },
+    "customerId"
+  >;
 }) {
   const [popOverOpen, setPopOverOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [name, setName] = React.useState(
-    () => customers.find((c) => c.id === defaultValue)?.name ?? ""
+    () => customers.find((c) => c.id === field.value)?.name ?? ""
   );
   const [inputValue, setInputValue] = React.useState("");
 
   const afterSaveCb = (newCustomer: Customer) => {
-    handleChange(newCustomer.id);
+    field.onChange(newCustomer.id);
     setName(newCustomer.name);
     setDialogOpen(false);
   };
@@ -78,7 +91,7 @@ export default function CustomerSelectComboBox({
                 <CommandItem
                   key={customer.id}
                   onSelect={(currentValue) => {
-                    handleChange(customer.id);
+                    field.onChange(customer.id);
                     setName(currentValue === name ? "" : currentValue);
                     setPopOverOpen(false);
                   }}

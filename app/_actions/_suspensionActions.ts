@@ -4,10 +4,10 @@ import { SuspensionSchemaType } from "@/types";
 
 export async function createNewSuspensionAction(data: SuspensionSchemaType) {
   const newSuspension = await createSuspension(data);
-  return newSuspension;
+  return JSON.stringify(newSuspension);
 }
 
 export async function updateSuspensionAction(data: SuspensionSchemaType) {
   const updatedSuspension = await updateSuspension(data);
-  return updatedSuspension;
+  return JSON.stringify(updatedSuspension);
 }

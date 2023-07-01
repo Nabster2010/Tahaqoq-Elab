@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { VisualInspectionSchema } from "@/lib/validations/visualInspection";
-import { createNewVisualInspectionAction } from "@/lib/serverActions/_visualInspectionActions";
+import { createNewVisualInspectionAction } from "@/app/_actions/_visualInspectionActions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { transferObjects } from "@/lib/helpers";
@@ -62,7 +62,8 @@ const VisualInspectionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   });
   function onSubmit(data: z.infer<typeof VisualInspectionSchema>) {
     startTransition(() => {
-      createNewVisualInspectionAction(data).then((res) => {
+      createNewVisualInspectionAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newVisualInspection) {
           toast({
             title: "Success",

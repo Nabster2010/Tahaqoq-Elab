@@ -4,10 +4,10 @@ import { VehicleInfoSchemaType } from "@/types";
 
 export async function createNewVehicleInfoAction(data: VehicleInfoSchemaType) {
   const newVehicleInfo = await createVehicleInfo(data);
-  return newVehicleInfo;
+  return JSON.stringify(newVehicleInfo);
 }
 
 export async function updateVehicleInfoAction(data: VehicleInfoSchemaType) {
   const updatedVehicleInfo = await updateVehicleInfo(data);
-  return updatedVehicleInfo;
+  return JSON.stringify(updatedVehicleInfo);
 }

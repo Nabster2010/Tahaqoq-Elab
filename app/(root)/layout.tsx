@@ -6,7 +6,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <div className="relative flex flex-col min-h-screen">
         <SiteHeader />
-        <div className="container  flex-1 bg-[url('/grid.svg')] ">
+        <div className="container flex-1 bg-[url('/grid.svg')] ">
           {children}
         </div>
       </div>

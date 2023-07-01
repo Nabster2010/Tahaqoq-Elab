@@ -22,7 +22,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
-import { createNewCustomerAction } from "@/lib/serverActions/_customerActions";
+import { createNewCustomerAction } from "@/app/_actions/_customerActions";
 import { Icons } from "@/components/icons";
 import { CustomerSchema } from "@/lib/validations/customer";
 import { useRouter } from "next/navigation";
@@ -54,7 +54,8 @@ const CustomerCreateForm = ({
   });
   async function onSubmit(data: z.infer<typeof CustomerSchema>) {
     startTransition(() => {
-      createNewCustomerAction(data).then((res) => {
+      createNewCustomerAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newCustomer) {
           toast({
             title: "Success",

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { ManufacturerSchema } from "@/lib/validations/manufacturer";
-import { createNewManufacturerAction } from "@/lib/serverActions/_manufacturerActions";
+import { createNewManufacturerAction } from "@/app/_actions/_manufacturerActions";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -43,7 +43,8 @@ const ManufacturerCreateForm = () => {
   });
   function onSubmit(data: z.infer<typeof ManufacturerSchema>) {
     startTransition(() => {
-      createNewManufacturerAction(data).then((res) => {
+      createNewManufacturerAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newManufacturer) {
           toast({
             title: "Success",

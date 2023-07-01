@@ -4,7 +4,11 @@ import { db } from ".";
 
 export async function getColors() {
   try {
-    const colors = await db.color.findMany();
+    const colors = await db.color.findMany({
+      orderBy: {
+        color: "asc",
+      },
+    });
     return { colors };
   } catch (error) {
     console.log("error fetching colors", { error });
@@ -89,6 +93,20 @@ export async function updateColor(data: ColorSchemaType, id: string) {
     return { updatedColor };
   } catch (error) {
     console.log("error updating color");
+    return { error };
+  }
+}
+
+export async function deleteColor(id: string) {
+  try {
+    const deletedColor = await db.color.delete({
+      where: {
+        id,
+      },
+    });
+    return { deletedColor };
+  } catch (error) {
+    console.log("error deleting color");
     return { error };
   }
 }

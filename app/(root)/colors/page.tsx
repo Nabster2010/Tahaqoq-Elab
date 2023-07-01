@@ -1,3 +1,4 @@
+import ColorListItem from "@/components/color-list-item";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
@@ -17,19 +18,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { siteConfig } from "@/config/site";
-import { getPaginatedCustomers } from "@/lib/db/customer";
+import { authOptions } from "@/lib/auth";
+import { getPaginatedColors } from "@/lib/db/color";
 import { cn } from "@/lib/utils";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Customers",
-  description: "add and edit Customers",
+  title: "Colors",
+  description: "add and edit colors",
 };
-const CustomersPage = async ({
+const ColorsPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
+  const session = await getServerSession(authOptions);
+  const isAdminUser = session?.user?.role === "admin";
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const pageSize = searchParams.pageSize
     ? parseInt(searchParams.pageSize)
@@ -37,22 +42,16 @@ const CustomersPage = async ({
   const search = searchParams.search
     ? decodeURIComponent(searchParams.search as string)
     : "";
-  const { customers, currentPage, totalPages } = await getPaginatedCustomers(
+  const { colors, currentPage, totalPages } = await getPaginatedColors(
     search,
     page,
     pageSize
   );
 
-  // const searchAction = async (data: FormData) => {
-  //   "use server";
-  //   const search = data.get("search") as String;
-  //   redirect(`/customers?search=${encodeURI(search.toString())}`);
-  // };
-
   return (
     <Card className="mt-4">
-      <CardHeader className="">
-        <Title className="mb-4">Customers</Title>
+      <CardHeader className="space-y-4">
+        <Title>Colors</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm
             path="/customers"
@@ -61,8 +60,8 @@ const CustomersPage = async ({
             searchParams={searchParams}
           />
           <Link
-            href="/customers/create"
-            className={cn(buttonVariants({}), "ml-auto w-full md:w-auto ")}
+            href="/colors/create"
+            className={cn(buttonVariants({}), "ml-auto w-full md:w-auto")}
           >
             Create New
           </Link>
@@ -72,37 +71,32 @@ const CustomersPage = async ({
         <Table>
           <TableHeader>
             <TableRow className="font-bold ">
-              <TableHead className="w-fit ">Name</TableHead>
-              <TableHead className="hidden md:table-cell">Phone</TableHead>
-              <TableHead className="hidden md:table-cell">Email</TableHead>
+              <TableHead className="w-fit ">Color</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Description
+              </TableHead>
               <TableHead className="text-right">Edit</TableHead>
+              {isAdminUser && (
+                <TableHead className="text-right">Delete</TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {customers && customers?.length > 0 ? (
-              customers.map((customer) => (
-                <TableRow key={customer.id}>
-                  <TableCell className="font-medium">{customer.name}</TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {customer.phone}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {customer.email}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Link
-                      className={cn(buttonVariants({}))}
-                      href={`/customers/${customer.id}?page=${page}&pageSize=${pageSize}&search=${search}`}
-                    >
-                      Update
-                    </Link>
-                  </TableCell>
-                </TableRow>
+            {colors && colors?.length > 0 ? (
+              colors.map((color) => (
+                <ColorListItem
+                  search={search}
+                  isAdminUser={isAdminUser}
+                  page={page}
+                  pageSize={pageSize}
+                  color={color}
+                  key={color.id}
+                />
               ))
             ) : (
               <TableRow>
-                <TableCell className="w-full text-center" colSpan={4}>
-                  No customers found
+                <TableCell className="w-full text-center" colSpan={3}>
+                  No Colors found
                 </TableCell>
               </TableRow>
             )}
@@ -112,7 +106,7 @@ const CustomersPage = async ({
       <CardFooter>
         {totalPages && totalPages >= 1 ? (
           <Pagination
-            pathName="customers"
+            pathName="colors"
             currentPage={page}
             totalPages={totalPages}
             pageSize={pageSize}
@@ -126,4 +120,4 @@ const CustomersPage = async ({
   );
 };
 
-export default CustomersPage;
+export default ColorsPage;

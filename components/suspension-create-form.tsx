@@ -26,7 +26,7 @@ import {
 import Indicator from "./Indicator";
 import { getSuspensionResult } from "@/lib/helpers";
 import { SuspensionSchema } from "@/lib/validations/suspension";
-import { createNewSuspensionAction } from "@/lib/serverActions/_suspensionActions";
+import { createNewSuspensionAction } from "@/app/_actions/_suspensionActions";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -48,7 +48,8 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   function onSubmit(data: z.infer<typeof SuspensionSchema>) {
     const result = getSuspensionResult(data);
     startTransition(() => {
-      createNewSuspensionAction({ ...data, result }).then((res) => {
+      createNewSuspensionAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.newSuspension) {
           toast({
             title: "Success",

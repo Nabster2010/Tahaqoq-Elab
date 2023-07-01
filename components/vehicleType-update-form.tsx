@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { updateVehicleTypeAction } from "@/lib/serverActions/_vehicleTypeActions";
+import { updateVehicleTypeAction } from "@/app/_actions/_vehicleTypeActions";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -49,7 +49,8 @@ const VehicleTypeUpdateForm = ({
   });
   function onSubmit(data: z.infer<typeof VehicleTypeSchema>) {
     startTransition(() => {
-      updateVehicleTypeAction(data, vehicleType.id).then((res) => {
+      updateVehicleTypeAction(data, vehicleType.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedVehicleType) {
           toast({
             title: "Success",

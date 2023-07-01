@@ -17,13 +17,17 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { ColorSchema } from "@/lib/validations/colors";
-import { updateColorAction } from "@/lib/serverActions/_colorActions";
+import { updateColorAction } from "@/app/_actions/_colorActions";
 import { Color } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { useSession } from "next-auth/react";
+import { cn } from "@/lib/utils";
 
 const ColorUpdateForm = ({ color }: { color: Color }) => {
+  const { data: session } = useSession();
+  const isAdminUser = session?.user?.role === "admin";
   const router = useRouter();
   let [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof ColorSchema>>({
@@ -35,7 +39,8 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
   });
   function onSubmit(data: z.infer<typeof ColorSchema>) {
     startTransition(() => {
-      updateColorAction(data, color.id).then((res) => {
+      updateColorAction(data, color.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedColor) {
           toast({
             title: "Success",
@@ -57,6 +62,7 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
     });
     router.refresh();
   }
+
   return (
     <Card>
       <CardHeader>
@@ -65,7 +71,6 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {" "}
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 gap-x-4">
@@ -96,10 +101,14 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
                 )}
               />
             </div>
-            <div className="flex justify-end">
+            <div
+              className={cn(
+                "flex flex-col gap-2 md:flex-row md:justify-between"
+              )}
+            >
               <Button
                 disabled={isPending}
-                className="w-full sm:w-auto"
+                className={cn("w-full sm:w-auto", !isAdminUser && "ml-auto")}
                 type="submit"
               >
                 {isPending && (

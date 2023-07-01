@@ -1,10 +1,14 @@
 "use server";
-import { createVehicleType, updateVehicleType } from "@/lib/db/vehicleType";
+import {
+  createVehicleType,
+  deleteVehicleType,
+  updateVehicleType,
+} from "@/lib/db/vehicleType";
 import { VehicleTypeSchemaType } from "@/types";
 
 export async function createNewVehicleTypeAction(data: VehicleTypeSchemaType) {
   const newVehicleType = await createVehicleType(data);
-  return newVehicleType;
+  return JSON.stringify(newVehicleType);
 }
 
 export async function updateVehicleTypeAction(
@@ -12,5 +16,10 @@ export async function updateVehicleTypeAction(
   id: string
 ) {
   const updatedVehicleType = await updateVehicleType(data, id);
-  return updatedVehicleType;
+  return JSON.stringify(updatedVehicleType);
+}
+
+export async function deleteVehicleTypeAction(id: string) {
+  const deletedVehicleType = await deleteVehicleType(id);
+  return JSON.stringify(deletedVehicleType);
 }

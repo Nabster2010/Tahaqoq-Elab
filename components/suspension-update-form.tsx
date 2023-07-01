@@ -27,7 +27,7 @@ import Indicator from "./Indicator";
 import { getSuspensionResult } from "@/lib/helpers";
 import { Suspension } from "@prisma/client";
 import { SuspensionSchema } from "@/lib/validations/suspension";
-import { updateSuspensionAction } from "@/lib/serverActions/_suspensionActions";
+import { updateSuspensionAction } from "@/app/_actions/_suspensionActions";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -53,7 +53,8 @@ const SuspensionUpdateForm = ({
   function onSubmit(data: z.infer<typeof SuspensionSchema>) {
     const result = getSuspensionResult(data);
     startTransition(() => {
-      updateSuspensionAction({ ...data, result }).then((res) => {
+      updateSuspensionAction({ ...data, result }).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedSuspension) {
           toast({
             title: "Success",

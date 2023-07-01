@@ -168,5 +168,5 @@ export const siteConfig = {
       name: "MANUAL",
     },
   ],
-  pageSize: 5,
+  pageSize: 10,
 };

@@ -16,40 +16,44 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import VehicleTypeCreateForm from "@/components/vehicleType-create-form";
+import VehicleTypeListItem from "@/components/vehicleType-list-item";
 import { siteConfig } from "@/config/site";
-import { getPaginatedManufacturers } from "@/lib/db/manufacturer";
+import { authOptions } from "@/lib/auth";
+import { getPaginatedVehicleTypes } from "@/lib/db/vehicleType";
 import { cn } from "@/lib/utils";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Manufacturers",
-  description: "add and edit Vehicles Manufacturers",
+  title: " Vehicle Types",
+  description: "Add and update vehicle types",
 };
 
-const ManufacturersPage = async ({
+const VehicleTypesPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
+  const session = await getServerSession(authOptions);
+  const isAdminUser = session?.user?.role === "admin";
   const page = searchParams.page ? parseInt(searchParams.page) : 1;
   const pageSize = searchParams.pageSize
     ? parseInt(searchParams.pageSize)
     : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
-  const { manufacturers, currentPage, totalPages } =
-    await getPaginatedManufacturers(search, page, pageSize);
+  const search = searchParams.search ? searchParams.search : "";
+
+  const { vehicleTypes, currentPage, totalPages } =
+    await getPaginatedVehicleTypes(search, page, pageSize);
 
   return (
     <Card className="mt-4">
       <CardHeader className="space-y-4">
-        <Title>Manufacturers</Title>
+        <Title>Vehicle Types</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm searchParams={searchParams} />
-
           <Link
-            href="/manufacturers/create"
+            href="/vehicleTypes/create"
             className={cn(buttonVariants({}), "ml-auto w-full md:w-auto")}
           >
             Create New
@@ -60,42 +64,35 @@ const ManufacturersPage = async ({
         <Table>
           <TableHeader>
             <TableRow className="font-bold ">
-              <TableHead className="w-fit ">Manufacturer</TableHead>
+              <TableHead className="w-fit ">Model Type</TableHead>
               <TableHead className="hidden md:table-cell">
                 Description
               </TableHead>
-              <TableHead className="hidden md:table-cell">Country</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Manufacturer
+              </TableHead>
               <TableHead className="text-right">Edit</TableHead>
+              {isAdminUser && (
+                <TableHead className="text-right">Delete</TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {manufacturers && manufacturers?.length > 0 ? (
-              manufacturers.map((manufacturer) => (
-                <TableRow key={manufacturer.id}>
-                  <TableCell className="font-medium">
-                    {manufacturer.name}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {manufacturer.description}
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell">
-                    {manufacturer.country}
-                  </TableCell>
-
-                  <TableCell className="text-right">
-                    <Link
-                      className={cn(buttonVariants({}))}
-                      href={`/manufacturers/${manufacturer.id}?search=${search}&page=${page}&pageSize=${pageSize}`}
-                    >
-                      Update
-                    </Link>
-                  </TableCell>
-                </TableRow>
+            {vehicleTypes && vehicleTypes?.length > 0 ? (
+              vehicleTypes.map((vehicleType) => (
+                <VehicleTypeListItem
+                  key={vehicleType.id}
+                  vehicleType={vehicleType}
+                  page={page}
+                  pageSize={pageSize}
+                  search={search}
+                  isAdminUser={isAdminUser}
+                />
               ))
             ) : (
               <TableRow>
                 <TableCell className="w-full text-center" colSpan={4}>
-                  No Manufacturers found
+                  No vehicle Types found
                 </TableCell>
               </TableRow>
             )}
@@ -105,7 +102,7 @@ const ManufacturersPage = async ({
       <CardFooter>
         {totalPages && totalPages >= 1 ? (
           <Pagination
-            pathName="manufacturers"
+            pathName="vehicleTypes"
             currentPage={page}
             totalPages={totalPages}
             pageSize={pageSize}
@@ -119,4 +116,4 @@ const ManufacturersPage = async ({
   );
 };
 
-export default ManufacturersPage;
+export default VehicleTypesPage;

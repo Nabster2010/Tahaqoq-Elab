@@ -21,7 +21,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
-import { updateCustomerAction } from "@/lib/serverActions/_customerActions";
+import { updateCustomerAction } from "@/app/_actions/_customerActions";
 import { Icons } from "@/components/icons";
 import { CustomerSchema } from "@/lib/validations/customer";
 import { Customer } from "@prisma/client";
@@ -46,7 +46,8 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
   });
   function onSubmit(data: z.infer<typeof CustomerSchema>) {
     startTransition(() => {
-      updateCustomerAction(data, customer.id).then((res) => {
+      updateCustomerAction(data, customer.id).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedCustomer) {
           toast({
             title: "Success",
@@ -58,7 +59,14 @@ const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
             variant: "destructive",
             title: "Error ",
             description: (
-              <ToastDesc error msg={res.error}>
+              <ToastDesc
+                error
+                msg={
+                  res.error && res.error?.code === "P2002"
+                    ? "Customer Name Already Exists"
+                    : null
+                }
+              >
                 Error Updating Customer!
               </ToastDesc>
             ),

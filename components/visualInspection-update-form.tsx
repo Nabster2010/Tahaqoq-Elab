@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { VisualInspectionSchema } from "@/lib/validations/visualInspection";
-import { updateVisualInspectionAction } from "@/lib/serverActions/_visualInspectionActions";
+import { updateVisualInspectionAction } from "@/app/_actions/_visualInspectionActions";
 import { VisualInspection } from "@prisma/client";
 import { transferObjects } from "@/lib/helpers";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -69,7 +69,8 @@ const VisualInspectionUpateForm = ({
   });
   function onSubmit(data: z.infer<typeof VisualInspectionSchema>) {
     startTransition(() => {
-      updateVisualInspectionAction(data).then((res) => {
+      updateVisualInspectionAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.updatedVisualInspection) {
           toast({
             title: "Success",

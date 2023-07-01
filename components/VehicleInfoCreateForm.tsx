@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
 import { VehicleInfoSchema } from "@/lib/validations/vehicleInfo";
-import { createNewVehicleInfoAction } from "@/lib/serverActions/_vehicleInfoActions";
+import { createNewVehicleInfoAction } from "@/app/_actions/_vehicleInfoActions";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -63,7 +63,8 @@ const VehicleInfoCreateForm = ({
   });
   function onSubmit(data: z.infer<typeof VehicleInfoSchema>) {
     startTransition(() => {
-      createNewVehicleInfoAction(data).then((res) => {
+      createNewVehicleInfoAction(data).then((data) => {
+        const res = JSON.parse(data);
         if (res.newVehicleInfo) {
           toast({
             title: "Success",
