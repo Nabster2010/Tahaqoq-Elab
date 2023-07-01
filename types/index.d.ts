@@ -58,6 +58,12 @@ export type ExtendedVehicle = Vehicle & {
   };
 };
 
+export type ExtendedVehicleType = VehicleType & {
+  manufacturer: {
+    name: string;
+  };
+};
+
 import { User } from "@prisma/client";
 import type { Icon } from "lucide-react";
 

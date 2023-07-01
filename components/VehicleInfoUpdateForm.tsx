@@ -30,11 +30,12 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { ExtendedVehicleType } from "@/types";
 
 type VehicleInfoUpdateFormProps = {
-  colors: Color[];
-  vehicleTypes: VehicleType[];
   vehicleInfo: VehicleInfo;
+  colors: Color[];
+  vehicleTypes: ExtendedVehicleType[];
 };
 const VehicleInfoUpdateForm = ({
   colors,
@@ -185,7 +186,10 @@ const VehicleInfoUpdateForm = ({
                       <SelectContent>
                         {vehicleTypes.map((type) => (
                           <SelectItem key={type.id} value={type.id}>
-                            {type.modelType}
+                            <span className="">{type.modelType}</span>
+                            <span className="py-1 px-1.5  ml-10 text-[10px] rounded-md bg-foreground text-background font-bold">
+                              {type.manufacturer.name}
+                            </span>
                           </SelectItem>
                         ))}
                       </SelectContent>

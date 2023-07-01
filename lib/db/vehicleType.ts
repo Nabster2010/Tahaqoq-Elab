@@ -10,6 +10,13 @@ export async function getVehicleTypes() {
           name: "asc",
         },
       },
+      include: {
+        manufacturer: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
     return { vehicleTypes };
   } catch (error) {

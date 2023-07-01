@@ -16,7 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import VehicleTypeCreateForm from "@/components/vehicleType-create-form";
 import VehicleTypeListItem from "@/components/vehicleType-list-item";
 import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
@@ -45,7 +44,6 @@ const VehicleTypesPage = async ({
 
   const { vehicleTypes, currentPage, totalPages } =
     await getPaginatedVehicleTypes(search, page, pageSize);
-
   return (
     <Card className="mt-4">
       <CardHeader className="space-y-4">
