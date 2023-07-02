@@ -42,7 +42,12 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   styles.tableCol,
                   styles.cellBottomBorder,
                   styles.englishLightText,
-                  { width: "76.5%", borderRight: "none" },
+                  {
+                    width: "76.5%",
+                    borderRight: "none",
+                    fontWeight: "bold",
+                    fontSize: 12,
+                  },
                 ]}
               >
                 <Text>{vehicle.vin}</Text>

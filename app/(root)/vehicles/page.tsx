@@ -83,8 +83,8 @@ const VehiclesPage = async ({
             <TableRow className="font-bold ">
               <TableHead className="w-fit ">No</TableHead>
               <TableHead className="hidden md:table-cell">Vin</TableHead>
+              <TableHead className="hidden md:table-cell">Customer</TableHead>
               <TableHead className="hidden md:table-cell">Request No</TableHead>
-              <TableHead className="hidden md:table-cell">Bayan No</TableHead>
               <TableHead className="hidden md:table-cell">Port</TableHead>
               <TableHead>Test Results</TableHead>
               <TableHead>Edit</TableHead>
