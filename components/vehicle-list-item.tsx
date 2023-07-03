@@ -16,7 +16,7 @@ import { TableCell, TableRow } from "./ui/table";
 import { toast } from "./ui/use-toast";
 
 type VehicleListProps = {
-  vehicle: Vehicle & { customer: { name: string } };
+  vehicle: ExtendedVehicle;
   page: number;
   pageSize: number;
   search: string;
@@ -63,6 +63,10 @@ const VehicleListItem = ({
       <TableCell className="hidden md:table-cell">
         {ports.find((v) => v.description === vehicle.port)?.name}
       </TableCell>
+      <TableCell className="hidden md:table-cell">
+        {vehicle?.broker?.name}
+      </TableCell>
+
       <TableCell className="px-2 ">
         <Link
           prefetch={false}

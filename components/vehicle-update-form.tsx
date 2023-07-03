@@ -1,5 +1,5 @@
 "use client";
-import { Customer, Vehicle } from "@prisma/client";
+import { Broker, Customer, Vehicle } from "@prisma/client";
 import { siteConfig } from "@/config/site";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -31,14 +31,18 @@ import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Label } from "./ui/label";
 import { ports } from "@/config/ports";
 
 type VehicleUpdateFormProps = {
   customers: Customer[];
+  brokers: Broker[];
   vehicle: Vehicle;
 };
-const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
+const VehicleUpdateForm = ({
+  customers,
+  vehicle,
+  brokers,
+}: VehicleUpdateFormProps) => {
   let [isPending, startTransition] = useTransition();
   const router = useRouter();
   const form = useForm<z.infer<typeof VehicleSchema>>({
@@ -54,6 +58,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
       price: vehicle.price || 300,
       tax: vehicle.tax || 45,
       customerId: vehicle.customerId!,
+      brokerId: vehicle.brokerId || "",
     },
   });
   function onSubmit(data: z.infer<typeof VehicleSchema>) {
@@ -220,6 +225,33 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
                         {ports.map((port) => (
                           <SelectItem key={port.id} value={port.description}>
                             {port.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="brokerId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel variant={"optional"}>Broker:</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Broker" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {brokers.map((broker) => (
+                          <SelectItem key={broker.id} value={broker.id}>
+                            {broker.name}
                           </SelectItem>
                         ))}
                       </SelectContent>

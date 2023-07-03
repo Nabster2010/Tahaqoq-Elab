@@ -1,6 +1,7 @@
 import BackButton from "@/components/back-button";
 import VehicleUpdateForm from "@/components/vehicle-update-form";
 import { siteConfig } from "@/config/site";
+import { getBrokers } from "@/lib/db/broker";
 import { getCustomers } from "@/lib/db/customer";
 import { getVehicleById } from "@/lib/db/vehicle";
 
@@ -21,6 +22,7 @@ const VehiclePage = async ({
     : "";
   const { vehicle } = await getVehicleById(parseInt(params.id));
   const { customers } = await getCustomers();
+  const { brokers } = await getBrokers();
 
   if (!vehicle) {
     return (
@@ -33,7 +35,11 @@ const VehiclePage = async ({
       <BackButton
         to={`/vehicles?search=${search}&page=${page}&pageSize=${pageSize}`}
       />
-      <VehicleUpdateForm customers={customers || []} vehicle={vehicle} />
+      <VehicleUpdateForm
+        customers={customers || []}
+        brokers={brokers || []}
+        vehicle={vehicle}
+      />
     </section>
   );
 };

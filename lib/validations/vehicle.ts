@@ -14,4 +14,5 @@ export const VehicleSchema = z.object({
   price: z.number({ required_error: "Price is required" }),
   tax: z.number({ required_error: "VAT amount is required" }),
   customerId: z.string().nonempty("You should select a customer"),
+  brokerId: z.string(),
 });

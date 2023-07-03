@@ -59,16 +59,13 @@ export type ExtendedVehicle = Vehicle & {
     name: string;
     phone?: string;
   };
+  broker: Broker;
 };
 
 export type ExtendedVehicleType = VehicleType & {
   manufacturer: {
     name: string;
   };
-};
-
-export type ExtendedCustomer = Customer & {
-  broker: Broker;
 };
 
 import { User } from "@prisma/client";

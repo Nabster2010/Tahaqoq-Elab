@@ -1,7 +1,6 @@
 import BackButton from "@/components/back-button";
 import CustomerCreateForm from "@/components/customer-create-form";
 import { siteConfig } from "@/config/site";
-import { getBrokers } from "@/lib/db/broker";
 
 const CreateCustomerPage = async ({
   searchParams,
@@ -15,13 +14,13 @@ const CreateCustomerPage = async ({
   const search = searchParams.search
     ? decodeURIComponent(searchParams.search as string)
     : "";
-  const { brokers } = await getBrokers();
+
   return (
     <section>
       <BackButton
         to={`/customers?search=${search}&page=${page}&pageSize=${pageSize}`}
       />
-      <CustomerCreateForm brokers={brokers || []} />
+      <CustomerCreateForm />
     </section>
   );
 };

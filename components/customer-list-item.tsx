@@ -1,7 +1,7 @@
 "use client";
 import { deleteCustomerAction } from "@/app/_actions/_customerActions";
 import { cn } from "@/lib/utils";
-import { ExtendedCustomer } from "@/types";
+import { Customer } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
@@ -12,7 +12,7 @@ import { TableCell, TableRow } from "./ui/table";
 import { toast } from "./ui/use-toast";
 
 type CustomerListProps = {
-  customer: ExtendedCustomer;
+  customer: Customer;
   page: number;
   pageSize: number;
   search: string;
@@ -57,9 +57,6 @@ const CustomerListItem = ({
       <TableCell className="font-bold">{customer.name}</TableCell>
       <TableCell className="hidden md:table-cell">{customer.phone}</TableCell>
       <TableCell className="hidden md:table-cell">{customer.email}</TableCell>
-      <TableCell className="hidden md:table-cell">
-        {customer?.broker?.name}
-      </TableCell>
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}

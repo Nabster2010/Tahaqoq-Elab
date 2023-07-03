@@ -21,7 +21,6 @@ import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedCustomers } from "@/lib/db/customer";
 import { cn } from "@/lib/utils";
-import { ExtendedCustomer } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -81,7 +80,6 @@ const CustomersPage = async ({
               <TableHead className="w-fit ">Name</TableHead>
               <TableHead className="hidden md:table-cell">Phone</TableHead>
               <TableHead className="hidden md:table-cell">Email</TableHead>
-              <TableHead className="hidden md:table-cell">Broker</TableHead>
               <TableHead className="text-right">Edit</TableHead>
               {isAdminUser && (
                 <TableHead className="text-right">Delete</TableHead>
@@ -92,7 +90,7 @@ const CustomersPage = async ({
             {customers && customers?.length > 0 ? (
               customers.map((customer) => (
                 <CustomerListItem
-                  customer={customer as ExtendedCustomer}
+                  customer={customer}
                   key={customer.id}
                   page={page}
                   pageSize={pageSize}
@@ -102,7 +100,7 @@ const CustomersPage = async ({
               ))
             ) : (
               <TableRow>
-                <TableCell className="w-full text-center" colSpan={5}>
+                <TableCell className="w-full text-center" colSpan={4}>
                   No customers found
                 </TableCell>
               </TableRow>

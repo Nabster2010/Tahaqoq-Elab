@@ -33,6 +33,7 @@ export async function getPaginatedVehicles(
       skip,
       take: pageSize,
       include: {
+        broker: true,
         vehicleInfo: {
           include: {
             vehicleType: {
@@ -79,6 +80,7 @@ export async function getVehicleById(id: number) {
     const vehicle = await db.vehicle.findUnique({
       where: { id },
       include: {
+        broker: true,
         vehicleInfo: {
           include: {
             vehicleType: {

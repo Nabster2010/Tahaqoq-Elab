@@ -1,5 +1,5 @@
 "use client";
-import { Customer } from "@prisma/client";
+import { Broker, Customer } from "@prisma/client";
 import { siteConfig } from "@/config/site";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -32,11 +32,13 @@ import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ports } from "@/config/ports";
+import { arabicDateFormat } from "@/lib/helpers";
 
 type VehicleCreateFormProps = {
   customers: Customer[];
+  brokers: Broker[];
 };
-const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
+const VehicleCreateForm = ({ customers, brokers }: VehicleCreateFormProps) => {
   const { data: session } = useSession();
   const todayDate = new Date().toISOString().split("T")[0];
   const router = useRouter();
@@ -54,6 +56,7 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
       price: 300,
       tax: 45,
       customerId: "",
+      brokerId: brokers[0].id || "",
     },
   });
 
@@ -194,6 +197,12 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                       />
                     </FormControl>
                     <FormMessage />
+                    <div className="text-sm text-muted-foreground">
+                      Hijri Date:{" "}
+                      <span dir="rtl" className="">
+                        {arabicDateFormat(new Date(field.value))}
+                      </span>{" "}
+                    </div>
                   </FormItem>
                 )}
               />
@@ -216,6 +225,33 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                         {ports.map((port) => (
                           <SelectItem key={port.id} value={port.description}>
                             {port.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="brokerId"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel variant={"optional"}>Broker:</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Broker" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {brokers.map((broker) => (
+                          <SelectItem key={broker.id} value={broker.id}>
+                            {broker.name}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -251,6 +287,7 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="price"

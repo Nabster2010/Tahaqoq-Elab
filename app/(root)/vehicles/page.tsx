@@ -86,6 +86,7 @@ const VehiclesPage = async ({
               <TableHead className="hidden md:table-cell">Customer</TableHead>
               <TableHead className="hidden md:table-cell">Request No</TableHead>
               <TableHead className="hidden md:table-cell">Port</TableHead>
+              <TableHead className="hidden md:table-cell">Broker</TableHead>
               <TableHead className="text-center">Results</TableHead>
               <TableHead className="text-center">Edit</TableHead>
               <TableHead className="hidden text-center md:table-cell ">
@@ -111,7 +112,7 @@ const VehiclesPage = async ({
               ))
             ) : (
               <TableRow>
-                <TableCell className="w-full text-center" colSpan={7}>
+                <TableCell className="w-full text-center" colSpan={11}>
                   No Vehicles found
                 </TableCell>
               </TableRow>

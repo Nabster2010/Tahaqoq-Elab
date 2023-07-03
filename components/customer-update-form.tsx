@@ -24,18 +24,12 @@ import { useTransition } from "react";
 import { updateCustomerAction } from "@/app/_actions/_customerActions";
 import { Icons } from "@/components/icons";
 import { CustomerSchema } from "@/lib/validations/customer";
-import { Broker, Customer } from "@prisma/client";
+import { Customer } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
-const CustomerUpdateForm = ({
-  customer,
-  brokers,
-}: {
-  customer: Customer;
-  brokers: Broker[];
-}) => {
+const CustomerUpdateForm = ({ customer }: { customer: Customer }) => {
   let [isPending, startTransition] = useTransition();
   const router = useRouter();
   const form = useForm<z.infer<typeof CustomerSchema>>({
@@ -48,7 +42,6 @@ const CustomerUpdateForm = ({
       address: customer.address || "",
       taxId: customer.taxId || "",
       customerType: customer.customerType || "INDIVIDUAL",
-      brokerId: customer.brokerId || "",
     },
   });
   function onSubmit(data: z.infer<typeof CustomerSchema>) {
@@ -177,33 +170,6 @@ const CustomerUpdateForm = ({
                       <SelectContent>
                         <SelectItem value="INDIVIDUAL">INDIVIDUAL</SelectItem>
                         <SelectItem value="COMPANY">COMPANY</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="brokerId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel variant={"optional"}>Broker:</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select Broker" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {brokers.map((broker) => (
-                          <SelectItem key={broker.id} value={broker.id}>
-                            {broker.name}
-                          </SelectItem>
-                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />

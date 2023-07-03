@@ -2,6 +2,7 @@ import { getCustomers } from "@/lib/db/customer";
 import VehicleCreateForm from "@/components/vehicle-create-form";
 import BackButton from "@/components/back-button";
 import { siteConfig } from "@/config/site";
+import { getBrokers } from "@/lib/db/broker";
 
 const CreateVehiclePage = async ({
   params,
@@ -19,12 +20,13 @@ const CreateVehiclePage = async ({
     ? decodeURIComponent(searchParams.search as string)
     : "";
   const { customers } = await getCustomers();
+  const { brokers } = await getBrokers();
   return (
     <section>
       <BackButton
         to={`/vehicles?search=${search}&page=${page}&pageSize=${pageSize}`}
       />
-      <VehicleCreateForm customers={customers || []} />
+      <VehicleCreateForm customers={customers || []} brokers={brokers || []} />
     </section>
   );
 };

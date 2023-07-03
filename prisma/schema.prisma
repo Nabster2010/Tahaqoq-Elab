@@ -35,12 +35,9 @@ model Customer {
   website                          String?
   taxId                            String?
   customerType                     String    @default("INDIVIDUAL") 
-  brokerId                         String?
-  broker                           Broker? @relation(fields: [brokerId], references: [id],onDelete: SetNull)
   vehicles                         Vehicle[]
   createdAt                        DateTime @default(now())
   updatedAt                        DateTime @updatedAt
-  @@index([brokerId])
 
 }
 model Broker{
@@ -50,7 +47,6 @@ model Broker{
   phone        String?
   percentage   Float?
   vehicles     Vehicle[]
-  customers    Customer[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

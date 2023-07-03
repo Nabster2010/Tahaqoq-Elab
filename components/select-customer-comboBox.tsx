@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,6 +19,7 @@ import { Customer } from "@prisma/client";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import CustomerCreateModal from "./CustomerCreateModal";
 import { ControllerRenderProps } from "react-hook-form";
+import { useState } from "react";
 
 export default function CustomerSelectComboBox({
   customers,
@@ -38,16 +38,17 @@ export default function CustomerSelectComboBox({
       price: number;
       tax: number;
       customerId: string;
+      brokerId: string;
     },
     "customerId"
   >;
 }) {
-  const [popOverOpen, setPopOverOpen] = React.useState(false);
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [name, setName] = React.useState(
+  const [popOverOpen, setPopOverOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [name, setName] = useState(
     () => customers.find((c) => c.id === field.value)?.name ?? ""
   );
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = useState("");
 
   const afterSaveCb = (newCustomer: Customer) => {
     field.onChange(newCustomer.id);

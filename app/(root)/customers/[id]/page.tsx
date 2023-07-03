@@ -1,7 +1,6 @@
 import BackButton from "@/components/back-button";
 import CustomerUpdateForm from "@/components/customer-update-form";
 import { siteConfig } from "@/config/site";
-import { getBrokers } from "@/lib/db/broker";
 import { getCustomerById } from "@/lib/db/customer";
 
 const CustomerPage = async ({
@@ -20,8 +19,6 @@ const CustomerPage = async ({
     ? decodeURIComponent(searchParams.search as string)
     : "";
 
-  const { brokers } = await getBrokers();
-
   const { customer } = await getCustomerById(params.id);
   if (!customer) {
     return (
@@ -33,7 +30,7 @@ const CustomerPage = async ({
       <BackButton
         to={`/customers?search=${search}&page=${page}&pageSize=${pageSize}`}
       />
-      <CustomerUpdateForm brokers={brokers || []} customer={customer} />
+      <CustomerUpdateForm customer={customer} />
     </section>
   );
 };

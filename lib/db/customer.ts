@@ -8,7 +8,6 @@ export async function getCustomers() {
       orderBy: {
         name: "asc",
       },
-      include: { broker: true },
     });
     return {
       customers,
@@ -37,7 +36,6 @@ export async function getPaginatedCustomers(
       },
       skip,
       include: {
-        broker: true,
         _count: true,
       },
       take: pageSize,
@@ -67,9 +65,6 @@ export async function getCustomerById(id: string) {
     const customer = await db.customer.findUnique({
       where: {
         id,
-      },
-      include: {
-        broker: true,
       },
     });
     return { customer };
