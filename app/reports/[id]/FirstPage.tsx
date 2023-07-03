@@ -1,10 +1,16 @@
 "use client";
 import { siteConfig } from "@/config/site";
-import { englishDateFormat, getFinalResult, slugify } from "@/lib/helpers";
+import {
+  arabicDateFormat,
+  englishDateFormat,
+  getFinalResult,
+  slugify,
+} from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
 import { Image, Text, View } from "@react-pdf/renderer";
 import { styles } from "./styles";
 import QRCode from "qrcode";
+
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
   const finalResult = getFinalResult(vehicle);
 
@@ -22,7 +28,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
     <View>
       <View
         style={{
-          marginTop: 20,
+          marginTop: 30,
         }}
       >
         <View style={{ display: "flex", flexDirection: "row-reverse" }}>
@@ -32,7 +38,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 style={[
                   styles.tableHead,
                   styles.cellBottomBorder,
-                  { width: "23.5%" },
+                  { width: "16.7%" },
                 ]}
               >
                 <Text>رقـم الهيكل </Text>
@@ -43,10 +49,11 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   styles.cellBottomBorder,
                   styles.englishLightText,
                   {
-                    width: "76.5%",
+                    width: "83.3%",
                     borderRight: "none",
                     fontWeight: "bold",
                     fontSize: 12,
+                    letterSpacing: 1,
                   },
                 ]}
               >
@@ -65,84 +72,85 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         >
           <View
             style={{
-              width: "60%",
+              width: "62%",
+              fontSize: "9.3px",
             }}
           >
             <View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
+                <View style={[styles.tableHead, { width: "27%" }]}>
                   <Text>مكان الفحص </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
                   <Text>{siteConfig.inspectionCenter}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
-                  <Text>الجهة الطالبة للفحص </Text>
+                <View style={[styles.tableHead, { width: "27%" }]}>
+                  <Text>جهة طلب الفحص </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle?.port}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
+                <View style={[styles.tableHead, { width: "27%" }]}>
                   <Text>تاريخ الفحص</Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
                   <Text>{englishDateFormat(vehicle?.createdAt!)}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
+                <View style={[styles.tableHead, { width: "27%" }]}>
                   <Text>رقـم بيان الاستيراد </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle?.bayanNo}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
+                <View style={[styles.tableHead, { width: "27%" }]}>
                   <Text>تاريخ بيان الاستيراد </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
-                  <Text>{vehicle?.bayanDate}</Text>
+                  <Text>{arabicDateFormat(new Date(vehicle?.bayanDate))}</Text>
                 </View>
               </View>
 
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "40%" }]}>
+                <View style={[styles.tableHead, { width: "27%" }]}>
                   <Text>رقـم الاحالة </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle?.reqNo}</Text>
@@ -153,7 +161,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   style={[
                     styles.tableHead,
                     styles.cellBottomBorder,
-                    { width: "40%" },
+                    { width: "27%" },
                   ]}
                 >
                   <Text>اسم المستورد </Text>
@@ -162,7 +170,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   style={[
                     styles.tableCol,
                     styles.cellBottomBorder,
-                    { width: "60%", borderRight: "none" },
+                    { width: "73%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle?.customer?.name}</Text>
@@ -172,44 +180,44 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
           <View
             style={{
-              width: "40%",
+              width: "38%",
             }}
           >
             <View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text>عدد الركاب </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle.vehicleInfo?.seats}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text> قراءة العداد </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle.vehicleInfo?.mileage}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text> نوع المركبة </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>
@@ -218,39 +226,39 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text> الطراز </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle.vehicleInfo?.vehicleType?.modelType}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text> الموديل </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle.vehicleInfo?.year}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
-                <View style={[styles.tableHead, { width: "50%" }]}>
+                <View style={[styles.tableHead, { width: "38%" }]}>
                   <Text> اللون </Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>{vehicle.vehicleInfo.color?.description}</Text>
@@ -261,16 +269,16 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                   style={[
                     styles.tableHead,
                     styles.cellBottomBorder,
-                    { width: "50%" },
+                    { width: "38%" },
                   ]}
                 >
-                  <Text> البلد المستورد منه </Text>
+                  <Text>بلد الاستيراد</Text>
                 </View>
                 <View
                   style={[
                     styles.tableCol,
                     styles.cellBottomBorder,
-                    { width: "50%", borderRight: "none" },
+                    { width: "62%", fontSize: "9.3px", borderRight: "none" },
                   ]}
                 >
                   <Text>
@@ -282,7 +290,6 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
         </View>
       </View>
-
       <View style={styles.column}>
         {/* نتيجة الفحص */}
 
@@ -291,7 +298,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={[
               styles.tableHead,
               styles.cellBottomBorder,
-              { width: "50%", borderLeft: "none" },
+              { width: "50%", borderLeft: "none", textAlign: "center" },
             ]}
           >
             <Text>: نتيجة الفــحص</Text>

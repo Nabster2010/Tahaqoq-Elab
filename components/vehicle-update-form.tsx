@@ -25,13 +25,14 @@ import { Input } from "@/components/ui/input";
 import { VehicleSchema } from "@/lib/validations/vehicle";
 import { useTransition } from "react";
 import { Icons } from "@/components/icons";
-
-import { slugify } from "@/lib/helpers";
+import { arabicDateFormat, slugify } from "@/lib/helpers";
 import { updateVehicleAction } from "@/app/_actions/_vehicleActions";
 import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Label } from "./ui/label";
+import { ports } from "@/config/ports";
 
 type VehicleUpdateFormProps = {
   customers: Customer[];
@@ -87,6 +88,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
     });
     router.refresh();
   }
+
   return (
     <Card>
       <CardHeader>
@@ -180,6 +182,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Custom Declaration Date:</FormLabel>
+
                     <FormControl>
                       <Input
                         type={"date"}
@@ -187,10 +190,17 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
                         {...field}
                       />
                     </FormControl>
+                    <div className="text-sm text-muted-foreground">
+                      Hijri Date:{" "}
+                      <span dir="rtl" className="">
+                        {arabicDateFormat(new Date(field.value))}
+                      </span>{" "}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="port"
@@ -207,7 +217,7 @@ const VehicleUpdateForm = ({ customers, vehicle }: VehicleUpdateFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {siteConfig.ports.map((port) => (
+                        {ports.map((port) => (
                           <SelectItem key={port.id} value={port.description}>
                             {port.name}
                           </SelectItem>

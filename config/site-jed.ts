@@ -1,7 +1,7 @@
-//rename to site.ts to activate jed profile
-
 export type SiteConfig = typeof siteConfig;
+
 export const siteConfig = {
+  // JEDDAH
   title: "TAHAQOQ ",
   branch: "JEDDAH",
   ar_branch: "جدة",
@@ -37,55 +37,16 @@ export const siteConfig = {
       title: "Models",
       href: "/vehicleTypes",
     },
+    {
+      title: "Broker",
+      href: "/brokers",
+    },
   ],
   links: {
     twitter: "#",
     github: "#",
   },
-  ports: [
-    {
-      id: 1,
-      name: "salwa",
-      description: "سلوي",
-      code: 41,
-    },
-    {
-      id: 2,
-      name: "khafji",
-      description: "الخفجي",
-      code: 44,
-    },
-    {
-      id: 3,
-      name: "batha",
-      description: "البطحاء",
-      code: 31,
-    },
-    {
-      id: 4,
-      name: "King Abdulaziz Sea port",
-      description: "جمرك ميناء الملك عبدالعزيز",
-      code: 30,
-    },
-    {
-      id: 5,
-      name: "Jeddah Islamic Sea port",
-      description: "ميناء جدة الاسلامي",
-      code: 10,
-    },
-    {
-      id: 6,
-      name: "King Fahad Cause way",
-      description: "جمرك جسر الملك فهد",
-      code: 83,
-    },
-    {
-      id: 7,
-      name: "Al Rukae",
-      description: "جمرك الرقعي",
-      code: 35,
-    },
-  ],
+
   paymentMethods: [
     {
       id: 1,

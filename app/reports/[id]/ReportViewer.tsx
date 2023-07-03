@@ -74,7 +74,12 @@ const Report = ({ vehicle }: { vehicle: ExtendedVehicle }) => (
     style={styles.document}
   >
     <Page style={styles.page} size="A4">
-      <Header vehicleId={vehicle.id} createdAt={vehicle.createdAt!} />
+      <Header
+        title="INSPECTION REPORT"
+        description="تقرير الفحص"
+        vehicleId={vehicle.id}
+        createdAt={vehicle.createdAt!}
+      />
       <FirstPage vehicle={vehicle} />
       <PageTwo visualInspectionResult={vehicle.visualInspection} />
       <PageThree vehicle={vehicle} />

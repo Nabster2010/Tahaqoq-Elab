@@ -68,7 +68,7 @@ const Footer = () => {
             <Text>ن-</Text>
             <Text>1.4.7</Text>
             <Text>اصدار رقم</Text>
-            <Text> 4 </Text>
+            <Text> 5 </Text>
             <Text>بتاريخ</Text>
             <Text> 01/07/2023 </Text>
           </View>

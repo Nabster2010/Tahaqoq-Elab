@@ -13,6 +13,7 @@ import { VehicleTypeSchema } from "@/lib/validations/vehicleType";
 import { VisualInspectionSchema } from "@/lib/validations/visualInspection";
 import {
   Brake,
+  Broker,
   Color,
   Customer,
   Emission,
@@ -29,6 +30,7 @@ import {
 
 export type VehicleSchemaType = z.infer<typeof VehicleSchema>;
 export type CustomerSchemaType = z.infer<typeof CustomerSchema>;
+export type BrokerSchemaType = z.infer<typeof BrokerSchema>;
 export type ColorSchemaType = z.infer<typeof ColorSchema>;
 export type ManufacturerSchemaType = z.infer<typeof ManufacturerSchema>;
 export type VehicleInfoSchemaType = z.infer<typeof VehicleInfoSchema>;
@@ -55,6 +57,7 @@ export type ExtendedVehicle = Vehicle & {
   suspensionTest: Suspension;
   customer: {
     name: string;
+    phone?: string;
   };
 };
 
@@ -64,10 +67,15 @@ export type ExtendedVehicleType = VehicleType & {
   };
 };
 
+export type ExtendedCustomer = Customer & {
+  broker: Broker;
+};
+
 import { User } from "@prisma/client";
 import type { Icon } from "lucide-react";
 
 import { Icons } from "@/components/icons";
+import { BrokerSchema } from "@/lib/validations/broker";
 
 export type NavItem = {
   title: string;

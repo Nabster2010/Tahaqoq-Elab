@@ -165,15 +165,6 @@ export const canIssueReport = (vehicle: ExtendedVehicle) => {
   return result.every((v) => v !== null);
 };
 
-export const englishDateFormat = (date: Date) => {
-  return new Intl.DateTimeFormat("en-GB").format(date);
-};
-export const arabicDateFormat = (date: Date) => {
-  return new Intl.DateTimeFormat("ar-SA", {
-    numberingSystem: "latn",
-  }).format(date);
-};
-
 export const validateByTestLimits = (
   value: number,
   min: number,
@@ -194,3 +185,14 @@ export function stopPropagate(callback: () => void) {
     callback();
   };
 }
+
+export const englishDateFormat = (date: Date) => {
+  return new Date(date).toLocaleDateString("en-GB");
+};
+
+export const arabicDateFormat = (date: Date) => {
+  const arDate = new Intl.DateTimeFormat("ar-SA", {
+    numberingSystem: "latn",
+  });
+  return arDate.format(date).split(" ")[0];
+};

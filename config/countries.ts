@@ -187,7 +187,7 @@ export const countries = [
   {
     id: "38",
     name: "Central African Republic",
-    description: "جمهورية أفريقيا الوسطى",
+    description: " أفريقيا الوسطى",
   },
   {
     id: "39",
@@ -202,7 +202,7 @@ export const countries = [
   {
     id: "41",
     name: "China",
-    description: "جمهورية الصين الشعبية",
+    description: "الصين",
   },
   {
     id: "42",
@@ -217,7 +217,7 @@ export const countries = [
   {
     id: "44",
     name: "Democratic Republic of the Congo (Kinshasa)",
-    description: "جمهورية الكونغو الديمقراطية",
+    description: " الكونغو الديمقراطية",
   },
   {
     id: "45",
@@ -277,7 +277,7 @@ export const countries = [
   {
     id: "56",
     name: "Dominican Republic",
-    description: "الجمهورية الدومينيكية",
+    description: " الدومنيكان",
   },
   {
     id: "57",
@@ -627,7 +627,7 @@ export const countries = [
   {
     id: "126",
     name: "Micronesia, Federal ",
-    description: "ولايات ميكرونيسيا المتحدة",
+    description: "ولايات ميكرونيسيا ",
   },
   {
     id: "127",
@@ -687,12 +687,12 @@ export const countries = [
   {
     id: "138",
     name: "Netherlands Antilles",
-    description: "جزر الأنتيل الهولندي",
+    description: "جزر الأنتيل ",
   },
   {
     id: "139",
     name: "New Caledonia",
-    description: "كاليدونيا الجديدة",
+    description: "كاليدونيا ",
   },
   {
     id: "140",
@@ -727,7 +727,7 @@ export const countries = [
   {
     id: "146",
     name: "Northern Mariana Islands",
-    description: "جزر ماريانا الشمالية",
+    description: "جزر ماريانا ",
   },
   {
     id: "147",
@@ -751,8 +751,8 @@ export const countries = [
   },
   {
     id: "151",
-    name: "Palestinian territories",
-    description: "الأراضي الفلسطينية",
+    name: "Palestine",
+    description: "فلسطين ",
   },
   {
     id: "152",
@@ -762,7 +762,7 @@ export const countries = [
   {
     id: "153",
     name: "Papua New Guinea",
-    description: "بابوا غينيا الجديدة",
+    description: "بابوا غينيا ",
   },
   {
     id: "154",
@@ -832,7 +832,7 @@ export const countries = [
   {
     id: "167",
     name: "Saint Vincent and the Grenadines",
-    description: "سانت فنسنت وجزر غرينادين",
+    description: "سانت فنسنت  ",
   },
   {
     id: "168",
@@ -852,7 +852,7 @@ export const countries = [
   {
     id: "171",
     name: "Saudi Arabia",
-    description: "المملكة العربية السعودية",
+    description: "السعودية",
   },
   {
     id: "172",
@@ -1027,7 +1027,7 @@ export const countries = [
   {
     id: "206",
     name: "United Arab Emirates",
-    description: "الإمارات العربية المتحدة",
+    description: "الإمارات المتحدة",
   },
   {
     id: "207",
@@ -1057,7 +1057,7 @@ export const countries = [
   {
     id: "212",
     name: "Vatican City State",
-    description: "دولة مدينة الفاتيكان",
+    description: "الفاتيكان",
   },
   {
     id: "213",
@@ -1072,7 +1072,7 @@ export const countries = [
   {
     id: "215",
     name: "Virgin Islands (British)",
-    description: "الجزر العذراء البريطانية",
+    description: "الجزر العذراء ",
   },
   {
     id: "216",

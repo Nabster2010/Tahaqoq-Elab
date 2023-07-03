@@ -1,11 +1,10 @@
 "use client";
-import { deleteCustomerAction } from "@/app/_actions/_customerActions";
 import { deleteVehicleAction } from "@/app/_actions/_vehicleActions";
-import { siteConfig } from "@/config/site";
+import { ports } from "@/config/ports";
 import { canIssueReport, slugify } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import { ExtendedVehicle } from "@/types";
-import { Customer, Vehicle } from "@prisma/client";
+import { Vehicle } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
@@ -55,19 +54,19 @@ const VehicleListItem = ({
 
   return (
     <TableRow>
-      <TableCell className="font-bold">{slugify(vehicle.id)}</TableCell>
+      <TableCell className="font-bold ">{slugify(vehicle.id)}</TableCell>
       <TableCell className="hidden md:table-cell">{vehicle.vin}</TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className="hidden md:table-cell text-ellipsis">
         {vehicle.customer?.name}
       </TableCell>
       <TableCell className="hidden md:table-cell">{vehicle.reqNo}</TableCell>
       <TableCell className="hidden md:table-cell">
-        {siteConfig.ports.find((v) => v.description === vehicle.port)?.name}
+        {ports.find((v) => v.description === vehicle.port)?.name}
       </TableCell>
-      <TableCell className="">
+      <TableCell className="px-2 ">
         <Link
           prefetch={false}
-          className={cn(buttonVariants({}), "whitespace-nowrap ")}
+          className={cn(buttonVariants({ size: "sm" }), "whitespace-nowrap ")}
           href={`/results/${vehicle.id}?search=${
             search ? search : ""
           }&page=${page}&pageSize=${pageSize}`}
@@ -77,31 +76,41 @@ const VehicleListItem = ({
             : "Add Result"}
         </Link>
       </TableCell>
-      <TableCell className="">
+      <TableCell className="px-2 ">
         <Link
-          className={cn(buttonVariants({}))}
+          className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
           href={`/vehicles/${vehicle.id}?search=${
             String(search) || ""
           }&page=${page}&pageSize=${pageSize}`}
         >
-          Update
+          Edit
         </Link>
       </TableCell>
-      <TableCell className="text-end">
+      <TableCell className="hidden px-2 text-center md:table-cell">
+        <Link
+          className={cn(buttonVariants({ size: "sm" }))}
+          target={"_blank"}
+          href={`/reports/${vehicle.id}/receipt`}
+        >
+          <Icons.print className="w-4 h-4" />
+        </Link>
+      </TableCell>
+      <TableCell className="px-2 text-end">
         <Button
           variant="secondary"
+          size={"sm"}
           className="ring-2 ring-gray-300"
           disabled={!canIssueReport(vehicle as ExtendedVehicle)}
         >
           <Link target={"_blank"} href={`/reports/${vehicle.id}`}>
             {canIssueReport(vehicle as ExtendedVehicle) ? (
-              <Icons.report className="w-6 h-6" />
+              <Icons.report className="w-5 h-5" />
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
@@ -109,8 +118,8 @@ const VehicleListItem = ({
                 strokeLinejoin="round"
                 className="lucide lucide-ban"
               >
-                <circle cx="12" cy="12" r="10" />
-                <path d="m4.9 4.9 14.2 14.2" />
+                <circle cx="10" cy="10" r="8" />
+                <path d="m4.7 4.7 11 11" />
               </svg>
             )}
           </Link>
@@ -118,7 +127,7 @@ const VehicleListItem = ({
       </TableCell>
 
       {isAdminUser && (
-        <TableCell className="text-right">
+        <TableCell className="text-right ">
           <ConfirmDelete
             handleDelete={handleDelete}
             title="Are you Sure you want to delete this Vehicle?"

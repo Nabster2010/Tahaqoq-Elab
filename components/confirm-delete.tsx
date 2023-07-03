@@ -16,8 +16,11 @@ import { Button, buttonVariants } from "./ui/button";
 type ConfirmDeleteProps = {
   title: string;
   desc?: string;
+  variant?: "outline" | "secondary" | "destructive" | "ghost";
+  size?: "sm" | "lg" | "default";
   handleDelete: () => void;
   isPending: boolean;
+  className?: string;
 };
 
 const ConfirmDelete = ({
@@ -25,14 +28,18 @@ const ConfirmDelete = ({
   desc,
   handleDelete,
   isPending,
+  variant = "destructive",
+  size = "default",
+  className,
 }: ConfirmDeleteProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
-          variant={"destructive"}
-          className="w-full sm:w-auto"
+          variant={variant}
+          className={cn("w-full sm:w-auto", className)}
           type="button"
+          size={size}
         >
           {isPending ? (
             <Icons.spinner className="w-4 h-4 animate-spin" />

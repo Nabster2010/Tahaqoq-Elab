@@ -31,6 +31,7 @@ import CustomerSelectComboBox from "./select-customer-comboBox";
 import { useRouter } from "next/navigation";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { ports } from "@/config/ports";
 
 type VehicleCreateFormProps = {
   customers: Customer[];
@@ -212,7 +213,7 @@ const VehicleCreateForm = ({ customers }: VehicleCreateFormProps) => {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {siteConfig.ports.map((port) => (
+                        {ports.map((port) => (
                           <SelectItem key={port.id} value={port.description}>
                             {port.name}
                           </SelectItem>

@@ -8,4 +8,5 @@ export const CustomerSchema = z.object({
   website: z.string(),
   taxId: z.string(),
   customerType: z.string().default("INDIVIDUAL"),
+  brokerId: z.string(),
 });

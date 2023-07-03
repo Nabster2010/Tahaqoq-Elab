@@ -1,4 +1,4 @@
-import CustomerListItem from "@/components/customer-list-item";
+import BrokerListItem from "@/components/broker-list-item";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
@@ -19,17 +19,16 @@ import {
 } from "@/components/ui/table";
 import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
-import { getPaginatedCustomers } from "@/lib/db/customer";
+import { getPaginatedBrokers } from "@/lib/db/broker";
 import { cn } from "@/lib/utils";
-import { ExtendedCustomer } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Customers",
-  description: "add and edit Customers",
+  title: "Brokers",
+  description: "add and edit Brokers",
 };
-const CustomersPage = async ({
+const BrokersPage = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -43,31 +42,25 @@ const CustomersPage = async ({
   const search = searchParams.search
     ? decodeURIComponent(searchParams.search as string)
     : "";
-  const { customers, currentPage, totalPages } = await getPaginatedCustomers(
+  const { brokers, currentPage, totalPages } = await getPaginatedBrokers(
     search,
     page,
     pageSize
   );
 
-  // const searchAction = async (data: FormData) => {
-  //   "use server";
-  //   const search = data.get("search") as String;
-  //   redirect(`/customers?search=${encodeURI(search.toString())}`);
-  // };
-
   return (
     <Card className="mt-4">
       <CardHeader className="">
-        <Title className="mb-4">Customers</Title>
+        <Title className="mb-4">Brokers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm
-            path="/customers"
+            path="/brokers"
             //action={searchAction}
             defaultValue={search}
             searchParams={searchParams}
           />
           <Link
-            href="/customers/create"
+            href="/brokers/create"
             className={cn(buttonVariants({}), "ml-auto w-full md:w-auto ")}
           >
             Create New
@@ -81,7 +74,7 @@ const CustomersPage = async ({
               <TableHead className="w-fit ">Name</TableHead>
               <TableHead className="hidden md:table-cell">Phone</TableHead>
               <TableHead className="hidden md:table-cell">Email</TableHead>
-              <TableHead className="hidden md:table-cell">Broker</TableHead>
+              <TableHead className="hidden md:table-cell">Percentage</TableHead>
               <TableHead className="text-right">Edit</TableHead>
               {isAdminUser && (
                 <TableHead className="text-right">Delete</TableHead>
@@ -89,11 +82,11 @@ const CustomersPage = async ({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {customers && customers?.length > 0 ? (
-              customers.map((customer) => (
-                <CustomerListItem
-                  customer={customer as ExtendedCustomer}
-                  key={customer.id}
+            {brokers && brokers?.length > 0 ? (
+              brokers.map((broker) => (
+                <BrokerListItem
+                  broker={broker}
+                  key={broker.id}
                   page={page}
                   pageSize={pageSize}
                   search={search}
@@ -103,7 +96,7 @@ const CustomersPage = async ({
             ) : (
               <TableRow>
                 <TableCell className="w-full text-center" colSpan={5}>
-                  No customers found
+                  No Brokers found
                 </TableCell>
               </TableRow>
             )}
@@ -113,7 +106,7 @@ const CustomersPage = async ({
       <CardFooter>
         {totalPages && totalPages >= 1 ? (
           <Pagination
-            pathName="customers"
+            pathName="brokers"
             currentPage={page}
             totalPages={totalPages}
             pageSize={pageSize}
@@ -127,4 +120,4 @@ const CustomersPage = async ({
   );
 };
 
-export default CustomersPage;
+export default BrokersPage;

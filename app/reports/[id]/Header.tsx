@@ -4,14 +4,18 @@ import { arabicDateFormat, englishDateFormat, slugify } from "@/lib/helpers";
 import { Text, View, Image } from "@react-pdf/renderer";
 import { styles } from "./styles";
 const Header = ({
+  title,
+  description,
   createdAt,
   vehicleId,
+  memo = false,
 }: {
+  title: string;
+  description: string;
   createdAt: Date;
   vehicleId: number;
+  memo?: boolean;
 }) => {
-  const date = new Date(createdAt!).toLocaleDateString("en-GB");
-
   return (
     <View fixed>
       <View style={styles.rowBetween}>
@@ -32,21 +36,29 @@ const Header = ({
             Inspection Center - {siteConfig.branch}
           </Text>
         </View>
+
         <View style={[styles.column]}>
           <Text style={[styles.heading, styles.englishBoldText, {}]}>
-            INSPECTION REPORT
+            {title}
           </Text>
-          <Text style={[styles.headText]}>تقرير الفحص</Text>
-          <Text>
-            <Text style={[styles.headText]}>
-              {slugify(vehicleId)}
-              {`  `}
+          <Text style={[styles.headText]}> {description}</Text>
+          {!memo && (
+            <Text>
+              <Text style={[styles.headText]}>
+                {slugify(vehicleId)}
+                {`  `}
+              </Text>
+              <Text style={[styles.headText]}>رقم التقرير:</Text>
             </Text>
-            <Text style={[styles.headText]}>رقم التقرير:</Text>
-          </Text>
+          )}
+
           <View style={styles.row}>
             <View
-              style={{ display: "flex", flexDirection: "row-reverse", gap: 4 }}
+              style={{
+                display: "flex",
+                flexDirection: "row-reverse",
+                gap: 4,
+              }}
             >
               <Text style={styles.headText}>التاريخ:</Text>
               <Text style={styles.headText}>
@@ -62,7 +74,7 @@ const Header = ({
 
         <Image src="/images/logo.png" style={styles.logo} />
       </View>
-      <View style={[styles.dividerLG, { marginTop: 10 }]} />
+      <View style={[styles.dividerLG, { marginTop: 15 }]} />
     </View>
   );
 };

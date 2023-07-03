@@ -86,9 +86,12 @@ const VehiclesPage = async ({
               <TableHead className="hidden md:table-cell">Customer</TableHead>
               <TableHead className="hidden md:table-cell">Request No</TableHead>
               <TableHead className="hidden md:table-cell">Port</TableHead>
-              <TableHead>Test Results</TableHead>
-              <TableHead>Edit</TableHead>
-              <TableHead className="text-right ">Report</TableHead>
+              <TableHead className="text-center">Results</TableHead>
+              <TableHead className="text-center">Edit</TableHead>
+              <TableHead className="hidden text-center md:table-cell ">
+                Receipt
+              </TableHead>
+              <TableHead className="text-center ">Report</TableHead>
               {isAdminUser && (
                 <TableHead className="text-right ">Delete</TableHead>
               )}

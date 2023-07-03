@@ -1,10 +1,9 @@
 import BackButton from "@/components/back-button";
-import CustomerUpdateForm from "@/components/customer-update-form";
+import BrokerUpdateForm from "@/components/broker-update-form";
 import { siteConfig } from "@/config/site";
-import { getBrokers } from "@/lib/db/broker";
-import { getCustomerById } from "@/lib/db/customer";
+import { getBrokerById } from "@/lib/db/broker";
 
-const CustomerPage = async ({
+const BrokerPage = async ({
   params,
   searchParams,
 }: {
@@ -20,22 +19,20 @@ const CustomerPage = async ({
     ? decodeURIComponent(searchParams.search as string)
     : "";
 
-  const { brokers } = await getBrokers();
-
-  const { customer } = await getCustomerById(params.id);
-  if (!customer) {
+  const { broker } = await getBrokerById(params.id);
+  if (!broker) {
     return (
-      <div className="pt-6 pb-8 text-center md:py-10">Customer Not Found</div>
+      <div className="pt-6 pb-8 text-center md:py-10">Broker Not Found</div>
     );
   }
   return (
     <section>
       <BackButton
-        to={`/customers?search=${search}&page=${page}&pageSize=${pageSize}`}
+        to={`/brokers?search=${search}&page=${page}&pageSize=${pageSize}`}
       />
-      <CustomerUpdateForm brokers={brokers || []} customer={customer} />
+      <BrokerUpdateForm broker={broker} />
     </section>
   );
 };
 
-export default CustomerPage;
+export default BrokerPage;

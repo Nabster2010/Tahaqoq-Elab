@@ -1,7 +1,7 @@
 "use client";
-import { deleteCustomerAction } from "@/app/_actions/_customerActions";
+import { deleteBrokerAction } from "@/app/_actions/_brokerActions";
 import { cn } from "@/lib/utils";
-import { ExtendedCustomer } from "@/types";
+import { Broker } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
@@ -11,40 +11,37 @@ import { buttonVariants } from "./ui/button";
 import { TableCell, TableRow } from "./ui/table";
 import { toast } from "./ui/use-toast";
 
-type CustomerListProps = {
-  customer: ExtendedCustomer;
+type BrokerListProps = {
+  broker: Broker;
   page: number;
   pageSize: number;
   search: string;
   isAdminUser: boolean;
 };
-const CustomerListItem = ({
-  customer,
+const BrokerListItem = ({
+  broker,
   page,
   pageSize,
   search,
   isAdminUser,
-}: CustomerListProps) => {
+}: BrokerListProps) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDelete = async () => {
     startTransition(() => {
-      deleteCustomerAction(customer.id).then((res) => {
+      deleteBrokerAction(broker.id).then((res) => {
         const data = JSON.parse(res);
-        if (data.deletedCustomer) {
+        if (data.deletedBroker) {
           toast({
             title: "Success",
-            description: <ToastDesc>Customer Deleted Successfully</ToastDesc>,
+            description: <ToastDesc>Broker Deleted Successfully</ToastDesc>,
           });
+          return;
         } else {
           toast({
             variant: "destructive",
             title: "Error ",
-            description: (
-              <ToastDesc error>
-                Error Deleting Customer! May connected with Vehicles
-              </ToastDesc>
-            ),
+            description: <ToastDesc error>Error Deleting Broker</ToastDesc>,
           });
         }
       });
@@ -54,16 +51,16 @@ const CustomerListItem = ({
 
   return (
     <TableRow>
-      <TableCell className="font-bold">{customer.name}</TableCell>
-      <TableCell className="hidden md:table-cell">{customer.phone}</TableCell>
-      <TableCell className="hidden md:table-cell">{customer.email}</TableCell>
+      <TableCell className="font-bold">{broker.name}</TableCell>
+      <TableCell className="hidden md:table-cell">{broker.phone}</TableCell>
+      <TableCell className="hidden md:table-cell">{broker.email}</TableCell>
       <TableCell className="hidden md:table-cell">
-        {customer?.broker?.name}
+        {broker.percentage}
       </TableCell>
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/customers/${customer.id}?page=${page}&pageSize=${pageSize}&search=${search}`}
+          href={`/brokers/${broker.id}?page=${page}&pageSize=${pageSize}&search=${search}`}
         >
           Update
         </Link>
@@ -72,7 +69,7 @@ const CustomerListItem = ({
         <TableCell className="text-right">
           <ConfirmDelete
             handleDelete={handleDelete}
-            title="Are you Sure you want to delete this Customer?"
+            title="Are you Sure you want to delete this Broker?"
             isPending={isPending}
           />
         </TableCell>
@@ -81,4 +78,4 @@ const CustomerListItem = ({
   );
 };
 
-export default CustomerListItem;
+export default BrokerListItem;

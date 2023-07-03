@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   page: {
     backgroundColor: "#ffffff",
     color: "#000",
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     paddingVertical: 20,
     fontSize: 16,
     fontFamily: "Cairo",
@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row-reverse",
     justifyContent: "center",
     alignItems: "center",
-    gap: 10,
+    gap: 5,
   },
 
   column: {
@@ -74,8 +74,8 @@ export const styles = StyleSheet.create({
   tableCol: {
     paddingVertical: 4,
     textAlign: "right",
-    paddingRight: 4,
-    paddingLeft: 2,
+    paddingRight: 2,
+    paddingLeft: 0,
     fontSize: 10,
     display: "flex",
     flexDirection: "row",
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
   tableHead: {
     paddingVertical: 4,
     textAlign: "right",
-    paddingRight: 4,
+    paddingRight: 2,
     paddingLeft: 2,
     fontSize: 10,
     fontWeight: "bold",

@@ -12,11 +12,6 @@ datasource db {
 }
 
 
-
-
-
-
-
 model User {
   id        String    @id @default(cuid())
   name      String?
@@ -32,15 +27,30 @@ model User {
 }
 
 model Customer {
+  id                               String    @id() @default(cuid())
+  name                             String    @unique
+  email                            String?
+  phone                            String?
+  address                          String?
+  website                          String?
+  taxId                            String?
+  customerType                     String    @default("INDIVIDUAL") 
+  brokerId                         String?
+  broker                           Broker? @relation(fields: [brokerId], references: [id],onDelete: SetNull)
+  vehicles                         Vehicle[]
+  createdAt                        DateTime @default(now())
+  updatedAt                        DateTime @updatedAt
+  @@index([brokerId])
+
+}
+model Broker{
   id           String    @id() @default(cuid())
   name         String    @unique
   email        String?
   phone        String?
-  address      String?
-  website      String?
-  taxId        String?
-  customerType String    @default("INDIVIDUAL") 
+  percentage   Float?
   vehicles     Vehicle[]
+  customers    Customer[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -93,6 +103,8 @@ model Vehicle {
   tax              Float
   customer         Customer         @relation(fields: [customerId], references: [id],onDelete: Restrict)
   customerId       String 
+  brokerId         String?
+  broker           Broker? @relation(fields: [brokerId], references: [id],onDelete: SetNull)
   vehicleInfo      VehicleInfo?
   visualInspection VisualInspection?
   emissionTest     Emission?
@@ -107,7 +119,9 @@ model Vehicle {
 
   @@index([customerId])
   @@index([userId])
+  @@index([brokerId])
 }
+
 
 model VehicleInfo {
   vehicleId     Int         @id
@@ -278,3 +292,5 @@ model VisualInspection {
 
   @@index([vehicleId])
 }
+
+

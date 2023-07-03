@@ -1,31 +1,30 @@
 import { siteConfig } from "@/config/site";
-import { CustomerSchemaType } from "@/types";
+import { BrokerSchemaType } from "@/types";
 import { db } from ".";
 
-export async function getCustomers() {
+export async function getBrokers() {
   try {
-    const customers = await db.customer.findMany({
+    const brokers = await db.broker.findMany({
       orderBy: {
         name: "asc",
       },
-      include: { broker: true },
     });
     return {
-      customers,
+      brokers,
     };
   } catch (error) {
-    console.log("error fetching customers", { error });
+    console.log("error fetching brokers", { error });
     return { error };
   }
 }
-export async function getPaginatedCustomers(
+export async function getPaginatedBrokers(
   search = "",
   page = 1,
   pageSize = siteConfig.pageSize
 ) {
   const skip: number = (page - 1) * pageSize;
   try {
-    const customers = await db.customer.findMany({
+    const brokers = await db.broker.findMany({
       where: {
         name: {
           contains: search.toLowerCase() || undefined,
@@ -37,14 +36,13 @@ export async function getPaginatedCustomers(
       },
       skip,
       include: {
-        broker: true,
         _count: true,
       },
       take: pageSize,
     });
 
     //TODO: fix this
-    const count = await db.customer.count({
+    const count = await db.broker.count({
       where: {
         name: {
           contains: search.toLowerCase() || undefined,
@@ -52,51 +50,48 @@ export async function getPaginatedCustomers(
       },
     });
     return {
-      customers,
+      brokers,
       totalPages: Math.ceil(count / pageSize),
       currentPage: page,
     };
   } catch (error) {
-    console.log("error fetching customers", { error });
+    console.log("error fetching brokers", { error });
     return { error };
   }
 }
 
-export async function getCustomerById(id: string) {
+export async function getBrokerById(id: string) {
   try {
-    const customer = await db.customer.findUnique({
+    const broker = await db.broker.findUnique({
       where: {
         id,
       },
-      include: {
-        broker: true,
-      },
     });
-    return { customer };
+    return { broker };
   } catch (error) {
-    console.log("error fetching customer", { error });
+    console.log("error fetching broker", { error });
     return { error };
   }
 }
 
-export async function createCustomer(customer: CustomerSchemaType) {
+export async function createBroker(broker: BrokerSchemaType) {
   try {
-    const newCustomer = await db.customer.create({
+    const newBroker = await db.broker.create({
       data: {
-        ...customer,
+        ...broker,
       },
     });
-    return { newCustomer };
+    return { newBroker };
   } catch (error) {
-    console.log("error creating customer");
+    console.log("error creating broker");
     console.log(error);
     return { error };
   }
 }
 
-export async function updateCustomer(data: CustomerSchemaType, id: string) {
+export async function updateBroker(data: BrokerSchemaType, id: string) {
   try {
-    const updatedCustomer = await db.customer.update({
+    const updatedBroker = await db.broker.update({
       where: {
         id,
       },
@@ -104,24 +99,24 @@ export async function updateCustomer(data: CustomerSchemaType, id: string) {
         ...data,
       },
     });
-    return { updatedCustomer };
+    return { updatedBroker };
   } catch (error) {
-    console.log("error updating customer");
+    console.log("error updating broker");
     console.log(error);
     return { error };
   }
 }
 
-export async function deleteCustomer(id: string) {
+export async function deleteBroker(id: string) {
   try {
-    const deletedCustomer = await db.customer.delete({
+    const deletedBroker = await db.broker.delete({
       where: {
         id,
       },
     });
-    return { deletedCustomer };
+    return { deletedBroker };
   } catch (error) {
-    console.log("error deleting customer");
+    console.log("error deleting broker");
     return { error };
   }
 }
