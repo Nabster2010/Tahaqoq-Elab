@@ -14,6 +14,7 @@ import ToastDesc from "./ToastDesc";
 import { Button, buttonVariants } from "./ui/button";
 import { TableCell, TableRow } from "./ui/table";
 import { toast } from "./ui/use-toast";
+import VehicleActionsMenu from "./vehicle-actions-menu";
 
 type VehicleListProps = {
   vehicle: ExtendedVehicle;
@@ -54,23 +55,32 @@ const VehicleListItem = ({
 
   return (
     <TableRow>
-      <TableCell className="font-bold ">{slugify(vehicle.id)}</TableCell>
-      <TableCell className="hidden md:table-cell">{vehicle.vin}</TableCell>
-      <TableCell className="hidden md:table-cell text-ellipsis">
+      <TableCell className="px-1 font-bold ">{slugify(vehicle.id)}</TableCell>
+      <TableCell className="hidden px-1 text-center whitespace-nowrap md:table-cell">
+        {vehicle.vin}
+      </TableCell>
+      <TableCell
+        dir="rtl"
+        className="hidden max-w-[100px] md:table-cell px-1 text-center "
+      >
         {vehicle.customer?.name}
       </TableCell>
-      <TableCell className="hidden md:table-cell">{vehicle.reqNo}</TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className="hidden px-1 text-center md:table-cell">
+        {vehicle.reqNo}
+      </TableCell>
+      <TableCell className="hidden px-1 max-w-[100px] text-center md:table-cell">
         {ports.find((v) => v.description === vehicle.port)?.name}
       </TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className="hidden px-1 text-center md:table-cell">
         {vehicle?.broker?.name}
       </TableCell>
 
-      <TableCell className="px-2 ">
+      <TableCell className="px-1 ">
         <Link
-          prefetch={false}
-          className={cn(buttonVariants({ size: "sm" }), "whitespace-nowrap ")}
+          className={cn(
+            buttonVariants({ size: "sm" }),
+            "whitespace-nowrap text-center "
+          )}
           href={`/results/${vehicle.id}?search=${
             search ? search : ""
           }&page=${page}&pageSize=${pageSize}`}
@@ -80,7 +90,7 @@ const VehicleListItem = ({
             : "Add Result"}
         </Link>
       </TableCell>
-      <TableCell className="px-2 ">
+      <TableCell className="px-1 text-center ">
         <Link
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
           href={`/vehicles/${vehicle.id}?search=${
@@ -90,7 +100,7 @@ const VehicleListItem = ({
           Edit
         </Link>
       </TableCell>
-      <TableCell className="hidden px-2 text-center md:table-cell">
+      <TableCell className="hidden px-1 text-center md:table-cell">
         <Link
           className={cn(buttonVariants({ size: "sm" }))}
           target={"_blank"}
@@ -99,7 +109,7 @@ const VehicleListItem = ({
           <Icons.print className="w-4 h-4" />
         </Link>
       </TableCell>
-      <TableCell className="px-2 text-end">
+      <TableCell className="px-1 text-center">
         <Button
           variant="secondary"
           size={"sm"}

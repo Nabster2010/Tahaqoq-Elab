@@ -81,20 +81,28 @@ const VehiclesPage = async ({
         <Table>
           <TableHeader>
             <TableRow className="font-bold ">
-              <TableHead className="w-fit ">No</TableHead>
+              <TableHead className="px-1 w-fit ">No</TableHead>
               <TableHead className="hidden md:table-cell">Vin</TableHead>
-              <TableHead className="hidden md:table-cell">Customer</TableHead>
-              <TableHead className="hidden md:table-cell">Request No</TableHead>
-              <TableHead className="hidden md:table-cell">Port</TableHead>
-              <TableHead className="hidden md:table-cell">Broker</TableHead>
-              <TableHead className="text-center">Results</TableHead>
-              <TableHead className="text-center">Edit</TableHead>
-              <TableHead className="hidden text-center md:table-cell ">
+              <TableHead className="hidden text-center md:table-cell">
+                Customer
+              </TableHead>
+              <TableHead className="hidden px-1 md:table-cell">
+                Ctrl No
+              </TableHead>
+              <TableHead className="hidden px-1 text-center md:table-cell">
+                Port
+              </TableHead>
+              <TableHead className="hidden px-1 text-center md:table-cell">
+                Broker
+              </TableHead>
+              <TableHead className="px-1 text-center">Result</TableHead>
+              <TableHead className="px-1 text-center">Edit</TableHead>
+              <TableHead className="hidden px-1 text-center md:table-cell">
                 Receipt
               </TableHead>
-              <TableHead className="text-center ">Report</TableHead>
+              <TableHead className="px-1 text-center">Report</TableHead>
               {isAdminUser && (
-                <TableHead className="text-right ">Delete</TableHead>
+                <TableHead className="px-1 text-right">Delete</TableHead>
               )}
             </TableRow>
           </TableHeader>

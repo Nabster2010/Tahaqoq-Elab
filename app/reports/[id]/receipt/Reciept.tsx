@@ -135,7 +135,7 @@ const ReceiptInfo = ({ vehicle }: any) => {
               fontWeight: "medium",
             }}
           >
-            {vehicle.customer?.name}
+            {vehicle?.broker?.name}
           </Text>
         </View>
         <View style={[styles.tableHead, { width: 120, paddingHorizontal: 4 }]}>
@@ -162,7 +162,7 @@ const ReceiptInfo = ({ vehicle }: any) => {
               fontWeight: "medium",
             }}
           >
-            {vehicle.customer?.phone}
+            {vehicle.customer?.phone || vehicle?.broker?.phone}
           </Text>
         </View>
         <View style={[styles.tableHead, { width: 120, paddingHorizontal: 4 }]}>
