@@ -56,7 +56,7 @@ const VehicleCreateForm = ({ customers, brokers }: VehicleCreateFormProps) => {
       price: 300,
       tax: 45,
       customerId: "",
-      brokerId: brokers[0].id || "",
+      brokerId: "",
     },
   });
 
