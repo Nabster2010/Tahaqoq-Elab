@@ -27,7 +27,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "5%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             borderLeft: 0,
             justifyContent: "center",
             alignItems: "center",
@@ -38,7 +38,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "12%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             borderLeft: 0,
 
             justifyContent: "center",
@@ -50,7 +50,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "8%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             borderLeft: 0,
 
             justifyContent: "center",
@@ -62,7 +62,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "20%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             borderLeft: 0,
 
             justifyContent: "center",
@@ -74,7 +74,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "45%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             borderLeft: 0,
 
             justifyContent: "center",
@@ -86,7 +86,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
         <View
           style={{
             width: "10%",
-            border: "1px solid #e5e5e5",
+            border: "1px solid #cbd5e1",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -113,7 +113,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -126,7 +126,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -139,7 +139,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -156,7 +156,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -172,8 +172,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               <View
                 style={{
                   flex: 1,
-                  borderRight: "1px solid #e5e5e5",
-                  borderBottom: "1px solid #e5e5e5",
+                  borderRight: "1px solid #cbd5e1",
+                  borderBottom: "1px solid #cbd5e1",
                   justifyContent: "center",
                   alignItems: "center",
                   height: 40,
@@ -185,8 +185,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               <View
                 style={{
                   flex: 1,
-                  borderRight: "1px solid #e5e5e5",
-                  borderBottom: "1px solid #e5e5e5",
+                  borderRight: "1px solid #cbd5e1",
+                  borderBottom: "1px solid #cbd5e1",
                   justifyContent: "center",
                   alignItems: "center",
                   height: 40,
@@ -202,8 +202,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               <View
                 style={{
                   flex: 1,
-                  borderRight: "1px solid #e5e5e5",
-                  borderBottom: "1px solid #e5e5e5",
+                  borderRight: "1px solid #cbd5e1",
+                  borderBottom: "1px solid #cbd5e1",
                   justifyContent: "center",
                   alignItems: "center",
                   height: 40,
@@ -218,7 +218,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderTop: 0,
               justifyContent: "flex-end",
@@ -244,7 +244,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -254,7 +254,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -264,7 +264,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -274,7 +274,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -305,8 +305,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 <View
                   style={{
                     flex: 1,
-                    borderRight: "1px solid #e5e5e5",
-                    borderBottom: "1px solid #e5e5e5",
+                    borderRight: "1px solid #cbd5e1",
+                    borderBottom: "1px solid #cbd5e1",
                     justifyContent: "center",
                     alignItems: "center",
                     height: 40,
@@ -317,8 +317,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 <View
                   style={{
                     flex: 1,
-                    borderRight: "1px solid #e5e5e5",
-                    borderBottom: "1px solid #e5e5e5",
+                    borderRight: "1px solid #cbd5e1",
+                    borderBottom: "1px solid #cbd5e1",
                     justifyContent: "center",
                     alignItems: "center",
                     height: 40,
@@ -332,8 +332,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               <View
                 style={{
                   flex: 1,
-                  borderRight: "1px solid #e5e5e5",
-                  borderBottom: "1px solid #e5e5e5",
+                  borderRight: "1px solid #cbd5e1",
+                  borderBottom: "1px solid #cbd5e1",
                   justifyContent: "center",
                   alignItems: "center",
                   height: 40,
@@ -346,7 +346,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderTop: 0,
               justifyContent: "center",
               alignItems: "center",
@@ -364,7 +364,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -377,7 +377,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -390,7 +390,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -403,7 +403,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -418,8 +418,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -430,8 +430,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -445,7 +445,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderTop: 0,
               justifyContent: "flex-end",
@@ -471,7 +471,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -481,7 +481,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -491,7 +491,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -501,7 +501,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "flex-start",
@@ -522,8 +522,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -534,8 +534,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -547,7 +547,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderTop: 0,
               justifyContent: "center",
               alignItems: "center",
@@ -565,7 +565,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -577,7 +577,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -589,7 +589,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -601,7 +601,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -615,7 +615,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             style={{
               width: "45%",
               flexDirection: "row",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -628,7 +628,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderTop: 0,
               justifyContent: "center",
               alignItems: "center",
@@ -655,7 +655,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -668,7 +668,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -681,7 +681,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -694,7 +694,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -709,8 +709,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -722,8 +722,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -735,8 +735,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -748,8 +748,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -763,7 +763,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderTop: 0,
               justifyContent: "flex-end",
@@ -790,7 +790,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -800,7 +800,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -810,7 +810,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -820,7 +820,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -832,8 +832,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -844,8 +844,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -856,8 +856,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -868,8 +868,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -882,7 +882,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderTop: 0,
               justifyContent: "center",
               alignItems: "center",
@@ -901,7 +901,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -914,7 +914,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -927,7 +927,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -940,7 +940,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderLeft: 0,
               borderTop: 0,
@@ -955,8 +955,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -967,8 +967,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -979,8 +979,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -993,7 +993,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderBottom: "1px solid white",
               borderTop: 0,
               justifyContent: "flex-end",
@@ -1020,7 +1020,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "5%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -1030,7 +1030,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "12%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -1040,7 +1040,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "8%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "center",
@@ -1050,7 +1050,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "20%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderLeft: 0,
               borderTop: 0,
               justifyContent: "flex-start",
@@ -1063,8 +1063,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -1075,8 +1075,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -1087,8 +1087,8 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             <View
               style={{
                 flex: 1,
-                borderRight: "1px solid #e5e5e5",
-                borderBottom: "1px solid #e5e5e5",
+                borderRight: "1px solid #cbd5e1",
+                borderBottom: "1px solid #cbd5e1",
                 justifyContent: "center",
                 alignItems: "center",
                 height: 40,
@@ -1100,7 +1100,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           <View
             style={{
               width: "10%",
-              border: "1px solid #e5e5e5",
+              border: "1px solid #cbd5e1",
               borderTop: 0,
               justifyContent: "center",
               alignItems: "center",
@@ -1110,7 +1110,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
       </View>
       <View
         style={{
-          border: "1px solid #e5e5e5",
+          border: "1px solid #cbd5e1",
           marginTop: 20,
           paddingVertical: 10,
           display: "flex",

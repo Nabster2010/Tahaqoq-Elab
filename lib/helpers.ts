@@ -9,6 +9,7 @@ import {
   Suspension,
   VisualInspection,
 } from "@prisma/client";
+import { string } from "zod";
 
 export const tests = [
   "brakeTest",
@@ -19,7 +20,7 @@ export const tests = [
   "vehicleInfo",
   "visualInspection",
 ];
-export function addLeadingZeros(num: number, totalLength: number = 5) {
+export function addLeadingZeros(num: number | string, totalLength: number = 5) {
   return String(num).padStart(totalLength, "0");
 }
 
@@ -191,8 +192,12 @@ export const englishDateFormat = (date: Date) => {
 };
 
 export const arabicDateFormat = (date: Date) => {
-  const arDate = new Intl.DateTimeFormat("ar-SA", {
-    numberingSystem: "latn",
+  const formatter = new Intl.DateTimeFormat("en-US-u-ca-islamic", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
-  return arDate.format(date).split(" ")[0];
+  let formattedDate = formatter.format(date).split(" ")[0];
+  const parts = formattedDate.split("/");
+  return parts[1] + "/" + parts[0] + "/" + parts[2];
 };

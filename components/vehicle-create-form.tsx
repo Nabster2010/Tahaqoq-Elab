@@ -199,7 +199,7 @@ const VehicleCreateForm = ({ customers, brokers }: VehicleCreateFormProps) => {
                     <FormMessage />
                     <div className="text-sm text-muted-foreground">
                       Hijri Date:{" "}
-                      <span dir="rtl" className="">
+                      <span className="">
                         {arabicDateFormat(new Date(field.value))}
                       </span>{" "}
                     </div>
