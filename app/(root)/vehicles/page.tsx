@@ -33,6 +33,7 @@ export const metadata = {
 const VehiclesPage = async ({
   searchParams,
 }: {
+  //pathName?search=[search]&page=[page]&pageSize=[pageSize]&sortby=[sortby]&order=[order]&reportDate=[from]_[to]
   searchParams: { [key: string]: string | undefined };
 }) => {
   const session = await getServerSession(authOptions);
@@ -44,10 +45,16 @@ const VehiclesPage = async ({
   const search = searchParams.search
     ? decodeURIComponent(searchParams.search as string)
     : "";
+  const sortby = searchParams.sortby;
+  const order = searchParams.order;
+  const reportDate = searchParams.reportDate;
   const { vehicles, currentPage, totalPages } = await getPaginatedVehicles(
     search,
     page,
-    pageSize
+    pageSize,
+    sortby,
+    order,
+    reportDate
   );
 
   // const searchAction = async (data: FormData) => {

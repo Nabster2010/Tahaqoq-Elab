@@ -1,6 +1,7 @@
 import { db } from ".";
 import type { VehicleSchemaType } from "@/types";
 import { siteConfig } from "@/config/site";
+import { Prisma } from "@prisma/client";
 
 export async function getVehicles() {
   try {
@@ -14,8 +15,25 @@ export async function getVehicles() {
 export async function getPaginatedVehicles(
   search: string | undefined,
   page = 1,
-  pageSize = siteConfig.pageSize
+  pageSize = siteConfig.pageSize,
+  sortby: string | undefined,
+  order = "asc",
+  reportDate: string | undefined
 ) {
+  //filter by date
+  const filterByDate = reportDate?.split("_").map((date) => new Date(date));
+
+  const sortItems = new Map([
+    ["id", { id: order }],
+    ["port", { port: order }],
+    ["createdAt", { createdAt: order }],
+    ["broker", { broker: { name: order } }],
+    ["customer", { customer: { name: order } }],
+    ["paymentType", { paymentType: order }],
+  ]);
+  // order by these fields
+  const orderBy = sortby ? sortItems.get(sortby) : { id: "desc" };
+
   const id = !!parseInt(search as string)
     ? parseInt(search as string)
     : undefined;
@@ -26,9 +44,18 @@ export async function getPaginatedVehicles(
         id: {
           equals: id ? id : undefined,
         },
-      },
-      orderBy: {
-        id: "desc",
+        AND: [
+          {
+            createdAt: {
+              gte: filterByDate?.[0] || undefined,
+            },
+          },
+          {
+            createdAt: {
+              lte: filterByDate?.[1] || undefined,
+            },
+          },
+        ],
       },
       skip,
       take: pageSize,
@@ -56,6 +83,8 @@ export async function getPaginatedVehicles(
         suspensionTest: true,
         visualInspection: true,
       },
+      orderBy:
+        orderBy as Prisma.Enumerable<Prisma.VehicleOrderByWithRelationInput>,
     });
     const vehicleCount = await db.vehicle.count({
       where: {
