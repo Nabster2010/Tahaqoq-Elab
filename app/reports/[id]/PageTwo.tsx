@@ -1,9 +1,9 @@
 "use client";
-import { categorizedVisualInspectionData } from "@/config/visualInspectionConfig";
-import { VisualInspection } from "@prisma/client";
-import { Text, View } from "@react-pdf/renderer";
-import GroupTestHeader from "./GroupTestHeader";
 import { styles } from "./styles";
+import GroupTestHeader from "./GroupTestHeader";
+import { Text, View } from "@react-pdf/renderer";
+import { VisualInspection } from "@prisma/client";
+import { categorizedVisualInspectionData } from "@/config/visualInspectionConfig";
 import VisualInspectionItemBox from "./VisualInspectionItemBox";
 
 const PageTwo = ({
@@ -13,14 +13,32 @@ const PageTwo = ({
 }) => {
   return (
     <View break>
-      <Text
+      <View
         style={[
           styles.heading,
-          { alignSelf: "center", fontSize: 12, marginBottom: 5 },
+          {
+            alignSelf: "center",
+            fontSize: 12,
+            marginBottom: 5,
+            display: "flex",
+            flexDirection: "row-reverse",
+          },
         ]}
       >
-        تقرير الفحص الخارجي
-      </Text>
+        <Text>تقرير الفحص الظاهري</Text>
+        <Text>/</Text>
+        <Text>ملحق</Text>
+        <Text>)</Text>
+        <Text>٢</Text>
+        <Text>(</Text>
+        <Text>من اللائحة الفنية </Text>
+        <Text>م.{`  `}</Text>
+        <Text>أ-</Text>
+        <Text>٩٧١-</Text>
+        <Text>١٢-</Text>
+        <Text>٩٠-</Text>
+        <Text>٢٠</Text>
+      </View>
       <View style={[styles.rowBetween, { gap: 5 }]}>
         <View
           style={[

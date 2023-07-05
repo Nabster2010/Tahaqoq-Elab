@@ -1,8 +1,7 @@
-import { Icons } from "@/components/icons";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,12 +20,10 @@ import VehicleListItem from "@/components/vehicle-list-item";
 import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedVehicles } from "@/lib/db/vehicle";
-import { canIssueReport, slugify } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
 import { ExtendedVehicle } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Vehicles",
