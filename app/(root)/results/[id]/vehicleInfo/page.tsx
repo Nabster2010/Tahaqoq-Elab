@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 import { getColors } from "@/lib/db/color";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getVehicleTypes } from "@/lib/db/vehicleType";
+import { defaultModelYear } from "@/lib/helpers";
 
 export const metadata = {
   title: "Vehicle Info Results",
@@ -46,6 +47,7 @@ const VehicleInfoResultPage = async ({
         />
       ) : (
         <VehicleInfoCreateForm
+          defaultModelYear={defaultModelYear(vehicle.vin) || ""}
           vehicleId={vehicle.id}
           colors={colors || []}
           vehicleTypes={vehicleTypes || []}

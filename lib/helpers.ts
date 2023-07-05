@@ -201,3 +201,26 @@ export const arabicDateFormat = (date: Date) => {
   const parts = formattedDate.split("/");
   return parts[1] + "/" + parts[0] + "/" + parts[2];
 };
+
+export const defaultModelYear = (vin: string) => {
+  const letter = vin.charAt(9).toLocaleLowerCase();
+  const models = new Map([
+    ["a", "2010"],
+    ["b", "2011"],
+    ["c", "2012"],
+    ["d", "2013"],
+    ["e", "2014"],
+    ["f", "2015"],
+    ["g", "2016"],
+    ["h", "2017"],
+    ["j", "2018"],
+    ["k", "2019"],
+    ["l", "2020"],
+    ["m", "2021"],
+    ["n", "2022"],
+    ["p", "2023"],
+    ["r", "2024"],
+  ]);
+
+  return models.get(letter);
+};

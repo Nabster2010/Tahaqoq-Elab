@@ -1,5 +1,5 @@
 "use client";
-import { Color, VehicleInfo, VehicleType } from "@prisma/client";
+import { Color, VehicleInfo } from "@prisma/client";
 import { siteConfig } from "@/config/site";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -32,6 +32,7 @@ import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ExtendedVehicleType } from "@/types";
 import VehicleTypeSelectComboBox from "./select-vehicleType-comboBox";
+import { modelYear } from "@/config/modelYear";
 
 type VehicleInfoUpdateFormProps = {
   vehicleInfo: VehicleInfo;
@@ -109,9 +110,23 @@ const VehicleInfoUpdateForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Model Year:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Year" {...field} />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Year" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {modelYear.map((year) => (
+                          <SelectItem key={year} value={year}>
+                            {year}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

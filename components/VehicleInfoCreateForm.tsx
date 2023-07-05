@@ -32,16 +32,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Textarea } from "./ui/textarea";
 import { ExtendedVehicleType } from "@/types";
 import VehicleTypeSelectComboBox from "./select-vehicleType-comboBox";
+import { modelYear } from "@/config/modelYear";
 
 type VehicleInfoCreateFormProps = {
   vehicleId: number;
   colors: Color[];
   vehicleTypes: ExtendedVehicleType[];
+  defaultModelYear: string;
 };
 const VehicleInfoCreateForm = ({
   vehicleId,
   colors,
   vehicleTypes,
+  defaultModelYear,
 }: VehicleInfoCreateFormProps) => {
   const router = useRouter();
   let [isPending, startTransition] = useTransition();
@@ -59,7 +62,7 @@ const VehicleInfoCreateForm = ({
       seats: "5",
       vehicleId: vehicleId,
       vehicleTypeId: "",
-      year: "",
+      year: defaultModelYear,
       remarks: "",
     },
   });
@@ -107,9 +110,23 @@ const VehicleInfoCreateForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Model Year:</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Year" {...field} />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Year" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {modelYear.map((year) => (
+                          <SelectItem key={year} value={year}>
+                            {year}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
