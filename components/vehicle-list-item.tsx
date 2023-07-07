@@ -1,10 +1,8 @@
 "use client";
 import { deleteVehicleAction } from "@/app/_actions/_vehicleActions";
-import { ports } from "@/config/ports";
-import { canIssueReport, slugify } from "@/lib/helpers";
+import { canIssueReport, englishDateFormat, slugify } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { ExtendedVehicle } from "@/types";
-import { Vehicle } from "@prisma/client";
+import { ExtendedVehicle, FilterProps, PaginationProps } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
@@ -14,22 +12,18 @@ import ToastDesc from "./ToastDesc";
 import { Button, buttonVariants } from "./ui/button";
 import { TableCell, TableRow } from "./ui/table";
 import { toast } from "./ui/use-toast";
-import VehicleActionsMenu from "./vehicle-actions-menu";
 
 type VehicleListProps = {
   vehicle: ExtendedVehicle;
-  page: number;
-  pageSize: number;
-  search: string;
+  searchParams: PaginationProps & FilterProps;
   isAdminUser: boolean;
 };
 const VehicleListItem = ({
   vehicle,
-  page,
-  pageSize,
-  search,
+  searchParams,
   isAdminUser,
 }: VehicleListProps) => {
+  const { page, pageSize, search, sortby, order, from, to } = searchParams;
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDelete = async () => {
@@ -69,10 +63,14 @@ const VehicleListItem = ({
         {vehicle.reqNo}
       </TableCell>
       <TableCell className="hidden px-1 max-w-[100px] text-center md:table-cell">
-        {ports.find((v) => v.description === vehicle.port)?.name}
+        {/* {ports.find((v) => v.description === vehicle.port)?.name} */}
+        {vehicle.port}
       </TableCell>
       <TableCell className="hidden px-1 text-center md:table-cell">
         {vehicle?.broker?.name}
+      </TableCell>
+      <TableCell className="hidden px-1 text-center md:table-cell">
+        {englishDateFormat(vehicle.createdAt)}
       </TableCell>
 
       <TableCell className="px-1 ">
@@ -81,9 +79,7 @@ const VehicleListItem = ({
             buttonVariants({ size: "sm" }),
             "whitespace-nowrap text-center "
           )}
-          href={`/results/${vehicle.id}?search=${
-            search ? search : ""
-          }&page=${page}&pageSize=${pageSize}`}
+          href={`/results/${vehicle.id}?search=${search}&page=${page}&pageSize=${pageSize}&sortby=${sortby}&order=${order}&from=${from}&to=${to}`}
         >
           {canIssueReport(vehicle as ExtendedVehicle)
             ? "View Result"
@@ -93,9 +89,7 @@ const VehicleListItem = ({
       <TableCell className="px-1 text-center ">
         <Link
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-          href={`/vehicles/${vehicle.id}?search=${
-            String(search) || ""
-          }&page=${page}&pageSize=${pageSize}`}
+          href={`/vehicles/${vehicle.id}?search=${search}&page=${page}&pageSize=${pageSize}&sortby=${sortby}&order=${order}&from=${from}&to=${to}`}
         >
           Edit
         </Link>

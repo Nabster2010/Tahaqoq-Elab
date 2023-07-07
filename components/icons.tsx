@@ -22,11 +22,21 @@ import {
   Trash2,
   Printer,
   MoreHorizontal,
+  Filter,
+  ArrowUpDown,
+  PlusSquare,
+  ArrowDown,
+  ArrowUp,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
 
 export const Icons = {
+  desc: ArrowDown,
+  asc: ArrowUp,
+  new: PlusSquare,
+  order: ArrowUpDown,
+  filter: Filter,
   more: MoreHorizontal,
   print: Printer,
   trash: Trash2,

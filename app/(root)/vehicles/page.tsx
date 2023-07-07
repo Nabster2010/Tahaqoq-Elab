@@ -1,5 +1,5 @@
+import { Icons } from "@/components/icons";
 import Pagination from "@/components/Pagination";
-import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -24,6 +24,7 @@ import { cn } from "@/lib/utils";
 import { ExtendedVehicle } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import FilterForm from "@/components/filter-form";
 
 export const metadata = {
   title: "Vehicles",
@@ -33,53 +34,44 @@ export const metadata = {
 const VehiclesPage = async ({
   searchParams,
 }: {
-  //pathName?search=[search]&page=[page]&pageSize=[pageSize]&sortby=[sortby]&order=[order]&reportDate=[from]_[to]
   searchParams: { [key: string]: string | undefined };
 }) => {
+  const searchParamsDefault = {
+    search: "",
+    page: 1,
+    pageSize: siteConfig.pageSize.toString(),
+    sortby: "id",
+    order: "desc",
+    from: "",
+    to: "",
+  };
+
+  //get all search params
+
+  const searchParamsAll = {
+    ...searchParamsDefault,
+    ...searchParams,
+    page: isNaN(Number(searchParams?.page)) ? 1 : Number(searchParams?.page),
+  };
+
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
-  const sortby = searchParams.sortby;
-  const order = searchParams.order;
-  const reportDate = searchParams.reportDate;
-  const { vehicles, currentPage, totalPages } = await getPaginatedVehicles(
-    search,
-    page,
-    pageSize,
-    sortby,
-    order,
-    reportDate
+  const { vehicles, totalPages, error } = await getPaginatedVehicles(
+    searchParamsAll
   );
-
-  // const searchAction = async (data: FormData) => {
-  //   "use server";
-  //   const search = data.get("search")?.toString();
-  //   redirect(`/vehicles?search=${search}&pageSize=${pageSize}`);
-  // };
-
   return (
     <Card className="mt-4 ">
       <CardHeader className="space-y-4">
         <Title>Vehicles</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
-          <SearchForm
-            //action={searchAction}
-            defaultValue={search}
-            searchParams={searchParams}
-          />
           <Link
             href="/vehicles/create"
             className={cn(buttonVariants({}), " md:ml-auto ")}
           >
-            Create New
+            <span>Create New</span>
           </Link>
         </div>
+        <FilterForm />
       </CardHeader>
       <CardContent>
         <Table>
@@ -99,6 +91,9 @@ const VehiclesPage = async ({
               <TableHead className="hidden px-1 text-center md:table-cell">
                 Broker
               </TableHead>
+              <TableHead className="hidden px-1 text-center md:table-cell">
+                Date
+              </TableHead>
               <TableHead className="px-1 text-center">Result</TableHead>
               <TableHead className="px-1 text-center">Edit</TableHead>
               <TableHead className="hidden px-1 text-center md:table-cell">
@@ -116,15 +111,13 @@ const VehiclesPage = async ({
                 <VehicleListItem
                   key={vehicle.id}
                   vehicle={vehicle as ExtendedVehicle}
-                  page={page}
-                  pageSize={pageSize}
-                  search={search}
+                  searchParams={searchParamsAll}
                   isAdminUser={isAdminUser}
                 />
               ))
             ) : (
               <TableRow>
-                <TableCell className="w-full text-center" colSpan={11}>
+                <TableCell className="w-full text-center" colSpan={12}>
                   No Vehicles found
                 </TableCell>
               </TableRow>
@@ -134,13 +127,11 @@ const VehiclesPage = async ({
       </CardContent>
       <CardFooter>
         <>
-          {totalPages && totalPages >= 1 ? (
+          {vehicles && vehicles?.length > 0 && totalPages && totalPages >= 1 ? (
             <Pagination
               pathName="vehicles"
-              currentPage={page}
               totalPages={totalPages}
-              pageSize={pageSize}
-              search={search}
+              searchParamsAll={searchParamsAll}
             />
           ) : (
             ""

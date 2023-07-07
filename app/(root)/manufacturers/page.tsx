@@ -1,6 +1,6 @@
 import ManufacturerListItem from "@/components/manufacturer-list-item";
 import Pagination from "@/components/Pagination";
-import SearchForm from "@/components/search-form";
+import SearchForm from "@/components/filter-form";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import {

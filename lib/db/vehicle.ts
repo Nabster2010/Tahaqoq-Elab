@@ -1,7 +1,8 @@
 import { db } from ".";
-import type { VehicleSchemaType } from "@/types";
+import type { FilterProps, PaginationProps, VehicleSchemaType } from "@/types";
 import { siteConfig } from "@/config/site";
 import { Prisma } from "@prisma/client";
+import { isValidDate } from "../helpers";
 
 export async function getVehicles() {
   try {
@@ -12,17 +13,18 @@ export async function getVehicles() {
     return { error };
   }
 }
-export async function getPaginatedVehicles(
-  search: string | undefined,
-  page = 1,
-  pageSize = siteConfig.pageSize,
-  sortby: string | undefined,
-  order = "asc",
-  reportDate: string | undefined
-) {
-  //filter by date
-  const filterByDate = reportDate?.split("_").map((date) => new Date(date));
 
+export async function getPaginatedVehicles({
+  search,
+  page,
+  pageSize,
+  sortby,
+  order,
+  from,
+  to,
+}: PaginationProps & FilterProps) {
+  const dateFrom = isValidDate(from) ? new Date(from).toISOString() : undefined;
+  const dateTo = isValidDate(to) ? new Date(to).toISOString() : undefined;
   const sortItems = new Map([
     ["id", { id: order }],
     ["port", { port: order }],
@@ -31,34 +33,26 @@ export async function getPaginatedVehicles(
     ["customer", { customer: { name: order } }],
     ["paymentType", { paymentType: order }],
   ]);
-  // order by these fields
-  const orderBy = sortby ? sortItems.get(sortby) : { id: "desc" };
+  const orderBy = sortItems.get(sortby);
 
-  const id = !!parseInt(search as string)
-    ? parseInt(search as string)
-    : undefined;
-  const skip: number = (page - 1) * pageSize;
+  const skip: number =
+    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
+    (pageSize ? +pageSize : siteConfig.pageSize);
   try {
     const vehicles = await db.vehicle.findMany({
       where: {
         id: {
-          equals: id ? id : undefined,
+          equals: isNaN(parseInt(search)) ? undefined : parseInt(search),
         },
-        AND: [
-          {
-            createdAt: {
-              gte: filterByDate?.[0] || undefined,
-            },
+        AND: {
+          createdAt: {
+            gte: dateFrom,
+            lte: dateTo,
           },
-          {
-            createdAt: {
-              lte: filterByDate?.[1] || undefined,
-            },
-          },
-        ],
+        },
       },
       skip,
-      take: pageSize,
+      take: pageSize ? parseInt(pageSize) : siteConfig.pageSize,
       include: {
         broker: true,
         vehicleInfo: {
@@ -89,14 +83,22 @@ export async function getPaginatedVehicles(
     const vehicleCount = await db.vehicle.count({
       where: {
         id: {
-          equals: id || undefined,
+          equals: isNaN(parseInt(search)) ? undefined : parseInt(search),
+        },
+        AND: {
+          createdAt: {
+            gte: dateFrom,
+            lte: dateTo,
+          },
         },
       },
     });
 
     return {
       vehicles,
-      totalPages: Math.ceil(vehicleCount / pageSize),
+      totalPages: Math.ceil(
+        vehicleCount / (pageSize ? parseInt(pageSize) : siteConfig.pageSize)
+      ),
       currentPage: page,
     };
   } catch (error) {

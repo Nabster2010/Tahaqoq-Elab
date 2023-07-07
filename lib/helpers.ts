@@ -224,3 +224,8 @@ export const defaultModelYear = (vin: string) => {
 
   return models.get(letter);
 };
+
+export function isValidDate(dateString: string): boolean {
+  const date = new Date(dateString);
+  return !isNaN(date.getTime());
+}
