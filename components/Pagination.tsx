@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { FilterProps } from "@/types";
 import Link from "next/link";
 import { Button } from "./ui/button";
 

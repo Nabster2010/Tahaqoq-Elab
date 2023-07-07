@@ -1,4 +1,3 @@
-import { Icons } from "@/components/icons";
 import Pagination from "@/components/Pagination";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
