@@ -21,7 +21,9 @@ export async function getPaginatedManufacturers(
   page = 1,
   pageSize = siteConfig.pageSize
 ) {
-  const skip: number = (page - 1) * pageSize;
+  const skip: number =
+    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
+    (pageSize ? +pageSize : siteConfig.pageSize);
   try {
     const manufacturers = await db.vehicleManufacturer.findMany({
       where: {

@@ -22,7 +22,10 @@ export async function getPaginatedBrokers(
   page = 1,
   pageSize = siteConfig.pageSize
 ) {
-  const skip: number = (page - 1) * pageSize;
+  const skip: number =
+    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
+    (pageSize ? +pageSize : siteConfig.pageSize);
+
   try {
     const brokers = await db.broker.findMany({
       where: {
