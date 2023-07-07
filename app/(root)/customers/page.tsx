@@ -1,6 +1,6 @@
 import CustomerListItem from "@/components/customer-list-item";
 import Pagination from "@/components/Pagination";
-import SearchForm from "@/components/filter-form";
+import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -48,23 +48,12 @@ const CustomersPage = async ({
     pageSize
   );
 
-  // const searchAction = async (data: FormData) => {
-  //   "use server";
-  //   const search = data.get("search") as String;
-  //   redirect(`/customers?search=${encodeURI(search.toString())}`);
-  // };
-
   return (
     <Card className="mt-4">
       <CardHeader className="">
         <Title className="mb-4">Customers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
-          <SearchForm
-            path="/customers"
-            //action={searchAction}
-            defaultValue={search}
-            searchParams={searchParams}
-          />
+          <SearchForm />
           <Link
             href="/customers/create"
             className={cn(buttonVariants({}), "ml-auto w-full md:w-auto ")}
@@ -112,10 +101,12 @@ const CustomersPage = async ({
         {totalPages && totalPages >= 1 ? (
           <Pagination
             pathName="customers"
-            currentPage={page}
             totalPages={totalPages}
-            pageSize={pageSize}
-            search={search}
+            searchParamsAll={{
+              search,
+              page: currentPage,
+              pageSize: pageSize.toString(),
+            }}
           />
         ) : (
           ""

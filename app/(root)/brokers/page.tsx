@@ -1,6 +1,5 @@
 import BrokerListItem from "@/components/broker-list-item";
 import Pagination from "@/components/Pagination";
-import SearchForm from "@/components/filter-form";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -23,6 +22,8 @@ import { getPaginatedBrokers } from "@/lib/db/broker";
 import { cn } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import FilterForm from "@/components/filter-form";
+import SearchForm from "@/components/search-form";
 
 export const metadata = {
   title: "Brokers",
@@ -53,12 +54,7 @@ const BrokersPage = async ({
       <CardHeader className="">
         <Title className="mb-4">Brokers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
-          <SearchForm
-            path="/brokers"
-            //action={searchAction}
-            defaultValue={search}
-            searchParams={searchParams}
-          />
+          <SearchForm />
           <Link
             href="/brokers/create"
             className={cn(buttonVariants({}), "ml-auto w-full md:w-auto ")}
@@ -107,10 +103,12 @@ const BrokersPage = async ({
         {totalPages && totalPages >= 1 ? (
           <Pagination
             pathName="brokers"
-            currentPage={page}
             totalPages={totalPages}
-            pageSize={pageSize}
-            search={search}
+            searchParamsAll={{
+              search,
+              page: currentPage,
+              pageSize: pageSize.toString(),
+            }}
           />
         ) : (
           ""

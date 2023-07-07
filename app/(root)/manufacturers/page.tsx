@@ -1,6 +1,6 @@
 import ManufacturerListItem from "@/components/manufacturer-list-item";
 import Pagination from "@/components/Pagination";
-import SearchForm from "@/components/filter-form";
+import SearchForm from "@/components/search-form";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -51,7 +51,7 @@ const ManufacturersPage = async ({
       <CardHeader className="space-y-4">
         <Title>Manufacturers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
-          <SearchForm searchParams={searchParams} />
+          <SearchForm />
 
           <Link
             href="/manufacturers/create"
@@ -102,10 +102,12 @@ const ManufacturersPage = async ({
         {totalPages && totalPages >= 1 ? (
           <Pagination
             pathName="manufacturers"
-            currentPage={page}
             totalPages={totalPages}
-            pageSize={pageSize}
-            search={search}
+            searchParamsAll={{
+              search,
+              page: currentPage,
+              pageSize: pageSize.toString(),
+            }}
           />
         ) : (
           ""

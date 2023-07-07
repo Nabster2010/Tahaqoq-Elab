@@ -9,10 +9,10 @@ type PaginationProps = {
     page: number;
     search: string;
     pageSize: string;
-    sortby: string;
-    order: string;
-    from: string;
-    to: string;
+    sortby?: string;
+    order?: string;
+    from?: string;
+    to?: string;
   };
 };
 const Pagination = ({
@@ -25,7 +25,8 @@ const Pagination = ({
       <div className="flex flex-col items-center justify-center mx-auto">
         {/* <!-- Help text --> */}
         <span className="text-sm ">
-          Page <span className="font-semibold ">{searchParamsAll?.page}</span>{" "}
+          Page{" "}
+          <span className="font-semibold ">{searchParamsAll?.page || 1}</span>{" "}
           of <span className="font-semibold ">{totalPages}</span>
         </span>
         {/* <!-- Buttons --> */}
