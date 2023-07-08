@@ -20,6 +20,11 @@ const Pagination = ({
   searchParams,
 }: PaginationPropsType) => {
   const router = useRouter();
+
+  const initialPage =
+    searchParams.page && !isNaN(parseInt(searchParams.page))
+      ? parseInt(searchParams.page) - 1
+      : 0;
   const handlePageChange = ({ selected }: { selected: number }) => {
     return router.push(
       `/${pathName}/?${new URLSearchParams({
@@ -57,7 +62,7 @@ const Pagination = ({
       )}
       activeLinkClassName={"pagination-active-link"}
       containerClassName={"pagination-container"}
-      // initialPage={currentPage - 1}
+      initialPage={initialPage}
       pageCount={totalPages}
       disableInitialCallback={true}
       marginPagesDisplayed={2}

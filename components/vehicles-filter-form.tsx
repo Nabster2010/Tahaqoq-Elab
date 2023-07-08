@@ -2,7 +2,7 @@
 import React from "react";
 import { removeEmptyStrings } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
 import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
@@ -16,19 +16,16 @@ import {
 } from "./ui/select";
 
 const VehiclesFilterForm = () => {
-  const searchParams = useSearchParams();
-
   const defaultFilter = {
-    searchBy: searchParams.get("searchBy") || "id",
-    search: searchParams.get("search") || "",
-    sortby: searchParams.get("sortby") || "id",
-    order: searchParams.get("order") || "desc",
-    from: searchParams.get("from") || "",
-    to: searchParams.get("to") || "",
+    searchBy: "id",
+    search: "",
+    sortby: "id",
+    order: "desc",
+    from: "",
+    to: "",
   };
   const router = useRouter();
   const [filter, setFilter] = React.useState(defaultFilter);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
@@ -42,10 +39,11 @@ const VehiclesFilterForm = () => {
       ).toString()}`
     );
   };
-  const clearFilter = () => {
+  const resetForm = () => {
     setFilter(defaultFilter);
-    router.push(`/vehicles`);
+    router.replace(`/vehicles`);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2 lg:items-end lg:flex-row">
@@ -68,10 +66,10 @@ const VehiclesFilterForm = () => {
             <div className="flex items-end ">
               <Select
                 name="searchBy"
+                value={filter.searchBy}
                 onValueChange={(value) =>
                   setFilter((prev) => ({ ...prev, searchBy: value }))
                 }
-                defaultValue={String(filter.searchBy) || "id"}
               >
                 <SelectTrigger
                   className={cn(
@@ -84,7 +82,9 @@ const VehiclesFilterForm = () => {
                 <SelectContent>
                   <SelectItem value="id">Vehicle No</SelectItem>
                   <SelectItem value="reqNo">Request No</SelectItem>
-                  <SelectItem value="bayanNo">Bayan No</SelectItem>
+                  <SelectItem defaultChecked value="bayanNo">
+                    Bayan No
+                  </SelectItem>
                   <SelectItem value="vin">Vin</SelectItem>
                   <SelectItem value="port">Port</SelectItem>
                   <SelectItem value="customer">Customer</SelectItem>
@@ -128,6 +128,7 @@ const VehiclesFilterForm = () => {
             <Label variant={"optional"}>Sort By:</Label>
             <Select
               name="sortby"
+              value={filter.sortby}
               onValueChange={(value) =>
                 setFilter((prev) => ({ ...prev, sortby: value }))
               }
@@ -150,6 +151,7 @@ const VehiclesFilterForm = () => {
             <Label variant={"optional"}>Order:</Label>
             <Select
               name="order"
+              value={filter.order}
               onValueChange={(value) =>
                 setFilter((prev) => ({ ...prev, order: value }))
               }
@@ -172,9 +174,9 @@ const VehiclesFilterForm = () => {
           <Button type="submit">
             <Icons.search className="w-6 h-6" />
           </Button>
-          <Button onClick={clearFilter} variant="destructive">
-            <span>CLEAR</span>
-            <Icons.close className="w-4 h-4 ml-2 " />
+          <Button variant="destructive" type="button" onClick={resetForm}>
+            Clear
+            <Icons.close className="w-5 h-5 ml-2" />
           </Button>
         </div>
       </div>
