@@ -1,7 +1,11 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { VehiclesFilterProps, PaginationProps } from "@/types";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+import React from "react";
+import ReactPaginate from "react-paginate";
+import { Icons } from "./icons";
+import { Button, buttonVariants } from "./ui/button";
 
 type PaginationPropsType = {
   totalPages: number;
@@ -15,45 +19,55 @@ const Pagination = ({
   pathName,
   searchParams,
 }: PaginationPropsType) => {
+  const router = useRouter();
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    return router.push(
+      `/${pathName}/?${new URLSearchParams({
+        ...searchParams,
+        page: String(selected + 1),
+      }).toString()}`
+    );
+  };
   return (
-    <>
-      <div className="flex flex-col items-center justify-center mx-auto">
-        {/* <!-- Help text --> */}
-        <span className="text-sm ">
-          Page <span className="font-semibold ">{currentPage || 1}</span> of{" "}
-          <span className="font-semibold ">{totalPages}</span>
-        </span>
-        {/* <!-- Buttons --> */}
-        <div className="inline-flex mt-2 xs:mt-0">
-          <Button
-            disabled={currentPage === 1}
-            className={cn("text-sm font-medium border-r rounded-r-none")}
-          >
-            <Link
-              href={`/${pathName}/?${new URLSearchParams({
-                ...searchParams,
-                page: String(currentPage - 1),
-              }).toString()}`}
-            >
-              Prev
-            </Link>
-          </Button>
-          <Button
-            disabled={currentPage === totalPages}
-            className={cn("text-sm font-medium  rounded-l-none")}
-          >
-            <Link
-              href={`/${pathName}/?${new URLSearchParams({
-                ...searchParams,
-                page: String(currentPage + 1),
-              }).toString()}`}
-            >
-              Next
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </>
+    <ReactPaginate
+      previousLabel={
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          disabled={currentPage === 1}
+          className={cn("text-sm font-medium border-r rounded-r-none")}
+        >
+          <Icons.chevronLeft className="w-5 h-5" />
+        </Button>
+      }
+      nextLabel={
+        <Button
+          size={"sm"}
+          variant={"outline"}
+          disabled={currentPage === totalPages}
+          className={cn("text-sm font-medium border-r rounded-l-none")}
+        >
+          <Icons.chevronRight className="w-5 h-5" />
+        </Button>
+      }
+      breakLabel={"..."}
+      breakLinkClassName={cn(
+        buttonVariants({ variant: "outline", size: "sm" }),
+        "rounded-none"
+      )}
+      activeLinkClassName={"pagination-active-link"}
+      containerClassName={"pagination-container"}
+      // initialPage={currentPage - 1}
+      pageCount={totalPages}
+      disableInitialCallback={true}
+      marginPagesDisplayed={2}
+      pageLinkClassName={cn(
+        buttonVariants({ variant: "outline", size: "sm" }),
+        " rounded-none "
+      )}
+      pageRangeDisplayed={3}
+      onPageChange={handlePageChange}
+    />
   );
 };
 

@@ -33,6 +33,7 @@ export async function getPaginatedVehicles(
       : siteConfig.pageSize;
   let sortby = params.sortby || "id";
   let order = params.order || "desc";
+  let searchBy = params.searchBy || "id";
   let dateFrom =
     params.from && isValidDate(params.from) ? new Date(params.from) : undefined;
   let dateTo =
@@ -46,31 +47,47 @@ export async function getPaginatedVehicles(
     ["customer", { customer: { name: order } }],
     ["paymentType", { paymentType: order }],
   ]);
-  const orderBy = sortItems.get(sortby);
-  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
-
-  const where = (search: string | undefined) => {
-    if (search && !isNaN(parseInt(search))) {
-      return {
+  const searchItems = new Map([
+    [
+      "id",
+      {
         id: {
-          equals: parseInt(search) || undefined,
+          equals:
+            search && !isNaN(parseInt(search)) ? parseInt(search) : undefined,
         },
-      };
-    } else if (search) {
-      return {
-        customer: {
+      },
+    ],
+    ["port", { port: { contains: search } }],
+    ["reqNo", { reqNo: { contains: search } }],
+    ["bayanNo", { bayanNo: { contains: search } }],
+    ["vin", { vin: { contains: search } }],
+    [
+      "broker",
+      {
+        broker: {
           name: {
-            contains: search.toLowerCase() || undefined,
+            contains: search?.toLowerCase(),
           },
         },
-      };
-    }
-  };
-
+      },
+    ],
+    [
+      "customer",
+      {
+        customer: {
+          name: {
+            contains: search?.toLowerCase(),
+          },
+        },
+      },
+    ],
+  ]);
+  const orderBy = sortItems.get(sortby);
+  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
     const vehicles = await db.vehicle.findMany({
       where: {
-        ...where(search),
+        ...searchItems.get(searchBy),
         AND: {
           createdAt: {
             gte: dateFrom,
@@ -110,7 +127,7 @@ export async function getPaginatedVehicles(
 
     const vehicleCount = await db.vehicle.count({
       where: {
-        ...where(search),
+        ...searchItems.get(searchBy),
         AND: {
           createdAt: {
             gte: dateFrom,

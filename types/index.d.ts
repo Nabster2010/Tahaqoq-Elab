@@ -115,6 +115,7 @@ export type PaginationProps = {
 };
 
 export type VehiclesFilterProps = {
+  searchBy?: string;
   search?: string;
   sortby?: string;
   order?: string;
