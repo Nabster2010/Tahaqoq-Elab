@@ -2,7 +2,8 @@
 import { deleteVehicleAction } from "@/app/_actions/_vehicleActions";
 import { canIssueReport, englishDateFormat, slugify } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { ExtendedVehicle, FilterProps, PaginationProps } from "@/types";
+import { ExtendedVehicle, PaginationProps, VehiclesFilterProps } from "@/types";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useTransition } from "react";
@@ -15,7 +16,7 @@ import { toast } from "./ui/use-toast";
 
 type VehicleListProps = {
   vehicle: ExtendedVehicle;
-  searchParams: PaginationProps & FilterProps;
+  searchParams: PaginationProps & VehiclesFilterProps;
   isAdminUser: boolean;
 };
 const VehicleListItem = ({
@@ -23,7 +24,7 @@ const VehicleListItem = ({
   searchParams,
   isAdminUser,
 }: VehicleListProps) => {
-  const { page, pageSize, search, sortby, order, from, to } = searchParams;
+  // const { page, pageSize, search, sortby, order, from, to } = searchParams;
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDelete = async () => {
@@ -79,7 +80,9 @@ const VehicleListItem = ({
             buttonVariants({ size: "sm" }),
             "whitespace-nowrap text-center "
           )}
-          href={`/results/${vehicle.id}?search=${search}&page=${page}&pageSize=${pageSize}&sortby=${sortby}&order=${order}&from=${from}&to=${to}`}
+          href={`/results/${vehicle.id}?${new URLSearchParams(
+            searchParams
+          ).toString()}`}
         >
           {canIssueReport(vehicle as ExtendedVehicle)
             ? "View Result"
@@ -89,7 +92,9 @@ const VehicleListItem = ({
       <TableCell className="px-1 text-center ">
         <Link
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-          href={`/vehicles/${vehicle.id}?search=${search}&page=${page}&pageSize=${pageSize}&sortby=${sortby}&order=${order}&from=${from}&to=${to}`}
+          href={`/vehicles/${vehicle.id}?${new URLSearchParams(
+            searchParams
+          ).toString()}`}
         >
           Edit
         </Link>

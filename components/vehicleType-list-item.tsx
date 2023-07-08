@@ -1,6 +1,7 @@
 "use client";
 import { deleteVehicleTypeAction } from "@/app/_actions/_vehicleTypeActions";
 import { cn } from "@/lib/utils";
+import { PageSearchParams } from "@/types";
 import { VehicleType } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,16 +14,12 @@ import { toast } from "./ui/use-toast";
 
 type VehicleTypeListProps = {
   vehicleType: VehicleType & { manufacturer: { name: string } };
-  page: number;
-  pageSize: number;
-  search: string;
+  searchParams: PageSearchParams;
   isAdminUser: boolean;
 };
 const VehicleTypeListItem = ({
   vehicleType,
-  page,
-  pageSize,
-  search,
+  searchParams,
   isAdminUser,
 }: VehicleTypeListProps) => {
   const [isPending, startTransition] = useTransition();
@@ -64,7 +61,9 @@ const VehicleTypeListItem = ({
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/vehicleTypes/${vehicleType.id}?search=${search}&page=${page}&pageSize=${pageSize}`}
+          href={`/vehicleTypes/${vehicleType.id}?${new URLSearchParams(
+            searchParams
+          ).toString()}`}
         >
           Update
         </Link>

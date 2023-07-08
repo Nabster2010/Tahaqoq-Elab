@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { ExtendedVehicle } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import FilterForm from "@/components/filter-form";
+import VehiclesFilterForm from "@/components/vehicles-filter-form";
 
 export const metadata = {
   title: "Vehicles",
@@ -35,29 +35,11 @@ const VehiclesPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined };
 }) => {
-  const searchParamsDefault = {
-    search: "",
-    page: 1,
-    pageSize: siteConfig.pageSize.toString(),
-    sortby: "id",
-    order: "desc",
-    from: "",
-    to: "",
-  };
-
-  //get all search params
-
-  const searchParamsAll = {
-    ...searchParamsDefault,
-    ...searchParams,
-    page: isNaN(Number(searchParams?.page)) ? 1 : Number(searchParams?.page),
-  };
-
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const { vehicles, totalPages, error } = await getPaginatedVehicles(
-    searchParamsAll
-  );
+  const { vehicles, totalPages, currentPage, error } =
+    await getPaginatedVehicles(searchParams);
+
   return (
     <Card className="mt-4 ">
       <CardHeader className="space-y-4">
@@ -70,7 +52,7 @@ const VehiclesPage = async ({
             <span>Create New</span>
           </Link>
         </div>
-        <FilterForm />
+        <VehiclesFilterForm />
       </CardHeader>
       <CardContent>
         <Table>
@@ -110,7 +92,7 @@ const VehiclesPage = async ({
                 <VehicleListItem
                   key={vehicle.id}
                   vehicle={vehicle as ExtendedVehicle}
-                  searchParams={searchParamsAll}
+                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))
@@ -130,7 +112,8 @@ const VehiclesPage = async ({
             <Pagination
               pathName="vehicles"
               totalPages={totalPages}
-              searchParamsAll={searchParamsAll}
+              currentPage={currentPage}
+              searchParams={searchParams}
             />
           ) : (
             ""

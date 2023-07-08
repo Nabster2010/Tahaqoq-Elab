@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { testLimits } from "@/config/testConfig";
-import { ExtendedVehicle } from "@/types";
+import { ExtendedVehicle, PaginationProps } from "@/types";
 import {
   Brake,
   Emission,
@@ -228,4 +228,10 @@ export const defaultModelYear = (vin: string) => {
 export function isValidDate(dateString: string): boolean {
   const date = new Date(dateString);
   return !isNaN(date.getTime());
+}
+
+export function removeEmptyStrings(obj: any) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v != null && v != "")
+  );
 }

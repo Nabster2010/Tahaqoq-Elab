@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
-
 import { db } from "@/lib/db";
-import { PrismaClientUnknownRequestError } from "@prisma/client/runtime";
 
 export async function POST(req: Request) {
   try {

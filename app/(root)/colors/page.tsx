@@ -21,6 +21,7 @@ import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedColors } from "@/lib/db/color";
 import { cn } from "@/lib/utils";
+import { PageSearchParams } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -31,21 +32,12 @@ export const metadata = {
 const ColorsPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: PageSearchParams;
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
   const { colors, currentPage, totalPages } = await getPaginatedColors(
-    search,
-    page,
-    pageSize
+    searchParams
   );
 
   return (
@@ -80,12 +72,10 @@ const ColorsPage = async ({
             {colors && colors?.length > 0 ? (
               colors.map((color) => (
                 <ColorListItem
-                  search={search}
-                  isAdminUser={isAdminUser}
-                  page={page}
-                  pageSize={pageSize}
-                  color={color}
                   key={color.id}
+                  color={color}
+                  searchParams={searchParams}
+                  isAdminUser={isAdminUser}
                 />
               ))
             ) : (
@@ -103,11 +93,8 @@ const ColorsPage = async ({
           <Pagination
             pathName="colors"
             totalPages={totalPages}
-            searchParamsAll={{
-              search,
-              page: currentPage,
-              pageSize: pageSize.toString(),
-            }}
+            currentPage={currentPage}
+            searchParams={searchParams}
           />
         ) : (
           ""

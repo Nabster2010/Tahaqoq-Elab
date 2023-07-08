@@ -1,6 +1,7 @@
 "use client";
 import { deleteColorAction } from "@/app/_actions/_colorActions";
 import { cn } from "@/lib/utils";
+import { PageSearchParams } from "@/types";
 import { Color } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -14,15 +15,11 @@ import { toast } from "./ui/use-toast";
 
 const ColorListItem = ({
   color,
-  search,
-  page,
-  pageSize,
+  searchParams,
   isAdminUser,
 }: {
   color: Color;
-  search: string;
-  page: number;
-  pageSize: number;
+  searchParams: PageSearchParams;
   isAdminUser: boolean;
 }) => {
   const [isPending, startTransition] = useTransition();
@@ -61,7 +58,9 @@ const ColorListItem = ({
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/colors/${color.id}?search=${search}&page=${page}&pageSize=${pageSize}`}
+          href={`/colors/${color.id}?${new URLSearchParams(
+            searchParams
+          ).toString()}`}
         >
           Update
         </Link>

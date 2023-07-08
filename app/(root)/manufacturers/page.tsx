@@ -36,15 +36,9 @@ const ManufacturersPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
+
   const { manufacturers, currentPage, totalPages } =
-    await getPaginatedManufacturers(search, page, pageSize);
+    await getPaginatedManufacturers(searchParams);
 
   return (
     <Card className="mt-4">
@@ -82,10 +76,8 @@ const ManufacturersPage = async ({
                 <ManufacturerListItem
                   key={manufacturer.id}
                   manufacturer={manufacturer}
+                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
-                  page={page}
-                  pageSize={pageSize}
-                  search={search}
                 />
               ))
             ) : (
@@ -103,11 +95,8 @@ const ManufacturersPage = async ({
           <Pagination
             pathName="manufacturers"
             totalPages={totalPages}
-            searchParamsAll={{
-              search,
-              page: currentPage,
-              pageSize: pageSize.toString(),
-            }}
+            currentPage={currentPage}
+            searchParams={searchParams}
           />
         ) : (
           ""

@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { ColorSchemaType } from "@/types";
+import { ColorSchemaType, PageSearchParams } from "@/types";
 import { db } from ".";
 
 export async function getColors() {
@@ -15,19 +15,25 @@ export async function getColors() {
     return { error };
   }
 }
-export async function getPaginatedColors(
-  search: string | undefined,
-  page = 1,
-  pageSize = siteConfig.pageSize
-) {
-  const skip: number =
-    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
-    (pageSize ? +pageSize : siteConfig.pageSize);
+export async function getPaginatedColors(params: PageSearchParams) {
+  //start sanitize params
+  let search = params.search
+    ? decodeURIComponent(params.search).toLowerCase()
+    : undefined;
+  let page =
+    params.page && !isNaN(parseInt(params.page.toString()))
+      ? parseInt(params.page.toString())
+      : 1;
+  let pageSize =
+    params.pageSize && !isNaN(parseInt(params.pageSize.toString()))
+      ? parseInt(params.pageSize.toString())
+      : siteConfig.pageSize;
+  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
     const colors = await db.color.findMany({
       where: {
         color: {
-          contains: search || undefined,
+          contains: search,
         },
       },
       orderBy: {
@@ -39,7 +45,7 @@ export async function getPaginatedColors(
     const colorsCount = await db.color.count({
       where: {
         color: {
-          contains: search || undefined,
+          contains: search,
         },
       },
     });

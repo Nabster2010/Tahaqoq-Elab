@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { CustomerSchemaType } from "@/types";
+import { CustomerSchemaType, PageSearchParams } from "@/types";
 import { db } from ".";
 
 export async function getCustomers() {
@@ -17,20 +17,26 @@ export async function getCustomers() {
     return { error };
   }
 }
-export async function getPaginatedCustomers(
-  search = "",
-  page = 1,
-  pageSize = siteConfig.pageSize
-) {
-  const skip: number =
-    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
-    (pageSize ? +pageSize : siteConfig.pageSize);
+export async function getPaginatedCustomers(params: PageSearchParams) {
+  //start sanitize params
+  let search = params.search
+    ? decodeURIComponent(params.search).toLowerCase()
+    : undefined;
+  let page =
+    params.page && !isNaN(parseInt(params.page.toString()))
+      ? parseInt(params.page.toString())
+      : 1;
+  let pageSize =
+    params.pageSize && !isNaN(parseInt(params.pageSize.toString()))
+      ? parseInt(params.pageSize.toString())
+      : siteConfig.pageSize;
+  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
 
   try {
     const customers = await db.customer.findMany({
       where: {
         name: {
-          contains: search.toLowerCase() || undefined,
+          contains: search,
         },
       },
 
@@ -48,7 +54,7 @@ export async function getPaginatedCustomers(
     const count = await db.customer.count({
       where: {
         name: {
-          contains: search.toLowerCase() || undefined,
+          contains: search,
         },
       },
     });

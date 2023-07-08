@@ -36,14 +36,9 @@ const VehicleTypesPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search ? searchParams.search : "";
 
   const { vehicleTypes, currentPage, totalPages } =
-    await getPaginatedVehicleTypes(search, page, pageSize);
+    await getPaginatedVehicleTypes(searchParams);
   return (
     <Card className="mt-4">
       <CardHeader className="space-y-4">
@@ -81,9 +76,7 @@ const VehicleTypesPage = async ({
                 <VehicleTypeListItem
                   key={vehicleType.id}
                   vehicleType={vehicleType}
-                  page={page}
-                  pageSize={pageSize}
-                  search={search}
+                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))
@@ -102,11 +95,8 @@ const VehicleTypesPage = async ({
           <Pagination
             pathName="vehicleTypes"
             totalPages={totalPages}
-            searchParamsAll={{
-              search,
-              page: currentPage,
-              pageSize: pageSize.toString(),
-            }}
+            currentPage={currentPage}
+            searchParams={searchParams}
           />
         ) : (
           ""

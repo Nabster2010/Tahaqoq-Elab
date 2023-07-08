@@ -16,14 +16,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { siteConfig } from "@/config/site";
+
 import { authOptions } from "@/lib/auth";
 import { getPaginatedBrokers } from "@/lib/db/broker";
 import { cn } from "@/lib/utils";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import FilterForm from "@/components/filter-form";
 import SearchForm from "@/components/search-form";
+import { PageSearchParams } from "@/types";
 
 export const metadata = {
   title: "Brokers",
@@ -32,27 +32,18 @@ export const metadata = {
 const BrokersPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: PageSearchParams;
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
   const { brokers, currentPage, totalPages } = await getPaginatedBrokers(
-    search,
-    page,
-    pageSize
+    searchParams
   );
 
   return (
     <Card className="mt-4">
-      <CardHeader className="">
-        <Title className="mb-4">Brokers</Title>
+      <CardHeader className="space-y-4">
+        <Title>Brokers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm />
           <Link
@@ -83,9 +74,7 @@ const BrokersPage = async ({
                 <BrokerListItem
                   broker={broker}
                   key={broker.id}
-                  page={page}
-                  pageSize={pageSize}
-                  search={search}
+                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))
@@ -104,11 +93,8 @@ const BrokersPage = async ({
           <Pagination
             pathName="brokers"
             totalPages={totalPages}
-            searchParamsAll={{
-              search,
-              page: currentPage,
-              pageSize: pageSize.toString(),
-            }}
+            currentPage={currentPage}
+            searchParams={searchParams}
           />
         ) : (
           ""

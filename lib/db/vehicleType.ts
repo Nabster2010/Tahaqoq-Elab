@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { VehicleTypeSchemaType } from "@/types";
+import { PageSearchParams, VehicleTypeSchemaType } from "@/types";
 import { db } from ".";
 
 export async function getVehicleTypes() {
@@ -24,19 +24,24 @@ export async function getVehicleTypes() {
     return { error };
   }
 }
-export async function getPaginatedVehicleTypes(
-  search = "",
-  page = 1,
-  pageSize = siteConfig.pageSize
-) {
-  const skip: number =
-    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
-    (pageSize ? +pageSize : siteConfig.pageSize);
+export async function getPaginatedVehicleTypes(params: PageSearchParams) {
+  let search = params.search
+    ? decodeURIComponent(params.search).toLowerCase()
+    : undefined;
+  let page =
+    params.page && !isNaN(parseInt(params.page.toString()))
+      ? parseInt(params.page.toString())
+      : 1;
+  let pageSize =
+    params.pageSize && !isNaN(parseInt(params.pageSize.toString()))
+      ? parseInt(params.pageSize.toString())
+      : siteConfig.pageSize;
+  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
     const vehicleTypes = await db.vehicleType.findMany({
       where: {
         modelType: {
-          contains: search.toLowerCase(),
+          contains: search,
         },
       },
       include: {
@@ -58,7 +63,7 @@ export async function getPaginatedVehicleTypes(
     const count = await db.vehicleType.count({
       where: {
         modelType: {
-          contains: search.toLowerCase(),
+          contains: search,
         },
       },
     });

@@ -109,15 +109,21 @@ export type SiteConfig = {
   };
 };
 
-export interface PaginationProps {
-  page: number;
-  pageSize: string;
-}
+export type PaginationProps = {
+  page?: string;
+  pageSize?: string;
+};
 
-export interface FilterProps {
-  search: string;
-  sortby: string;
-  order: string;
-  from: string;
-  to: string;
-}
+export type VehiclesFilterProps = {
+  search?: string;
+  sortby?: string;
+  order?: string;
+  from?: string;
+  to?: string;
+};
+
+export type PageSearchParams = {
+  search?: string;
+  page?: string;
+  pageSize?: string;
+};

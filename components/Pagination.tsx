@@ -1,66 +1,53 @@
 import { cn } from "@/lib/utils";
+import { VehiclesFilterProps, PaginationProps } from "@/types";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
-type PaginationProps = {
+type PaginationPropsType = {
   totalPages: number;
+  currentPage: number;
   pathName?: string;
-  searchParamsAll: {
-    page: number;
-    search: string;
-    pageSize: string;
-    sortby?: string;
-    order?: string;
-    from?: string;
-    to?: string;
-  };
+  searchParams: PaginationProps & VehiclesFilterProps;
 };
 const Pagination = ({
   totalPages,
+  currentPage,
   pathName,
-  searchParamsAll,
-}: PaginationProps) => {
+  searchParams,
+}: PaginationPropsType) => {
   return (
     <>
       <div className="flex flex-col items-center justify-center mx-auto">
         {/* <!-- Help text --> */}
         <span className="text-sm ">
-          Page{" "}
-          <span className="font-semibold ">{searchParamsAll?.page || 1}</span>{" "}
-          of <span className="font-semibold ">{totalPages}</span>
+          Page <span className="font-semibold ">{currentPage || 1}</span> of{" "}
+          <span className="font-semibold ">{totalPages}</span>
         </span>
         {/* <!-- Buttons --> */}
         <div className="inline-flex mt-2 xs:mt-0">
           <Button
-            disabled={searchParamsAll.page === 1}
+            disabled={currentPage === 1}
             className={cn("text-sm font-medium border-r rounded-r-none")}
           >
             <Link
-              href={`/${pathName}/?search=${searchParamsAll?.search}&page=${
-                searchParamsAll.page - 1
-              }&pageSize=${searchParamsAll?.pageSize}&sortby=${
-                searchParamsAll?.sortby
-              }&order=${searchParamsAll?.order}&from=${
-                searchParamsAll?.from
-              }&to=${searchParamsAll?.to}`}
+              href={`/${pathName}/?${new URLSearchParams({
+                ...searchParams,
+                page: String(currentPage - 1),
+              }).toString()}`}
             >
               Prev
             </Link>
           </Button>
           <Button
-            disabled={searchParamsAll.page === totalPages}
+            disabled={currentPage === totalPages}
             className={cn("text-sm font-medium  rounded-l-none")}
           >
             <Link
-              href={`/${pathName}/?search=${searchParamsAll.search}&page=${
-                searchParamsAll.page + 1
-              }&pageSize=${searchParamsAll.pageSize}&sortby=${
-                searchParamsAll.sortby
-              }&order=${searchParamsAll.order}&from=${
-                searchParamsAll?.from
-              }&to=${searchParamsAll?.to}`}
+              href={`/${pathName}/?${new URLSearchParams({
+                ...searchParams,
+                page: String(currentPage + 1),
+              }).toString()}`}
             >
-              {" "}
               Next
             </Link>
           </Button>

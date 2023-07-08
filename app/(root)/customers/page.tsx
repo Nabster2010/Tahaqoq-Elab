@@ -21,6 +21,7 @@ import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedCustomers } from "@/lib/db/customer";
 import { cn } from "@/lib/utils";
+import { PageSearchParams } from "@/types";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
@@ -31,27 +32,18 @@ export const metadata = {
 const CustomersPage = async ({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: PageSearchParams;
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
   const { customers, currentPage, totalPages } = await getPaginatedCustomers(
-    search,
-    page,
-    pageSize
+    searchParams
   );
 
   return (
     <Card className="mt-4">
-      <CardHeader className="">
-        <Title className="mb-4">Customers</Title>
+      <CardHeader className="space-y-4">
+        <Title>Customers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm />
           <Link
@@ -81,9 +73,7 @@ const CustomersPage = async ({
                 <CustomerListItem
                   customer={customer}
                   key={customer.id}
-                  page={page}
-                  pageSize={pageSize}
-                  search={search}
+                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))
@@ -102,11 +92,8 @@ const CustomersPage = async ({
           <Pagination
             pathName="customers"
             totalPages={totalPages}
-            searchParamsAll={{
-              search,
-              page: currentPage,
-              pageSize: pageSize.toString(),
-            }}
+            currentPage={currentPage}
+            searchParams={searchParams}
           />
         ) : (
           ""

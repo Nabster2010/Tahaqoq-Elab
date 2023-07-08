@@ -1,5 +1,5 @@
 import { siteConfig } from "@/config/site";
-import { BrokerSchemaType } from "@/types";
+import { BrokerSchemaType, PageSearchParams } from "@/types";
 import { db } from ".";
 
 export async function getBrokers() {
@@ -17,20 +17,26 @@ export async function getBrokers() {
     return { error };
   }
 }
-export async function getPaginatedBrokers(
-  search = "",
-  page = 1,
-  pageSize = siteConfig.pageSize
-) {
-  const skip: number =
-    (isNaN(parseInt(page.toString())) ? 0 : +page - 1) *
-    (pageSize ? +pageSize : siteConfig.pageSize);
+export async function getPaginatedBrokers(params: PageSearchParams) {
+  //start sanitize params
+  let search = params.search
+    ? decodeURIComponent(params.search).toLowerCase()
+    : undefined;
+  let page =
+    params.page && !isNaN(parseInt(params.page.toString()))
+      ? parseInt(params.page.toString())
+      : 1;
+  let pageSize =
+    params.pageSize && !isNaN(parseInt(params.pageSize.toString()))
+      ? parseInt(params.pageSize.toString())
+      : siteConfig.pageSize;
+  const skip: number = page > 1 ? (page - 1) * pageSize : 0;
 
   try {
     const brokers = await db.broker.findMany({
       where: {
         name: {
-          contains: search.toLowerCase() || undefined,
+          contains: search,
         },
       },
 
@@ -48,7 +54,7 @@ export async function getPaginatedBrokers(
     const count = await db.broker.count({
       where: {
         name: {
-          contains: search.toLowerCase() || undefined,
+          contains: search,
         },
       },
     });
