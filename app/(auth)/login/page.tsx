@@ -23,14 +23,14 @@ export default function LoginPage() {
           </p>
         </div>
         <UserAuthForm />
-        <p className="px-8 text-sm text-center text-muted-foreground">
+        {/* <p className="px-8 text-sm text-center text-muted-foreground">
           <Link
             href="/register"
             className="underline hover:text-brand underline-offset-4"
           >
             Don&apos;t have an account? Sign Up
           </Link>
-        </p>
+        </p> */}
       </div>
     </section>
   );

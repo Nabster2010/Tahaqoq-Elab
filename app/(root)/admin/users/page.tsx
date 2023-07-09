@@ -1,3 +1,4 @@
+import { Icons } from "@/components/icons";
 import Title from "@/components/Title";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -16,9 +17,18 @@ import Link from "next/link";
 const UsersPage = async () => {
   const { users } = await getUsers();
   return (
-    <Card className="mt-4">
-      <CardHeader>
+    <Card className="mt-4 ">
+      <CardHeader className="space-y-4">
         <Title>Users</Title>
+        <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
+          <Link
+            href="/admin/users/create"
+            className={cn(buttonVariants({}), "ml-auto w-full md:w-auto")}
+          >
+            New User
+            <Icons.new className="w-5 h-5 ml-2" />
+          </Link>
+        </div>
       </CardHeader>
       <CardContent>
         <Table>

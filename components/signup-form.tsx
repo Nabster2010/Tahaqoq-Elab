@@ -13,12 +13,19 @@ import { toast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/icons";
 import { newUserSchema } from "@/lib/validations/auth";
 import ToastDesc from "./ToastDesc";
+import { useRouter } from "next/navigation";
+import ro from "date-fns/esm/locale/ro/index.js";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
+  fromAdminPage?: boolean;
+}
 type FormData = z.infer<typeof newUserSchema>;
 
-export function SignUpForm({ className, ...props }: UserAuthFormProps) {
+export function SignUpForm({
+  className,
+  fromAdminPage = false,
+  ...props
+}: UserAuthFormProps) {
   const {
     register,
     handleSubmit,
@@ -26,6 +33,7 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(newUserSchema),
   });
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   async function onSubmit(data: FormData) {
@@ -53,7 +61,11 @@ export function SignUpForm({ className, ...props }: UserAuthFormProps) {
           variant: "destructive",
         });
       }
-      signIn(undefined, { callbackUrl: "/" });
+      if (!fromAdminPage) {
+        signIn(undefined, { callbackUrl: "/" });
+      } else {
+        router.push("/admin/users");
+      }
       return toast({
         title: "Success!",
         description: <ToastDesc>You have successfully signed up.</ToastDesc>,
