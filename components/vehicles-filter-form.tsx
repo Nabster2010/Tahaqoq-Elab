@@ -138,7 +138,7 @@ const VehiclesFilterForm = () => {
               }
               defaultValue={String(filter.sortby)}
             >
-              <SelectTrigger className="min-w-[120px]">
+              <SelectTrigger className="min-w-[150px]">
                 <SelectValue placeholder="order by" />
               </SelectTrigger>
               <SelectContent>
@@ -161,7 +161,7 @@ const VehiclesFilterForm = () => {
               }
               defaultValue={String(filter.order)}
             >
-              <SelectTrigger className="">
+              <SelectTrigger className="min-w-[80px]">
                 <SelectValue placeholder="DESC" />
               </SelectTrigger>
               <SelectContent>
