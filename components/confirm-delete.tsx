@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Icons } from "./icons";
 import {
@@ -36,7 +37,7 @@ const ConfirmDelete = ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
-          title="Delete Vehicle!"
+          title="Delete!"
           variant={variant}
           className={cn("w-full sm:w-auto", className)}
           type="button"

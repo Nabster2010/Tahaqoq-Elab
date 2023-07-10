@@ -1,7 +1,6 @@
 "use client";
 import { deleteBrokerAction } from "@/app/_actions/_brokerActions";
 import { cn } from "@/lib/utils";
-import { PageSearchParams } from "@/types";
 import { Broker } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

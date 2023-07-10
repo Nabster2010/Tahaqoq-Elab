@@ -127,8 +127,8 @@ model Vehicle {
   paymentType      String            
   price            Float
   tax              Float
-  customer         Customer?        @relation(fields: [customerId], references: [id],onDelete: SetNull)
-  customerId       String? 
+  customer         Customer        @relation(fields: [customerId], references: [id],onDelete: Restrict)
+  customerId       String 
   broker           Broker? @relation(fields: [brokerId], references: [id],onDelete: SetNull)
   brokerId         String?
   vehicleInfo      VehicleInfo?

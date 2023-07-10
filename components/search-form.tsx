@@ -12,9 +12,9 @@ const SearchForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(
-      `${path}?search=${encodeURIComponent(search.trim() as string)}`
-    );
+    const encodedSearch = encodeURIComponent(search.trim() as string);
+
+    router.push(`${path}?${new URLSearchParams({ search: encodedSearch })}`);
   };
   const clearFilter = () => {
     setSearch("");
