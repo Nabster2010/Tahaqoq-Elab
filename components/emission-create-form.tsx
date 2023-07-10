@@ -44,9 +44,12 @@ const EmissionCreateForm = ({
   const form = useForm<z.infer<typeof EmissionSchema>>({
     resolver: zodResolver(EmissionSchema),
     defaultValues: {
-      co: randomFloat(0.01, 3.2),
-      diesel: randomNumber(10, 30),
-      hc: randomNumber(2, 25),
+      co: 0.0,
+      diesel: 0,
+      hc: 0,
+      // co: randomFloat(0.01, 3.2),
+      // diesel: randomNumber(10, 30),
+      // hc: randomNumber(2, 25),
       vehicleId: vehicleId,
       result: "PASS",
     },

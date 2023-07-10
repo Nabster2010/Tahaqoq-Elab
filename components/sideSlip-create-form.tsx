@@ -37,7 +37,8 @@ const SideSlipCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof SideSlipSchema>>({
     resolver: zodResolver(SideSlipSchema),
     defaultValues: {
-      reading: randomFloat(0.1, 4.9),
+      reading: 0.0,
+      // reading: randomFloat(0.1, 4.9),
       vehicleId: vehicleId,
       result: "PASS",
     },
