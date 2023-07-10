@@ -1,6 +1,8 @@
 import { siteConfig } from "@/config/site";
 import { PageSearchParams, VehicleTypeSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getVehicleTypes() {
   try {
@@ -25,9 +27,7 @@ export async function getVehicleTypes() {
   }
 }
 export async function getPaginatedVehicleTypes(params: PageSearchParams) {
-  let search = params.search
-    ? decodeURIComponent(params.search).toLowerCase()
-    : undefined;
+  let search = params.search ? params.search.toLowerCase() : undefined;
   let page =
     params.page && !isNaN(parseInt(params.page.toString()))
       ? parseInt(params.page.toString())
@@ -53,9 +53,7 @@ export async function getPaginatedVehicleTypes(params: PageSearchParams) {
       },
 
       orderBy: {
-        manufacturer: {
-          name: "asc",
-        },
+        createdAt: "desc",
       },
       skip,
       take: pageSize,
@@ -93,10 +91,14 @@ export async function getVehicleTypeById(id: string) {
 }
 
 export async function createVehicleType(vehicleType: VehicleTypeSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
+
   try {
     const newVehicleType = await db.vehicleType.create({
       data: {
         ...vehicleType,
+        userId,
       },
     });
     return { newVehicleType };

@@ -1,5 +1,7 @@
 import { BrakeSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getBrakeTests() {
   try {
@@ -26,10 +28,13 @@ export async function getBrakeTestById(vehicleId: number) {
 }
 
 export async function createBrakeTest(brakeTest: BrakeSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newBrakeTest = await db.brake.create({
       data: {
         ...brakeTest,
+        userId,
       },
     });
     return { newBrakeTest };

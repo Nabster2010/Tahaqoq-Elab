@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedCustomers } from "@/lib/db/customer";
 import { cn } from "@/lib/utils";
@@ -36,9 +35,12 @@ const CustomersPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const { customers, currentPage, totalPages } = await getPaginatedCustomers(
-    searchParams
-  );
+  const { customers, currentPage, totalPages } = await getPaginatedCustomers({
+    ...searchParams,
+    search: searchParams.search
+      ? decodeURIComponent(searchParams.search as string)
+      : undefined,
+  });
 
   return (
     <Card className="mt-4">
@@ -73,7 +75,6 @@ const CustomersPage = async ({
                 <CustomerListItem
                   customer={customer}
                   key={customer.id}
-                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))

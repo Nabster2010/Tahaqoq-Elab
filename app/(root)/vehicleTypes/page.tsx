@@ -17,7 +17,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import VehicleTypeListItem from "@/components/vehicleType-list-item";
-import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedVehicleTypes } from "@/lib/db/vehicleType";
 import { cn } from "@/lib/utils";
@@ -38,7 +37,12 @@ const VehicleTypesPage = async ({
   const isAdminUser = session?.user?.role === "admin";
 
   const { vehicleTypes, currentPage, totalPages } =
-    await getPaginatedVehicleTypes(searchParams);
+    await getPaginatedVehicleTypes({
+      ...searchParams,
+      search: searchParams.search
+        ? decodeURIComponent(searchParams.search as string)
+        : undefined,
+    });
   return (
     <Card className="mt-4">
       <CardHeader className="space-y-4">
@@ -76,7 +80,6 @@ const VehicleTypesPage = async ({
                 <VehicleTypeListItem
                   key={vehicleType.id}
                   vehicleType={vehicleType}
-                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))

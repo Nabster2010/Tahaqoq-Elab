@@ -1,7 +1,6 @@
 "use client";
 import { deleteCustomerAction } from "@/app/_actions/_customerActions";
 import { cn } from "@/lib/utils";
-import { PageSearchParams } from "@/types";
 import { Customer } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,14 +13,9 @@ import { toast } from "./ui/use-toast";
 
 type CustomerListProps = {
   customer: Customer;
-  searchParams: PageSearchParams;
   isAdminUser: boolean;
 };
-const CustomerListItem = ({
-  customer,
-  searchParams,
-  isAdminUser,
-}: CustomerListProps) => {
+const CustomerListItem = ({ customer, isAdminUser }: CustomerListProps) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDelete = async () => {
@@ -57,9 +51,7 @@ const CustomerListItem = ({
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/customers/${customer.id}?${new URLSearchParams(
-            searchParams
-          ).toString()}`}
+          href={`/customers/${customer.id}`}
         >
           Update
         </Link>

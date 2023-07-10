@@ -36,6 +36,7 @@ const ConfirmDelete = ({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
+          title="Delete Vehicle!"
           variant={variant}
           className={cn("w-full sm:w-auto", className)}
           type="button"

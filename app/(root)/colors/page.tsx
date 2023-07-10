@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedColors } from "@/lib/db/color";
 import { cn } from "@/lib/utils";
@@ -36,9 +35,12 @@ const ColorsPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const { colors, currentPage, totalPages } = await getPaginatedColors(
-    searchParams
-  );
+  const { colors, currentPage, totalPages } = await getPaginatedColors({
+    ...searchParams,
+    search: searchParams.search
+      ? decodeURIComponent(searchParams.search as string)
+      : undefined,
+  });
 
   return (
     <Card className="mt-4">
@@ -74,7 +76,6 @@ const ColorsPage = async ({
                 <ColorListItem
                   key={color.id}
                   color={color}
-                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))

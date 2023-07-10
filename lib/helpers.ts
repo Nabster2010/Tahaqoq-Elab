@@ -1,6 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { testLimits } from "@/config/testConfig";
-import { ExtendedVehicle, PaginationProps } from "@/types";
+import { ExtendedVehicle } from "@/types";
 import {
   Brake,
   Emission,

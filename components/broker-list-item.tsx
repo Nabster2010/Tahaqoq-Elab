@@ -14,16 +14,12 @@ import { toast } from "./ui/use-toast";
 
 type BrokerListProps = {
   broker: Broker;
-  searchParams: PageSearchParams;
   isAdminUser: boolean;
 };
-const BrokerListItem = ({
-  broker,
-  searchParams,
-  isAdminUser,
-}: BrokerListProps) => {
+const BrokerListItem = ({ broker, isAdminUser }: BrokerListProps) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+
   const handleDelete = async () => {
     startTransition(() => {
       deleteBrokerAction(broker.id).then((res) => {
@@ -55,12 +51,7 @@ const BrokerListItem = ({
         {broker.percentage}
       </TableCell>
       <TableCell className="text-right">
-        <Link
-          className={cn(buttonVariants({}))}
-          href={`/brokers/${broker.id}?${new URLSearchParams(
-            searchParams
-          ).toString()}`}
-        >
+        <Link className={cn(buttonVariants({}))} href={`/brokers/${broker.id}`}>
           Update
         </Link>
       </TableCell>

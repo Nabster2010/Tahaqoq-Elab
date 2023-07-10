@@ -2,7 +2,6 @@ import BackButton from "@/components/back-button";
 import EmissionCreateForm from "@/components/emission-create-form";
 import EmissionUpdateForm from "@/components/emission-update-form";
 import { buttonVariants } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -12,21 +11,7 @@ export const metadata = {
   description: "Add Emission results for Vehicle",
 };
 
-const EmissionResultPage = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | undefined };
-}) => {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
-
+const EmissionResultPage = async ({ params }: { params: { id: string } }) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
 
@@ -42,10 +27,7 @@ const EmissionResultPage = async ({
   if (!vehicle.vehicleInfo) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 my-8 text-xl font-bold text-center">
-        <BackButton
-          to={`/results/${vehicleId}?search=${search}&page=${page}&pageSize=${pageSize}`}
-          className="self-start"
-        />
+        <BackButton className="self-start" />
         <p>Please Add Vehicle Information First</p>
         <Link
           className={cn(buttonVariants({}))}

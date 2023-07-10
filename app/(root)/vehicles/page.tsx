@@ -18,7 +18,12 @@ const VehiclesPage = async ({
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
   const { vehicles, totalPages, currentPage, error } =
-    await getPaginatedVehicles(searchParams);
+    await getPaginatedVehicles({
+      ...searchParams,
+      search: searchParams.search
+        ? decodeURIComponent(searchParams.search as string)
+        : undefined,
+    });
   if (error) return <div>Error loading vehicles</div>;
 
   return (

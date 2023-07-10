@@ -82,6 +82,7 @@ export async function getPaginatedVehicles(
       },
     ],
   ]);
+
   const orderBy = sortItems.get(sortby);
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
@@ -90,8 +91,10 @@ export async function getPaginatedVehicles(
         ...searchItems.get(searchBy),
         AND: {
           createdAt: {
-            gte: dateFrom,
-            lte: dateTo,
+            gte: dateFrom ? new Date(dateFrom.setHours(0, 0, 0, 0)) : undefined,
+            lte: dateTo
+              ? new Date(dateTo.setHours(23, 59, 59, 999))
+              : undefined,
           },
         },
       },

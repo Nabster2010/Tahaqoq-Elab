@@ -1,6 +1,8 @@
 import { siteConfig } from "@/config/site";
 import { CustomerSchemaType, PageSearchParams } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getCustomers() {
   try {
@@ -19,9 +21,8 @@ export async function getCustomers() {
 }
 export async function getPaginatedCustomers(params: PageSearchParams) {
   //start sanitize params
-  let search = params.search
-    ? decodeURIComponent(params.search).toLowerCase()
-    : undefined;
+
+  let search = params.search ? params.search.toLowerCase() : undefined;
   let page =
     params.page && !isNaN(parseInt(params.page.toString()))
       ? parseInt(params.page.toString())
@@ -41,7 +42,7 @@ export async function getPaginatedCustomers(params: PageSearchParams) {
       },
 
       orderBy: {
-        name: "asc",
+        createdAt: "desc",
       },
       skip,
       include: {
@@ -84,10 +85,13 @@ export async function getCustomerById(id: string) {
 }
 
 export async function createCustomer(customer: CustomerSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newCustomer = await db.customer.create({
       data: {
         ...customer,
+        userId,
       },
     });
     return { newCustomer };

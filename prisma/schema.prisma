@@ -13,16 +13,29 @@ datasource db {
 
 
 model User {
-  id        String    @id @default(cuid())
-  name      String?
-  email     String    @unique
-  password  String
-  role      String    @default("user")
-  active    Boolean   @default(false)
-  vehicles  Vehicle[]
-  branch    String?   @default("DMM") //or "JED"
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  id                            String    @id @default(cuid())
+  name                          String?
+  email                         String    @unique
+  password                      String
+  role                          String    @default("user" )
+  active                        Boolean   @default(false)
+  image                         String?   
+  branch                        String?   @default("DMM") //or "JED"
+  vehicles                      Vehicle[]
+  customers                     Customer[]
+  brokers                       Broker[]
+  manufacturers                 VehicleManufacturer[]
+  vehicleTypes                  VehicleType[]
+  colors                        Color[]
+  vehiclesInfo                  VehicleInfo[]
+  emissionTests                 Emission[]
+  highBeamTests                 HighBeamLevel[]
+  sideSlipTests                 SideSlip[]
+  suspensionTests               Suspension[]
+  brakeTests                    Brake[]
+  visualTests                   VisualInspection[]
+  createdAt                     DateTime? @default(now())
+  updatedAt                     DateTime? @updatedAt
 
 }
 
@@ -35,10 +48,13 @@ model Customer {
   website                          String?
   taxId                            String?
   customerType                     String    @default("INDIVIDUAL") 
+  user                             User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId                           String?
   vehicles                         Vehicle[]
   createdAt                        DateTime @default(now())
   updatedAt                        DateTime @updatedAt
-
+  
+  @@index([userId])
 }
 model Broker{
   id           String    @id() @default(cuid())
@@ -46,9 +62,12 @@ model Broker{
   email        String?
   phone        String?
   percentage   Float?
+  user         User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId       String?
   vehicles     Vehicle[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  @@index([userId])
 
 }
 
@@ -57,9 +76,13 @@ model VehicleManufacturer {
   name         String
   description  String
   country      String
+  user         User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId       String?
   vehicleTypes VehicleType[]
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
+
+  @@index([userId])
 
 }
 
@@ -70,10 +93,13 @@ model VehicleType {
   manufacturer   VehicleManufacturer @relation(fields: [manufacturerId], references: [id],onDelete: Cascade)   
   manufacturerId String
   vehiclesInfo   VehicleInfo[]
+  userId         String?
+  user           User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
   createdAt      DateTime           @default(now())
   updatedAt      DateTime           @updatedAt
 
   @@index([manufacturerId])
+  @@index([userId])
 }
 
 model Color {
@@ -81,8 +107,12 @@ model Color {
   color        String
   description  String 
   vehiclesInfo VehicleInfo[]
+  user         User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId       String?
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
+
+  @@index([userId])
 }
 
 
@@ -97,10 +127,10 @@ model Vehicle {
   paymentType      String            
   price            Float
   tax              Float
-  customer         Customer         @relation(fields: [customerId], references: [id],onDelete: Restrict)
-  customerId       String 
-  brokerId         String?
+  customer         Customer?        @relation(fields: [customerId], references: [id],onDelete: SetNull)
+  customerId       String? 
   broker           Broker? @relation(fields: [brokerId], references: [id],onDelete: SetNull)
+  brokerId         String?
   vehicleInfo      VehicleInfo?
   visualInspection VisualInspection?
   emissionTest     Emission?
@@ -108,8 +138,8 @@ model Vehicle {
   sideSlip         SideSlip?
   suspensionTest   Suspension?
   brakeTest        Brake?
-  userId           String?
   user             User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId           String?
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 
@@ -122,11 +152,7 @@ model Vehicle {
 model VehicleInfo {
   vehicleId     Int         @id
   vehicle       Vehicle     @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
-  color         Color?       @relation(fields: [colorId], references: [id],onDelete: SetNull)
-  colorId       String?
   year          String
-  vehicleType   VehicleType? @relation(fields: [vehicleTypeId], references: [id],onDelete: SetNull)
-  vehicleTypeId String?
   category      String      
   condition     String      
   fuelType      String      
@@ -136,12 +162,19 @@ model VehicleInfo {
   mileage       String
   seats         String
   remarks       String?
+  vehicleType   VehicleType? @relation(fields: [vehicleTypeId], references: [id],onDelete: SetNull)
+  vehicleTypeId String?
+  color         Color?       @relation(fields: [colorId], references: [id],onDelete: SetNull)
+  colorId       String?
+  user          User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId        String?
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 
   @@index([vehicleId])
   @@index([colorId])
   @@index([vehicleTypeId])
+  @@index([userId])
 }
 
 model Emission {
@@ -151,10 +184,13 @@ model Emission {
   hc        Float? 
   diesel    Float? 
   result    String   @default("PASS")
+  user      User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 model HighBeamLevel {
@@ -163,10 +199,13 @@ model HighBeamLevel {
   left      Float
   right     Float
   result    String   @default("PASS")
+  user      User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 model SideSlip {
@@ -174,10 +213,13 @@ model SideSlip {
   vehicle   Vehicle   @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
   reading   Float
   result    String   @default("PASS")
+  user      User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 model Suspension {
@@ -188,10 +230,13 @@ model Suspension {
   rl        Float //rear left
   rr        Float //rear right
   result    String   @default("PASS")
+  user      User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 model Brake {
@@ -201,10 +246,13 @@ model Brake {
   front     Float //front brake
   rear      Float //rear brake
   result    String   @default("PASS")
+  user      User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 model VisualInspection {
@@ -283,10 +331,13 @@ model VisualInspection {
   notTaxi              String    @default("PASS")
   notSalvage           String    @default("PASS")
   notPolice            String    @default("PASS")
+  user                 User?  @relation(fields: [userId], references: [id],onDelete: SetNull)
+  userId               String?
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 
   @@index([vehicleId])
+  @@index([userId])
 }
 
 

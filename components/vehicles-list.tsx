@@ -36,6 +36,7 @@ const VehiclesList = ({
         <Title>Vehicles</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <Link
+            title="Add New Vehicle"
             href="/vehicles/create"
             className={cn(buttonVariants({}), " md:ml-auto ")}
           >

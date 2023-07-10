@@ -17,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { siteConfig } from "@/config/site";
 import { authOptions } from "@/lib/auth";
 import { getPaginatedManufacturers } from "@/lib/db/manufacturer";
 import { cn } from "@/lib/utils";
@@ -38,7 +37,12 @@ const ManufacturersPage = async ({
   const isAdminUser = session?.user?.role === "admin";
 
   const { manufacturers, currentPage, totalPages } =
-    await getPaginatedManufacturers(searchParams);
+    await getPaginatedManufacturers({
+      ...searchParams,
+      search: searchParams.search
+        ? decodeURIComponent(searchParams.search as string)
+        : undefined,
+    });
 
   return (
     <Card className="mt-4">
@@ -76,7 +80,6 @@ const ManufacturersPage = async ({
                 <ManufacturerListItem
                   key={manufacturer.id}
                   manufacturer={manufacturer}
-                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))

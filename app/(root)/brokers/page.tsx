@@ -36,9 +36,12 @@ const BrokersPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const { brokers, currentPage, totalPages } = await getPaginatedBrokers(
-    searchParams
-  );
+  const { brokers, currentPage, totalPages } = await getPaginatedBrokers({
+    ...searchParams,
+    search: searchParams.search
+      ? decodeURIComponent(searchParams.search as string)
+      : undefined,
+  });
 
   return (
     <Card className="mt-4">
@@ -47,7 +50,7 @@ const BrokersPage = async ({
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm />
           <Link
-            href="/brokers/create"
+            href={`/brokers/create`}
             className={cn(buttonVariants({}), "ml-auto w-full md:w-auto ")}
           >
             Create New
@@ -74,7 +77,6 @@ const BrokersPage = async ({
                 <BrokerListItem
                   broker={broker}
                   key={broker.id}
-                  searchParams={searchParams}
                   isAdminUser={isAdminUser}
                 />
               ))

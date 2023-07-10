@@ -1,6 +1,8 @@
 import { siteConfig } from "@/config/site";
 import { ColorSchemaType, PageSearchParams } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getColors() {
   try {
@@ -17,9 +19,7 @@ export async function getColors() {
 }
 export async function getPaginatedColors(params: PageSearchParams) {
   //start sanitize params
-  let search = params.search
-    ? decodeURIComponent(params.search).toLowerCase()
-    : undefined;
+  let search = params.search ? params.search.toLowerCase() : undefined;
   let page =
     params.page && !isNaN(parseInt(params.page.toString()))
       ? parseInt(params.page.toString())
@@ -37,7 +37,7 @@ export async function getPaginatedColors(params: PageSearchParams) {
         },
       },
       orderBy: {
-        color: "asc",
+        createdAt: "desc",
       },
       skip,
       take: pageSize,
@@ -75,10 +75,13 @@ export async function getColorById(id: string) {
 }
 
 export async function createColor(color: ColorSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newColor = await db.color.create({
       data: {
         ...color,
+        userId,
       },
     });
     return { newColor };

@@ -24,7 +24,6 @@ const VehicleListItem = ({
   searchParams,
   isAdminUser,
 }: VehicleListProps) => {
-  // const { page, pageSize, search, sortby, order, from, to } = searchParams;
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const handleDelete = async () => {
@@ -64,7 +63,6 @@ const VehicleListItem = ({
         {vehicle.reqNo}
       </TableCell>
       <TableCell className="hidden px-1 max-w-[100px] text-center md:table-cell">
-        {/* {ports.find((v) => v.description === vehicle.port)?.name} */}
         {vehicle.port}
       </TableCell>
       <TableCell className="hidden px-1 text-center md:table-cell">
@@ -76,6 +74,7 @@ const VehicleListItem = ({
 
       <TableCell className="px-1 ">
         <Link
+          title="Add or view results"
           className={cn(
             buttonVariants({ size: "sm" }),
             "whitespace-nowrap text-center "
@@ -91,6 +90,7 @@ const VehicleListItem = ({
       </TableCell>
       <TableCell className="px-1 text-center ">
         <Link
+          title="Edit Vehicle"
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
           href={`/vehicles/${vehicle.id}?${new URLSearchParams(
             searchParams
@@ -101,6 +101,7 @@ const VehicleListItem = ({
       </TableCell>
       <TableCell className="hidden px-1 text-center md:table-cell">
         <Link
+          title="Print Vehicle Receipt"
           className={cn(buttonVariants({ size: "sm" }))}
           target={"_blank"}
           href={`/reports/${vehicle.id}/receipt`}
@@ -110,6 +111,7 @@ const VehicleListItem = ({
       </TableCell>
       <TableCell className="px-1 text-center">
         <Button
+          title="Print Vehicle Test Report"
           variant="secondary"
           size={"sm"}
           className="ring-2 ring-gray-300"

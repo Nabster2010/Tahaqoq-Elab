@@ -54,7 +54,7 @@ const CustomerCreateForm = () => {
             description: <ToastDesc>Customer Added Successfully</ToastDesc>,
           });
           form.reset();
-          return router.back();
+          return router.push("/customers");
         } else {
           toast({
             variant: "destructive",

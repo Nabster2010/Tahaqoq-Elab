@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { PageSearchParams, VehiclesFilterProps } from "@/types";
 
 const VehiclesFilterForm = () => {
   const defaultFilter = {
@@ -35,7 +36,10 @@ const VehiclesFilterForm = () => {
     e.preventDefault();
     router.push(
       `/vehicles?${new URLSearchParams(
-        removeEmptyStrings(filter) as any
+        removeEmptyStrings({
+          ...filter,
+          search: encodeURIComponent(filter.search.trim() as string),
+        }) as PageSearchParams & VehiclesFilterProps
       ).toString()}`
     );
   };
@@ -171,10 +175,15 @@ const VehiclesFilterForm = () => {
         </div>
 
         <div className="flex ml-auto space-x-2 ">
-          <Button type="submit">
+          <Button title="Search" type="submit">
             <Icons.search className="w-6 h-6" />
           </Button>
-          <Button variant="destructive" type="button" onClick={resetForm}>
+          <Button
+            title="Clear Filters"
+            variant="destructive"
+            type="button"
+            onClick={resetForm}
+          >
             Clear
             <Icons.close className="w-5 h-5 ml-2" />
           </Button>

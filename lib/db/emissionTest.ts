@@ -1,5 +1,7 @@
 import { EmissionSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getEmissions() {
   try {
@@ -26,10 +28,13 @@ export async function getEmissionById(vehicleId: number) {
 }
 
 export async function createEmission(emission: EmissionSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newEmission = await db.emission.create({
       data: {
         ...emission,
+        userId,
       },
     });
     return { newEmission };

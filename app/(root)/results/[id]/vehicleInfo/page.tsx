@@ -1,11 +1,12 @@
 import BackButton from "@/components/back-button";
 import VehicleInfoCreateForm from "@/components/VehicleInfoCreateForm";
 import VehicleInfoUpdateForm from "@/components/VehicleInfoUpdateForm";
-import { siteConfig } from "@/config/site";
 import { getColors } from "@/lib/db/color";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getVehicleTypes } from "@/lib/db/vehicleType";
 import { defaultModelYear } from "@/lib/helpers";
+import { ExtendedVehicleType } from "@/types";
+import { Color } from "@prisma/client";
 
 export const metadata = {
   title: "Vehicle Info Results",
@@ -13,44 +14,32 @@ export const metadata = {
 };
 const VehicleInfoResultPage = async ({
   params,
-  searchParams,
 }: {
   params: { id: string };
-  searchParams: { [key: string]: string | undefined };
 }) => {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
   const { colors } = await getColors();
   const { vehicleTypes } = await getVehicleTypes();
   const hasResult = !!vehicle?.vehicleInfo;
-
   if (!vehicle) {
     return <div>vehicle not found</div>;
   }
   return (
     <section className="">
-      <BackButton
-        to={`/results/${vehicleId}?search=${search}&page=${page}&pageSize=${pageSize}`}
-      />
+      <BackButton />
       {hasResult ? (
         <VehicleInfoUpdateForm
           vehicleInfo={vehicle.vehicleInfo!}
-          vehicleTypes={vehicleTypes || []}
-          colors={colors || []}
+          colors={colors as Color[]}
+          vehicleTypes={vehicleTypes as ExtendedVehicleType[]}
         />
       ) : (
         <VehicleInfoCreateForm
           defaultModelYear={defaultModelYear(vehicle.vin) || ""}
           vehicleId={vehicle.id}
-          colors={colors || []}
-          vehicleTypes={vehicleTypes || []}
+          colors={colors as Color[]}
+          vehicleTypes={vehicleTypes as ExtendedVehicleType[]}
         />
       )}
     </section>

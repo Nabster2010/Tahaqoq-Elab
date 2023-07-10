@@ -14,12 +14,10 @@ import { toast } from "./ui/use-toast";
 
 type VehicleTypeListProps = {
   vehicleType: VehicleType & { manufacturer: { name: string } };
-  searchParams: PageSearchParams;
   isAdminUser: boolean;
 };
 const VehicleTypeListItem = ({
   vehicleType,
-  searchParams,
   isAdminUser,
 }: VehicleTypeListProps) => {
   const [isPending, startTransition] = useTransition();
@@ -61,9 +59,7 @@ const VehicleTypeListItem = ({
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/vehicleTypes/${vehicleType.id}?${new URLSearchParams(
-            searchParams
-          ).toString()}`}
+          href={`/vehicleTypes/${vehicleType.id}`}
         >
           Update
         </Link>

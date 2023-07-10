@@ -1,5 +1,7 @@
 import { SideSlipSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getSideSlips() {
   try {
@@ -26,10 +28,13 @@ export async function getSideSlipById(vehicleId: number) {
 }
 
 export async function createSideSlip(sideSlip: SideSlipSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newSideSlip = await db.sideSlip.create({
       data: {
         ...sideSlip,
+        userId,
       },
     });
     return { newSideSlip };

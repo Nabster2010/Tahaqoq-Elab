@@ -45,7 +45,7 @@ const BrokerCreateForm = () => {
             description: <ToastDesc>Broker Added Successfully</ToastDesc>,
           });
           form.reset();
-          return router.back();
+          return router.push("/brokers");
         } else {
           toast({
             variant: "destructive",

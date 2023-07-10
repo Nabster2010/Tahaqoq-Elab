@@ -41,6 +41,10 @@ export async function getUserByEmail(email: string) {
 }
 
 export async function updateUser(id: User["id"], data: any) {
+  const session = await getServerSession(authOptions);
+  if (session?.user.role !== "admin")
+    return { error: "Only admins can update users" };
+
   try {
     const user = await db.user.update({
       where: {
@@ -60,7 +64,10 @@ export async function updateUser(id: User["id"], data: any) {
 
 export async function deleteUser(id: string) {
   const session = await getServerSession(authOptions);
+  if (session?.user.role !== "admin")
+    return { error: "Only admins can delete users" };
   if (session?.user.id === id) return { error: "You cannot delete yourself" };
+
   try {
     const user = await db.user.delete({
       where: {

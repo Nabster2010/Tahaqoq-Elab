@@ -4,12 +4,10 @@ import Title from "@/components/Title";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { siteConfig } from "@/config/site";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getAppliedTests, slugify } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
@@ -18,20 +16,7 @@ export const metadata = {
   title: "Results",
   description: "Add inspection results for Vehicle",
 };
-const VehicleResultPage = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | undefined };
-}) => {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
+const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
   if (!vehicle) {
@@ -41,10 +26,7 @@ const VehicleResultPage = async ({
   const completedTests = getAppliedTests(vehicle as ExtendedVehicle);
   return (
     <>
-      <BackButton
-        to={`/vehicles?search=${search}&page=${page}&pageSize=${pageSize}`}
-      />
-
+      <BackButton />
       <Card>
         <CardHeader>
           <Title> Vehicle {slugify(vehicleId)} Results</Title>
@@ -61,7 +43,7 @@ const VehicleResultPage = async ({
                   | "FAIL"
                   | "INCOMPLETE"
               }
-              href={`/results/${vehicleId}/${test}?search=${search}&page=${page}&pageSize=${pageSize}`}
+              href={`/results/${vehicleId}/${test}`}
             />
           ))}
         </CardContent>

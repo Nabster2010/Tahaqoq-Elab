@@ -1,24 +1,8 @@
 import BackButton from "@/components/back-button";
 import CustomerUpdateForm from "@/components/customer-update-form";
-import { siteConfig } from "@/config/site";
 import { getCustomerById } from "@/lib/db/customer";
 
-const CustomerPage = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-
-  searchParams: { [key: string]: string | undefined };
-}) => {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
-
+const CustomerPage = async ({ params }: { params: { id: string } }) => {
   const { customer } = await getCustomerById(params.id);
   if (!customer) {
     return (
@@ -27,9 +11,7 @@ const CustomerPage = async ({
   }
   return (
     <section>
-      <BackButton
-        to={`/customers?search=${search}&page=${page}&pageSize=${pageSize}`}
-      />
+      <BackButton />
       <CustomerUpdateForm customer={customer} />
     </section>
   );

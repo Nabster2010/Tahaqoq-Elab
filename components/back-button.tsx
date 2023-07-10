@@ -1,11 +1,11 @@
-import { siteConfig } from "@/config/site";
+"use client";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Icons } from "./icons";
-import { buttonVariants } from "./ui/button";
+import { Button } from "./ui/button";
 
 type BackBtnProps = {
-  to: string;
+  to?: string;
   className?: string;
   icon?: boolean;
   title?: string;
@@ -17,16 +17,26 @@ const BackButton = ({
   icon = true,
   title = "Back",
 }: BackBtnProps) => {
+  const router = useRouter();
+  const handleNavigation = () => {
+    if (to) {
+      router.push(to);
+    } else {
+      router.back();
+    }
+  };
   return (
-    <Link
-      href={`${to}`}
-      className={cn(buttonVariants({ variant: "ghost" }), " my-2", className)}
+    <Button
+      onClick={handleNavigation}
+      variant="ghost"
+      title="Go Back"
+      className={cn(" my-2", className)}
     >
       <>
         {icon && <Icons.chevronLeft className="w-4 h-4 mr-2" />}
         {title}
       </>
-    </Link>
+    </Button>
   );
 };
 

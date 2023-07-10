@@ -1,5 +1,7 @@
 import { VisualInspectionSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getVisualInspections() {
   try {
@@ -28,10 +30,14 @@ export async function getVisualInspectionById(vehicleId: number) {
 export async function createVisualInspection(
   visualInspection: VisualInspectionSchemaType
 ) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
+
   try {
     const newVisualInspection = await db.visualInspection.create({
       data: {
         ...visualInspection,
+        userId,
       },
     });
     return { newVisualInspection };

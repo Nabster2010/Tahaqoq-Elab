@@ -1,5 +1,7 @@
 import { SuspensionSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getSuspensions() {
   try {
@@ -26,10 +28,13 @@ export async function getSuspensionById(vehicleId: number) {
 }
 
 export async function createSuspension(suspension: SuspensionSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newSuspension = await db.suspension.create({
       data: {
         ...suspension,
+        userId,
       },
     });
     return { newSuspension };

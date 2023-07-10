@@ -1,7 +1,6 @@
 "use client";
 import { deleteManufacturerAction } from "@/app/_actions/_manufacturerActions";
 import { cn } from "@/lib/utils";
-import { PageSearchParams } from "@/types";
 import { VehicleManufacturer } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,12 +13,10 @@ import { toast } from "./ui/use-toast";
 
 type ManufacturerListProps = {
   manufacturer: VehicleManufacturer;
-  searchParams: PageSearchParams;
   isAdminUser: boolean;
 };
 const ManufacturerListItem = ({
   manufacturer,
-  searchParams,
   isAdminUser,
 }: ManufacturerListProps) => {
   const [isPending, startTransition] = useTransition();
@@ -62,9 +59,7 @@ const ManufacturerListItem = ({
       <TableCell className="text-right">
         <Link
           className={cn(buttonVariants({}))}
-          href={`/manufacturers/${manufacturer.id}?${new URLSearchParams(
-            searchParams
-          ).toString()}`}
+          href={`/manufacturers/${manufacturer.id}`}
         >
           Update
         </Link>

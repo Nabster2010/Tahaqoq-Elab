@@ -1,6 +1,8 @@
 import { siteConfig } from "@/config/site";
 import { ManufacturerSchemaType, PageSearchParams } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getManufacturers() {
   try {
@@ -18,9 +20,7 @@ export async function getManufacturers() {
 
 export async function getPaginatedManufacturers(params: PageSearchParams) {
   //start sanitize params
-  let search = params.search
-    ? decodeURIComponent(params.search).toLowerCase()
-    : undefined;
+  let search = params.search ? params.search.toLowerCase() : undefined;
   let page =
     params.page && !isNaN(parseInt(params.page.toString()))
       ? parseInt(params.page.toString())
@@ -39,7 +39,7 @@ export async function getPaginatedManufacturers(params: PageSearchParams) {
         },
       },
       orderBy: {
-        name: "asc",
+        createdAt: "desc",
       },
       skip,
       take: pageSize,
@@ -76,10 +76,13 @@ export async function getManufacturerById(id: string) {
 }
 
 export async function createManufacturer(manufacturer: ManufacturerSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
   try {
     const newManufacturer = await db.vehicleManufacturer.create({
       data: {
         ...manufacturer,
+        userId,
       },
     });
     return { newManufacturer };

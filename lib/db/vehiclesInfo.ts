@@ -1,5 +1,7 @@
 import { VehicleInfoSchemaType } from "@/types";
+import { getServerSession } from "next-auth";
 import { db } from ".";
+import { authOptions } from "../auth";
 
 export async function getVehiclesInfo() {
   try {
@@ -26,10 +28,14 @@ export async function getVehicleInfoById(vehicleId: number) {
 }
 
 export async function createVehicleInfo(vehicleInfo: VehicleInfoSchemaType) {
+  const session = await getServerSession(authOptions);
+  const userId = session?.user.id;
+
   try {
     const newVehicleInfo = await db.vehicleInfo.create({
       data: {
         ...vehicleInfo,
+        userId,
       },
     });
     return { newVehicleInfo };

@@ -3,30 +3,18 @@ import VehicleCreateForm from "@/components/vehicle-create-form";
 import BackButton from "@/components/back-button";
 import { siteConfig } from "@/config/site";
 import { getBrokers } from "@/lib/db/broker";
+import { Broker, Customer } from "@prisma/client";
 
-const CreateVehiclePage = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-
-  searchParams: { [key: string]: string | undefined };
-}) => {
-  const page = searchParams.page ? parseInt(searchParams.page) : 1;
-  const pageSize = searchParams.pageSize
-    ? parseInt(searchParams.pageSize)
-    : siteConfig.pageSize;
-  const search = searchParams.search
-    ? decodeURIComponent(searchParams.search as string)
-    : "";
+const CreateVehiclePage = async () => {
   const { customers } = await getCustomers();
   const { brokers } = await getBrokers();
   return (
     <section>
-      <BackButton
-        to={`/vehicles?search=${search}&page=${page}&pageSize=${pageSize}`}
+      <BackButton />
+      <VehicleCreateForm
+        customers={customers as Customer[]}
+        brokers={brokers as Broker[]}
       />
-      <VehicleCreateForm customers={customers || []} brokers={brokers || []} />
     </section>
   );
 };
