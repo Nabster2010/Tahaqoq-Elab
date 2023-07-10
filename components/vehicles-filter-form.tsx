@@ -64,7 +64,7 @@ const VehiclesFilterForm = () => {
                 value={filter.search}
                 name="search"
                 placeholder={"Search"}
-                className="border-collapse rounded-r-none focus-visible:ring-0 "
+                className="rounded-r-none outline-none ring-0 focus-visible:ring-0 "
               />
             </div>
             <div className="flex items-end ">

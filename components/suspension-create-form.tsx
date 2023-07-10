@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Indicator from "./Indicator";
-import { getSuspensionResult } from "@/lib/helpers";
+import { getSuspensionResult, randomNumber } from "@/lib/helpers";
 import { SuspensionSchema } from "@/lib/validations/suspension";
 import { createNewSuspensionAction } from "@/app/_actions/_suspensionActions";
 import ToastDesc from "./ToastDesc";

@@ -61,8 +61,8 @@ function Receipt({ vehicle }: { vehicle: ExtendedVehicle }) {
 export default Receipt;
 
 const ReceiptInfo = ({ vehicle }: any) => {
-  const date = englishDateFormat(vehicle.createdAt);
-
+  const createdAt = vehicle.createdAt;
+  const createdBy = vehicle?.user?.name;
   return (
     <View>
       <View
@@ -486,6 +486,41 @@ const ReceiptInfo = ({ vehicle }: any) => {
             </Text>
           </View>
         </View>
+      </View>
+      <View
+        style={{
+          marginTop: 150,
+          textAlign: "left",
+          fontWeight: "semibold",
+          fontSize: 10,
+          display: "flex",
+          flexDirection: "row",
+          gap: 4,
+          alignItems: "center",
+        }}
+      >
+        <Text>Created by :</Text>
+        <Text style={{ fontWeight: "medium", color: "#64748b", fontSize: 9 }}>
+          {" "}
+          {createdBy}
+        </Text>
+      </View>
+      <View
+        style={{
+          marginTop: 5,
+          textAlign: "left",
+          fontWeight: "semibold",
+          fontSize: 10,
+          display: "flex",
+          flexDirection: "row",
+          gap: 4,
+          alignItems: "center",
+        }}
+      >
+        <Text>Created At :</Text>
+        <Text style={{ fontWeight: "medium", color: "#64748b", fontSize: 9 }}>
+          {new Date(createdAt).toLocaleString()}
+        </Text>
       </View>
     </View>
   );

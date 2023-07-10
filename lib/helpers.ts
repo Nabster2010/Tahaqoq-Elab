@@ -66,7 +66,8 @@ export const getVisualInspectionResult = (
   if (visualInspectionResults === null) {
     return "INCOMPLETE";
   }
-  const { vehicleId, createdAt, updatedAt, ...tests } = visualInspectionResults;
+  const { vehicleId, createdAt, updatedAt, userId, ...tests } =
+    visualInspectionResults;
   const result = Object.values(tests).every((test) => test === "PASS");
   return result ? "PASS" : "FAIL";
 };
@@ -235,3 +236,7 @@ export function removeEmptyStrings(obj: any) {
     Object.entries(obj).filter(([_, v]) => v != null && v != "")
   );
 }
+
+export const randomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

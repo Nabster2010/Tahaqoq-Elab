@@ -120,6 +120,12 @@ export async function getPaginatedVehicles(
             name: true,
           },
         },
+        user: {
+          select: {
+            name: true,
+            email: true,
+          },
+        },
         sideSlip: true,
         suspensionTest: true,
         visualInspection: true,
@@ -175,6 +181,7 @@ export async function getVehicleById(id: number) {
         customer: {
           select: { name: true, phone: true },
         },
+        user: { select: { name: true, email: true } },
       },
     });
     return { vehicle };
