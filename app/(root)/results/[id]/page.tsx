@@ -10,13 +10,23 @@ import {
 import { Label } from "@/components/ui/label";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { getAppliedTests, slugify } from "@/lib/helpers";
-import { ExtendedVehicle } from "@/types";
+import {
+  ExtendedVehicle,
+  PageSearchParams,
+  VehiclesFilterProps,
+} from "@/types";
 
 export const metadata = {
   title: "Results",
   description: "Add inspection results for Vehicle",
 };
-const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
+const VehicleResultPage = async ({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | undefined };
+}) => {
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
   if (!vehicle) {
@@ -24,9 +34,14 @@ const VehicleResultPage = async ({ params }: { params: { id: string } }) => {
   }
 
   const completedTests = getAppliedTests(vehicle as ExtendedVehicle);
+
   return (
     <>
-      <BackButton />
+      <BackButton
+        to={`/vehicles?${new URLSearchParams(
+          searchParams as PageSearchParams & VehiclesFilterProps
+        ).toString()}`}
+      />
       <Card>
         <CardHeader>
           <Title> Vehicle {slugify(vehicleId)} Results</Title>

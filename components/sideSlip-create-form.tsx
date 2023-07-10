@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Indicator from "./Indicator";
-import { getSideSlipResult } from "@/lib/helpers";
+import { getSideSlipResult, randomFloat } from "@/lib/helpers";
 import { SideSlipSchema } from "@/lib/validations/sideSlip";
 import { createNewSideSlipAction } from "@/app/_actions/_sideSlipAction";
 import ToastDesc from "./ToastDesc";
@@ -37,7 +37,7 @@ const SideSlipCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof SideSlipSchema>>({
     resolver: zodResolver(SideSlipSchema),
     defaultValues: {
-      reading: 0,
+      reading: randomFloat(0.1, 4.9),
       vehicleId: vehicleId,
       result: "PASS",
     },

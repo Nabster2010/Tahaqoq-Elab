@@ -27,7 +27,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Indicator from "./Indicator";
-import { getEmissionResult } from "@/lib/helpers";
+import { getEmissionResult, randomFloat, randomNumber } from "@/lib/helpers";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -44,9 +44,9 @@ const EmissionCreateForm = ({
   const form = useForm<z.infer<typeof EmissionSchema>>({
     resolver: zodResolver(EmissionSchema),
     defaultValues: {
-      co: 0.0,
-      diesel: 0.0,
-      hc: 0.0,
+      co: randomFloat(0.01, 3.2),
+      diesel: randomNumber(10, 30),
+      hc: randomNumber(2, 25),
       vehicleId: vehicleId,
       result: "PASS",
     },

@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Indicator from "./Indicator";
-import { getHighBeamLevelResult } from "@/lib/helpers";
+import { getHighBeamLevelResult, randomNumber } from "@/lib/helpers";
 import { HighBeamLevelSchema } from "@/lib/validations/highBeamLevel";
 import { createNewHighBeamLevelAction } from "@/app/_actions/_highBeamLevelAction";
 import ToastDesc from "./ToastDesc";
@@ -37,8 +37,8 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof HighBeamLevelSchema>>({
     resolver: zodResolver(HighBeamLevelSchema),
     defaultValues: {
-      left: 0,
-      right: 0,
+      left: randomNumber(90, 170),
+      right: randomNumber(90, 170),
       vehicleId: vehicleId,
       result: "PASS",
     },

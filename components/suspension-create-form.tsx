@@ -37,10 +37,10 @@ const SuspensionCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof SuspensionSchema>>({
     resolver: zodResolver(SuspensionSchema),
     defaultValues: {
-      fl: 0,
-      fr: 0,
-      rl: 0,
-      rr: 0,
+      fl: randomNumber(60, 89),
+      fr: randomNumber(60, 89),
+      rl: randomNumber(50, 80),
+      rr: randomNumber(50, 80),
       vehicleId: vehicleId,
       result: "PASS",
     },

@@ -27,7 +27,7 @@ import {
   TableRow,
 } from "./ui/table";
 import Indicator from "./Indicator";
-import { getBrakeTestResult } from "@/lib/helpers";
+import { getBrakeTestResult, randomNumber } from "@/lib/helpers";
 import ToastDesc from "./ToastDesc";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import LimitDescription from "./LimitDescription";
@@ -38,9 +38,9 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof BrakeSchema>>({
     resolver: zodResolver(BrakeSchema.omit({ vehicleId: true, result: true })),
     defaultValues: {
-      front: 0,
-      rear: 0,
-      parking: 0,
+      front: randomNumber(65, 89),
+      rear: randomNumber(65, 89),
+      parking: randomNumber(20, 40),
     },
   });
 
