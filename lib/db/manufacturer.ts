@@ -32,25 +32,27 @@ export async function getPaginatedManufacturers(params: PageSearchParams) {
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
 
   try {
-    const manufacturers = await db.vehicleManufacturer.findMany({
-      where: {
-        name: {
-          contains: search,
+    const [manufacturers, count] = await db.$transaction([
+      db.vehicleManufacturer.findMany({
+        where: {
+          name: {
+            contains: search,
+          },
         },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      take: pageSize,
-    });
-    const count = await db.vehicleManufacturer.count({
-      where: {
-        name: {
-          contains: search,
+        orderBy: {
+          createdAt: "desc",
         },
-      },
-    });
+        skip,
+        take: pageSize,
+      }),
+      db.vehicleManufacturer.count({
+        where: {
+          name: {
+            contains: search,
+          },
+        },
+      }),
+    ]);
     return {
       manufacturers,
       totalPages: Math.ceil(count / pageSize),

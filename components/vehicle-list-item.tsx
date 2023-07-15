@@ -50,29 +50,29 @@ const VehicleListItem = ({
   return (
     <TableRow>
       <TableCell className="px-1 font-bold ">{slugify(vehicle.id)}</TableCell>
-      <TableCell className="hidden px-1 text-center whitespace-nowrap md:table-cell">
+      <TableCell className="hidden px-1 text-center print:table-cell whitespace-nowrap md:table-cell">
         {vehicle.vin}
       </TableCell>
       <TableCell
         dir="rtl"
-        className="hidden max-w-[100px] md:table-cell px-1 text-center "
+        className="hidden print:table-cell max-w-[100px] md:table-cell px-1 text-center "
       >
         {vehicle.customer?.name}
       </TableCell>
-      <TableCell className="hidden px-1 text-center md:table-cell">
+      <TableCell className="hidden px-1 text-center print:table-cell md:table-cell">
         {vehicle.reqNo}
       </TableCell>
-      <TableCell className="hidden px-1 max-w-[100px] text-center md:table-cell">
+      <TableCell className="hidden print:table-cell px-1 max-w-[100px] text-center md:table-cell">
         {vehicle.port}
       </TableCell>
-      <TableCell className="hidden px-1 text-center md:table-cell">
+      <TableCell className="hidden px-1 text-center print:table-cell md:table-cell">
         {vehicle?.broker?.name}
       </TableCell>
-      <TableCell className="hidden px-1 text-center md:table-cell">
+      <TableCell className="hidden px-1 text-center print:table-cell md:table-cell">
         {englishDateFormat(vehicle.createdAt)}
       </TableCell>
 
-      <TableCell className="px-1 ">
+      <TableCell className="px-1 print:hidden ">
         <Link
           title="Add or view results"
           className={cn(
@@ -88,7 +88,7 @@ const VehicleListItem = ({
             : "Add Result"}
         </Link>
       </TableCell>
-      <TableCell className="px-1 text-center ">
+      <TableCell className="px-1 text-center print:hidden ">
         <Link
           title="Edit Vehicle"
           className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
@@ -99,7 +99,7 @@ const VehicleListItem = ({
           Edit
         </Link>
       </TableCell>
-      <TableCell className="hidden px-1 text-center md:table-cell">
+      <TableCell className="hidden px-1 text-center print:hidden md:table-cell">
         <Link
           title="Print Vehicle Receipt"
           className={cn(buttonVariants({ size: "sm" }))}
@@ -109,7 +109,7 @@ const VehicleListItem = ({
           <Icons.print className="w-4 h-4" />
         </Link>
       </TableCell>
-      <TableCell className="px-1 text-center">
+      <TableCell className="px-1 text-center print:hidden">
         <Button
           title="Print Vehicle Test Report"
           variant="secondary"
@@ -142,7 +142,7 @@ const VehicleListItem = ({
       </TableCell>
 
       {isAdminUser && (
-        <TableCell className="text-right ">
+        <TableCell className="text-right print:hidden ">
           <ConfirmDelete
             handleDelete={handleDelete}
             title="Are you Sure you want to delete this Vehicle?"

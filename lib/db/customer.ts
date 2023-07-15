@@ -34,31 +34,30 @@ export async function getPaginatedCustomers(params: PageSearchParams) {
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
 
   try {
-    const customers = await db.customer.findMany({
-      where: {
-        name: {
-          contains: search,
+    const [customers, count] = await db.$transaction([
+      db.customer.findMany({
+        where: {
+          name: {
+            contains: search,
+          },
         },
-      },
 
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      include: {
-        _count: true,
-      },
-      take: pageSize,
-    });
-
-    //TODO: fix this
-    const count = await db.customer.count({
-      where: {
-        name: {
-          contains: search,
+        orderBy: {
+          createdAt: "desc",
         },
-      },
-    });
+        skip,
+        take: pageSize,
+      }),
+
+      db.customer.count({
+        where: {
+          name: {
+            contains: search,
+          },
+        },
+      }),
+    ]);
+
     return {
       customers,
       totalPages: Math.ceil(count / pageSize),

@@ -86,69 +86,73 @@ export async function getPaginatedVehicles(
   const orderBy = sortItems.get(sortby);
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
-    const vehicles = await db.vehicle.findMany({
-      where: {
-        ...searchItems.get(searchBy),
-        AND: {
-          createdAt: {
-            gte: dateFrom ? new Date(dateFrom.setHours(0, 0, 0, 0)) : undefined,
-            lte: dateTo
-              ? new Date(dateTo.setHours(23, 59, 59, 999))
-              : undefined,
-          },
-        },
-      },
-      skip,
-      take: pageSize,
-      include: {
-        broker: true,
-        vehicleInfo: {
-          include: {
-            vehicleType: {
-              include: {
-                manufacturer: true,
-              },
+    const [vehicles, count] = await db.$transaction([
+      db.vehicle.findMany({
+        where: {
+          ...searchItems.get(searchBy),
+          AND: {
+            createdAt: {
+              gte: dateFrom
+                ? new Date(dateFrom.setHours(0, 0, 0, 0))
+                : undefined,
+              lte: dateTo
+                ? new Date(dateTo.setHours(23, 59, 59, 999))
+                : undefined,
             },
-            color: true,
           },
         },
-        emissionTest: true,
-        highBeamLevel: true,
-        brakeTest: true,
-        customer: {
-          select: {
-            name: true,
+        skip,
+        take: pageSize,
+        include: {
+          broker: true,
+          vehicleInfo: {
+            include: {
+              vehicleType: {
+                include: {
+                  manufacturer: true,
+                },
+              },
+              color: true,
+            },
           },
-        },
-        user: {
-          select: {
-            name: true,
-            email: true,
+          emissionTest: true,
+          highBeamLevel: true,
+          brakeTest: true,
+          customer: {
+            select: {
+              name: true,
+            },
           },
+          user: {
+            select: {
+              name: true,
+              email: true,
+            },
+          },
+          sideSlip: true,
+          suspensionTest: true,
+          visualInspection: true,
         },
-        sideSlip: true,
-        suspensionTest: true,
-        visualInspection: true,
-      },
-      orderBy:
-        orderBy as Prisma.Enumerable<Prisma.VehicleOrderByWithRelationInput>,
-    });
+        orderBy:
+          orderBy as Prisma.Enumerable<Prisma.VehicleOrderByWithRelationInput>,
+      }),
 
-    const vehicleCount = await db.vehicle.count({
-      where: {
-        ...searchItems.get(searchBy),
-        AND: {
-          createdAt: {
-            gte: dateFrom,
-            lte: dateTo,
+      db.vehicle.count({
+        where: {
+          ...searchItems.get(searchBy),
+          AND: {
+            createdAt: {
+              gte: dateFrom,
+              lte: dateTo,
+            },
           },
         },
-      },
-    });
+      }),
+    ]);
 
     return {
       vehicles,
-      totalPages: Math.ceil(vehicleCount / pageSize),
+      totalPages: Math.ceil(count / pageSize),
       currentPage: page,
     };
   } catch (error) {

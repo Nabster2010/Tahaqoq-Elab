@@ -38,33 +38,35 @@ export async function getPaginatedVehicleTypes(params: PageSearchParams) {
       : siteConfig.pageSize;
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
-    const vehicleTypes = await db.vehicleType.findMany({
-      where: {
-        modelType: {
-          contains: search,
-        },
-      },
-      include: {
-        manufacturer: {
-          select: {
-            name: true,
+    const [vehicleTypes, count] = await db.$transaction([
+      db.vehicleType.findMany({
+        where: {
+          modelType: {
+            contains: search,
           },
         },
-      },
-
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      take: pageSize,
-    });
-    const count = await db.vehicleType.count({
-      where: {
-        modelType: {
-          contains: search,
+        include: {
+          manufacturer: {
+            select: {
+              name: true,
+            },
+          },
         },
-      },
-    });
+
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip,
+        take: pageSize,
+      }),
+      db.vehicleType.count({
+        where: {
+          modelType: {
+            contains: search,
+          },
+        },
+      }),
+    ]);
     return {
       vehicleTypes,
       totalPages: Math.ceil(count / pageSize),

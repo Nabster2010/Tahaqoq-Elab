@@ -243,3 +243,9 @@ export const randomNumber = (min: number, max: number) => {
 export const randomFloat = (min: number, max: number) => {
   return Number((Math.random() * (max - min) + min).toFixed(1));
 };
+
+export const wait = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};

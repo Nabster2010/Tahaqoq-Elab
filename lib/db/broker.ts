@@ -33,31 +33,32 @@ export async function getPaginatedBrokers(params: PageSearchParams) {
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
 
   try {
-    const brokers = await db.broker.findMany({
-      where: {
-        name: {
-          contains: search,
+    const [brokers, count] = await db.$transaction([
+      db.broker.findMany({
+        where: {
+          name: {
+            contains: search,
+          },
         },
-      },
 
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      include: {
-        _count: true,
-      },
-      take: pageSize,
-    });
-
-    //TODO: fix this
-    const count = await db.broker.count({
-      where: {
-        name: {
-          contains: search,
+        orderBy: {
+          createdAt: "desc",
         },
-      },
-    });
+        skip,
+        include: {
+          _count: true,
+        },
+        take: pageSize,
+      }),
+
+      db.broker.count({
+        where: {
+          name: {
+            contains: search,
+          },
+        },
+      }),
+    ]);
     return {
       brokers,
       totalPages: Math.ceil(count / pageSize),

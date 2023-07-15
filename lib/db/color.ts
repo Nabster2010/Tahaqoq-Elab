@@ -30,29 +30,31 @@ export async function getPaginatedColors(params: PageSearchParams) {
       : siteConfig.pageSize;
   const skip: number = page > 1 ? (page - 1) * pageSize : 0;
   try {
-    const colors = await db.color.findMany({
-      where: {
-        color: {
-          contains: search,
+    const [colors, count] = await db.$transaction([
+      db.color.findMany({
+        where: {
+          color: {
+            contains: search,
+          },
         },
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      skip,
-      take: pageSize,
-    });
-    const colorsCount = await db.color.count({
-      where: {
-        color: {
-          contains: search,
+        orderBy: {
+          createdAt: "desc",
         },
-      },
-    });
+        skip,
+        take: pageSize,
+      }),
+      db.color.count({
+        where: {
+          color: {
+            contains: search,
+          },
+        },
+      }),
+    ]);
 
     return {
       colors,
-      totalPages: Math.ceil(colorsCount / pageSize),
+      totalPages: Math.ceil(count / pageSize),
       currentPage: page,
     };
   } catch (error) {
