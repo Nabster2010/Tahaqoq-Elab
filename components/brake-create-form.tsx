@@ -38,12 +38,12 @@ const BrakeCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof BrakeSchema>>({
     resolver: zodResolver(BrakeSchema.omit({ vehicleId: true, result: true })),
     defaultValues: {
-      // front: 0,
-      // rear: 0,
-      // parking: 0,
-      front: randomNumber(65, 89),
-      rear: randomNumber(65, 89),
-      parking: randomNumber(20, 40),
+      front: 0,
+      rear: 0,
+      parking: 0,
+      // front: randomNumber(65, 89),
+      // rear: randomNumber(65, 89),
+      // parking: randomNumber(20, 40),
     },
   });
 

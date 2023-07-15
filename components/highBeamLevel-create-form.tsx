@@ -37,10 +37,10 @@ const HighBeamLevelCreateForm = ({ vehicleId }: { vehicleId: number }) => {
   const form = useForm<z.infer<typeof HighBeamLevelSchema>>({
     resolver: zodResolver(HighBeamLevelSchema),
     defaultValues: {
-      // left: 0,
-      // right: 0,
-      left: randomNumber(90, 170),
-      right: randomNumber(90, 170),
+      left: 0,
+      right: 0,
+      // left: randomNumber(90, 170),
+      // right: randomNumber(90, 170),
       vehicleId: vehicleId,
       result: "PASS",
     },
