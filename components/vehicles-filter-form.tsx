@@ -34,7 +34,9 @@ const VehiclesFilterForm = () => {
   console.log(filterValuesFromUrl);
   const [filter, setFilter] = React.useState({
     searchBy: filterValuesFromUrl.searchBy || "id",
-    search: filterValuesFromUrl.search || "",
+    search: filterValuesFromUrl.search
+      ? decodeURIComponent(filterValuesFromUrl.search)
+      : "",
     sortby: filterValuesFromUrl.sortby || "id",
     order: filterValuesFromUrl.order || "desc",
     pageSize: filterValuesFromUrl.pageSize || "10",

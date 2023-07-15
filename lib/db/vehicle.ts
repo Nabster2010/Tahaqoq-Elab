@@ -152,6 +152,7 @@ export async function getPaginatedVehicles(
 
     return {
       vehicles,
+      itemsCount: count,
       totalPages: Math.ceil(count / pageSize),
       currentPage: page,
     };

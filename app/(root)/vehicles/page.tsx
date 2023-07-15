@@ -28,7 +28,7 @@ const VehiclesPage = async ({
 }) => {
   const session = await getServerSession(authOptions);
   const isAdminUser = session?.user?.role === "admin";
-  const { vehicles, totalPages, currentPage, error } =
+  const { vehicles, totalPages, currentPage, error, itemsCount } =
     await getPaginatedVehicles({
       ...searchParams,
       search: searchParams.search
@@ -39,7 +39,7 @@ const VehiclesPage = async ({
 
   return (
     <Card className="mt-2 ">
-      <CardHeader className="space-y-2  print:hidden">
+      <CardHeader className="space-y-2 print:hidden">
         <Title>Vehicles</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <Link
@@ -60,7 +60,13 @@ const VehiclesPage = async ({
         />
       </CardContent>
       <CardFooter>
-        <>
+        <div className="flex flex-col items-center justify-center gap-2 mx-auto">
+          {itemsCount && (
+            <p className="text-sm text-muted-foreground">
+              {" "}
+              Total Result: {itemsCount}
+            </p>
+          )}
           {vehicles && vehicles?.length > 0 && totalPages && totalPages >= 1 ? (
             <Pagination
               pathName="vehicles"
@@ -71,7 +77,7 @@ const VehiclesPage = async ({
           ) : (
             ""
           )}
-        </>
+        </div>
       </CardFooter>
     </Card>
   );
