@@ -2,7 +2,7 @@
 import React from "react";
 import { removeEmptyStrings } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Icons } from "./icons";
 import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
@@ -22,11 +22,25 @@ const VehiclesFilterForm = () => {
     search: "",
     sortby: "id",
     order: "desc",
+    pageSize: "10",
     from: "",
     to: "",
   };
   const router = useRouter();
-  const [filter, setFilter] = React.useState(defaultFilter);
+  const searchParams = useSearchParams();
+  const filterValuesFromUrl = Object.fromEntries(
+    searchParams
+  ) as PageSearchParams & VehiclesFilterProps;
+  console.log(filterValuesFromUrl);
+  const [filter, setFilter] = React.useState({
+    searchBy: filterValuesFromUrl.searchBy || "id",
+    search: filterValuesFromUrl.search || "",
+    sortby: filterValuesFromUrl.sortby || "id",
+    order: filterValuesFromUrl.order || "desc",
+    pageSize: filterValuesFromUrl.pageSize || "10",
+    from: filterValuesFromUrl.from || "",
+    to: filterValuesFromUrl.to || "",
+  });
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFilter((prev) => ({ ...prev, [name]: value }));
@@ -169,6 +183,29 @@ const VehiclesFilterForm = () => {
                   DESC
                 </SelectItem>
                 <SelectItem value="asc">ASC</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex-1">
+            <Label variant={"optional"}>Page Size:</Label>
+            <Select
+              name="pageSize"
+              value={filter.pageSize}
+              onValueChange={(value) =>
+                setFilter((prev) => ({ ...prev, pageSize: value }))
+              }
+              defaultValue={String(filter.pageSize)}
+            >
+              <SelectTrigger className="min-w-[80px]">
+                <SelectValue placeholder="Per Page" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem defaultChecked value="10">
+                  {"10"}
+                </SelectItem>
+                <SelectItem value="20">{"20"}</SelectItem>
+                <SelectItem value="50">{"50"}</SelectItem>
+                <SelectItem value="100">{"100"}</SelectItem>
               </SelectContent>
             </Select>
           </div>

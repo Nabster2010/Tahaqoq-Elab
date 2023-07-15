@@ -9,7 +9,7 @@ const Title = ({ children, className }: TitleProps) => {
   return (
     <h1
       className={cn(
-        "w-full uppercase py-3 text-xl md:text-2xl font-bold text-center border rounded-md  bg-border/50  ",
+        "w-full uppercase py-2 text-xl md:text-2xl font-bold text-center border rounded-md  bg-border/50  ",
         className
       )}
     >

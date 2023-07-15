@@ -43,8 +43,8 @@ const CustomersPage = async ({
   });
 
   return (
-    <Card className="mt-4">
-      <CardHeader className="space-y-4">
+    <Card className="mt-2">
+      <CardHeader className="space-y-2">
         <Title>Customers</Title>
         <div className="flex flex-col-reverse gap-8 md:items-center md:justify-between md:flex-row">
           <SearchForm />
