@@ -3,11 +3,12 @@ import { z } from "zod";
 export const VehicleSchema = z.object({
   vin: z
     .string()
+    .trim()
     .min(17, { message: "Please enter a valid VIN . min length 17 digits" })
     .max(17, { message: "Please enter a valid VIN . max length 17 digits" }),
-  reqNo: z.string().nonempty("Request number is required"),
+  reqNo: z.string().trim().nonempty("Request number is required"),
   reqDate: z.string().nonempty("Request Date is required"),
-  bayanNo: z.string().nonempty("Bayan number is required"),
+  bayanNo: z.string().trim().nonempty("Bayan number is required"),
   bayanDate: z.string().nonempty("Bayan Date  is required"),
   port: z.string().nonempty("Custom Port is required"),
   paymentType: z.string().nonempty("Payment Type is required"),

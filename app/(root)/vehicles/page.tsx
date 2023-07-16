@@ -61,11 +61,12 @@ const VehiclesPage = async ({
       </CardContent>
       <CardFooter>
         <div className="flex flex-col items-center justify-center gap-2 mx-auto">
-          {itemsCount && (
+          {itemsCount && itemsCount !== 0 ? (
             <p className="text-sm text-muted-foreground">
-              {" "}
               Total Result: {itemsCount}
             </p>
+          ) : (
+            ""
           )}
           {vehicles && vehicles?.length > 0 && totalPages && totalPages >= 1 ? (
             <Pagination
