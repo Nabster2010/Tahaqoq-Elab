@@ -193,10 +193,11 @@ export const englishDateFormat = (date: Date) => {
 };
 
 export const arabicDateFormat = (date: Date) => {
-  const formatter = new Intl.DateTimeFormat("en-US-u-ca-islamic", {
+  const formatter = new Intl.DateTimeFormat("en-US", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
+    calendar: "islamic-civil",
   });
   let formattedDate = formatter.format(date).split(" ")[0];
   const parts = formattedDate.split("/");
