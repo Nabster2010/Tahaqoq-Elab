@@ -197,7 +197,7 @@ export const arabicDateFormat = (date: Date) => {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
-    calendar: "islamic-civil",
+    calendar: "islamic-umalqura",
   });
   let formattedDate = formatter.format(date).split(" ")[0];
   const parts = formattedDate.split("/");
