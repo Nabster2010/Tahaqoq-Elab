@@ -1,7 +1,12 @@
+import Loader from "@/components/Loader";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { ExtendedVehicle } from "@/types";
-import Receipt from "./Reciept";
+import dynamic from "next/dynamic";
 
+const Receipt = dynamic(() => import("./Reciept"), {
+  loading: () => <Loader />,
+  ssr: false,
+});
 const page = async ({
   params,
 }: {

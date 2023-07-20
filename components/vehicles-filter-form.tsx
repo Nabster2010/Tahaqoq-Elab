@@ -31,7 +31,6 @@ const VehiclesFilterForm = () => {
   const filterValuesFromUrl = Object.fromEntries(
     searchParams
   ) as PageSearchParams & VehiclesFilterProps;
-  console.log(filterValuesFromUrl);
   const [filter, setFilter] = React.useState({
     searchBy: filterValuesFromUrl.searchBy || "id",
     search: filterValuesFromUrl.search
