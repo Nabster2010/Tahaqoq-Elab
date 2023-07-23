@@ -18,7 +18,7 @@ const SearchForm = () => {
   };
   const clearFilter = () => {
     setSearch("");
-    router.push(path);
+    router.push(path || "/");
   };
   return (
     <form

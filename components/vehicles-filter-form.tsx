@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { PageSearchParams, VehiclesFilterProps } from "@/types";
+import { defaultConfig } from "next/dist/server/config-shared";
 
 const VehiclesFilterForm = () => {
   const defaultFilter = {
@@ -28,9 +29,9 @@ const VehiclesFilterForm = () => {
   };
   const router = useRouter();
   const searchParams = useSearchParams();
-  const filterValuesFromUrl = Object.fromEntries(
-    searchParams
-  ) as PageSearchParams & VehiclesFilterProps;
+  const filterValuesFromUrl = searchParams
+    ? Object.fromEntries(searchParams)
+    : (defaultConfig as PageSearchParams & VehiclesFilterProps);
   const [filter, setFilter] = React.useState({
     searchBy: filterValuesFromUrl.searchBy || "id",
     search: filterValuesFromUrl.search
