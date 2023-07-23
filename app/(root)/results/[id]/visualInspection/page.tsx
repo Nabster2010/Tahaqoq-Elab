@@ -2,6 +2,7 @@ import BackButton from "@/components/back-button";
 import VisualInspectionCreateForm from "@/components/visualInspection-create-form";
 import VisualInspectionUpdateForm from "@/components/visualInspection-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Visual Results",
@@ -17,7 +18,7 @@ const VisualInspectionResultPage = async ({
   const hasResult = !!vehicle?.visualInspection;
 
   if (!vehicle) {
-    return <div>vehicle not found</div>;
+    return notFound();
   }
   return (
     <section className="">

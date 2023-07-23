@@ -2,6 +2,7 @@ import BackButton from "@/components/back-button";
 import HighBeamLevelCreateForm from "@/components/highBeamLevel-create-form";
 import HighBeamLevelUpdateForm from "@/components/highBeamLevel-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "HighBeam Results",
@@ -18,7 +19,7 @@ const HighBeamLevelResultPage = async ({
   const hasResult = !!vehicle?.highBeamLevel;
 
   if (!vehicle) {
-    return <div>vehicle not found</div>;
+    return notFound();
   }
   return (
     <section className="">

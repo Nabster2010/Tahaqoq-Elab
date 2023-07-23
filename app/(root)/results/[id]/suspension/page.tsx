@@ -2,6 +2,7 @@ import BackButton from "@/components/back-button";
 import SuspensionCreateForm from "@/components/suspension-create-form";
 import SuspensionUpdateForm from "@/components/suspension-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Suspension Results",
@@ -15,7 +16,7 @@ const SuspensionResultPage = async ({ params }: { params: { id: string } }) => {
   const hasResult = !!vehicle?.suspensionTest;
 
   if (!vehicle) {
-    return <div>vehicle not found</div>;
+    return notFound();
   }
   return (
     <section className="">

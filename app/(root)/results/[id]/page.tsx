@@ -15,6 +15,7 @@ import {
   PageSearchParams,
   VehiclesFilterProps,
 } from "@/types";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Results",
@@ -30,7 +31,7 @@ const VehicleResultPage = async ({
   const vehicleId = Number(params.id);
   const { vehicle } = await getVehicleById(vehicleId);
   if (!vehicle) {
-    return <div>Vehicle {slugify(vehicleId)} not found</div>;
+    return notFound();
   }
 
   const completedTests = getAppliedTests(vehicle as ExtendedVehicle);

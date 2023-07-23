@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Emission Results",
@@ -18,11 +19,7 @@ const EmissionResultPage = async ({ params }: { params: { id: string } }) => {
   const hasResult = !!vehicle?.emissionTest;
 
   if (!vehicle) {
-    return (
-      <div className="my-8 text-xl font-bold text-center">
-        Vehicle Not Found!
-      </div>
-    );
+    return notFound();
   }
   if (!vehicle.vehicleInfo) {
     return (

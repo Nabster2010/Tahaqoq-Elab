@@ -4,6 +4,7 @@ import { getBrokers } from "@/lib/db/broker";
 import { getCustomers } from "@/lib/db/customer";
 import { getVehicleById } from "@/lib/db/vehicle";
 import { Broker, Customer } from "@prisma/client";
+import { notFound } from "next/navigation";
 
 const VehiclePage = async ({ params }: { params: { id: string } }) => {
   const { vehicle } = await getVehicleById(parseInt(params.id));
@@ -11,9 +12,7 @@ const VehiclePage = async ({ params }: { params: { id: string } }) => {
   const { brokers } = await getBrokers();
 
   if (!vehicle) {
-    return (
-      <div className="pt-6 pb-8 text-center md:py-10">Vehicle Not Found</div>
-    );
+    return notFound();
   }
 
   return (

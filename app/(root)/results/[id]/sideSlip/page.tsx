@@ -2,6 +2,7 @@ import BackButton from "@/components/back-button";
 import SideSlipCreateForm from "@/components/sideSlip-create-form";
 import SideSlipUpdateForm from "@/components/sideSlip-update-form";
 import { getVehicleById } from "@/lib/db/vehicle";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "SideSlip Results",
@@ -15,7 +16,7 @@ const SideSlipResultPage = async ({ params }: { params: { id: string } }) => {
   const hasResult = !!vehicle?.sideSlip;
 
   if (!vehicle) {
-    return <div>vehicle not found</div>;
+    return notFound();
   }
   return (
     <section className="">

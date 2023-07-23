@@ -7,6 +7,7 @@ import { getVehicleTypes } from "@/lib/db/vehicleType";
 import { defaultModelYear } from "@/lib/helpers";
 import { ExtendedVehicleType } from "@/types";
 import { Color } from "@prisma/client";
+import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Vehicle Info Results",
@@ -23,7 +24,7 @@ const VehicleInfoResultPage = async ({
   const { vehicleTypes } = await getVehicleTypes();
   const hasResult = !!vehicle?.vehicleInfo;
   if (!vehicle) {
-    return <div>vehicle not found</div>;
+    return notFound();
   }
   return (
     <section className="">
