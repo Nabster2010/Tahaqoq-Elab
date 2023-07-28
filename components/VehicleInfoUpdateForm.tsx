@@ -38,11 +38,13 @@ type VehicleInfoUpdateFormProps = {
   vehicleInfo: VehicleInfo;
   colors: Color[];
   vehicleTypes: ExtendedVehicleType[];
+  createdAt: Date;
 };
 const VehicleInfoUpdateForm = ({
   colors,
   vehicleTypes,
   vehicleInfo,
+  createdAt,
 }: VehicleInfoUpdateFormProps) => {
   const router = useRouter();
   let [isPending, startTransition] = useTransition();
@@ -62,6 +64,8 @@ const VehicleInfoUpdateForm = ({
       vehicleTypeId: vehicleInfo.vehicleTypeId || "",
       year: vehicleInfo.year,
       remarks: vehicleInfo.remarks || "",
+      inspectionDate:
+        vehicleInfo.inspectionDate || createdAt.toISOString().split("T")[0],
     },
   });
   function onSubmit(data: z.infer<typeof VehicleInfoSchema>) {
@@ -76,7 +80,6 @@ const VehicleInfoUpdateForm = ({
             ),
           });
 
-          // return router.push(`/results/${vehicleInfo.vehicleId}`);
           return router.back();
         } else {
           toast({
@@ -104,6 +107,19 @@ const VehicleInfoUpdateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
+              <FormField
+                control={form.control}
+                name="inspectionDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Inspection Date:</FormLabel>
+                    <FormControl>
+                      <Input type={"date"} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="year"

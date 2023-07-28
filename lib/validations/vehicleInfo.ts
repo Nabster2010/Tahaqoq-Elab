@@ -14,4 +14,5 @@ export const VehicleInfoSchema = z.object({
   mileage: z.string().nonempty("Mileage is required"),
   seats: z.string().nonempty("Seats is required"),
   remarks: z.string(),
+  inspectionDate: z.string().nonempty("Inspection Date is required"),
 });

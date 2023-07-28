@@ -32,6 +32,7 @@ const VehicleInfoResultPage = async ({
       {hasResult ? (
         <VehicleInfoUpdateForm
           vehicleInfo={vehicle.vehicleInfo!}
+          createdAt={vehicle.createdAt}
           colors={colors as Color[]}
           vehicleTypes={vehicleTypes as ExtendedVehicleType[]}
         />
@@ -39,6 +40,7 @@ const VehicleInfoResultPage = async ({
         <VehicleInfoCreateForm
           defaultModelYear={defaultModelYear(vehicle.vin) || ""}
           vehicleId={vehicle.id}
+          createdAt={vehicle.createdAt}
           colors={colors as Color[]}
           vehicleTypes={vehicleTypes as ExtendedVehicleType[]}
         />

@@ -187,7 +187,6 @@ const VehicleUpdateForm = ({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Custom Declaration Date:</FormLabel>
-
                     <FormControl>
                       <Input
                         type={"date"}

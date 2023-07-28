@@ -13,11 +13,14 @@ import QRCode from "qrcode";
 
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
   const finalResult = getFinalResult(vehicle);
+  const inspectionDate = vehicle.vehicleInfo.inspectionDate
+    ? new Date(vehicle?.vehicleInfo.inspectionDate)
+    : vehicle.createdAt;
 
   const data = `
   Company Name : ${siteConfig.title}
   Report Number : ${slugify(vehicle.id)}
-  Inspection Date : ${englishDateFormat(vehicle.createdAt!)}
+  Inspection Date : ${englishDateFormat(inspectionDate)}
   Vin : ${vehicle.vin}
   Result : ${finalResult}
   `;
@@ -113,7 +116,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
-                  <Text>{englishDateFormat(vehicle?.createdAt!)}</Text>
+                  <Text>{englishDateFormat(inspectionDate)}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>

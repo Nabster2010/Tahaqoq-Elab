@@ -39,6 +39,7 @@ export default function VehicleTypeSelectComboBox({
       mileage: string;
       seats: string;
       remarks: string;
+      inspectionDate: string;
     },
     "vehicleTypeId"
   >;

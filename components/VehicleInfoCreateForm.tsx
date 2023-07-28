@@ -39,12 +39,14 @@ type VehicleInfoCreateFormProps = {
   colors: Color[];
   vehicleTypes: ExtendedVehicleType[];
   defaultModelYear: string;
+  createdAt: Date;
 };
 const VehicleInfoCreateForm = ({
   vehicleId,
   colors,
   vehicleTypes,
   defaultModelYear,
+  createdAt,
 }: VehicleInfoCreateFormProps) => {
   const router = useRouter();
   let [isPending, startTransition] = useTransition();
@@ -64,6 +66,7 @@ const VehicleInfoCreateForm = ({
       vehicleTypeId: "",
       year: defaultModelYear,
       remarks: "",
+      inspectionDate: createdAt.toISOString().split("T")[0],
     },
   });
   function onSubmit(data: z.infer<typeof VehicleInfoSchema>) {
@@ -104,6 +107,19 @@ const VehicleInfoCreateForm = ({
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
+              <FormField
+                control={form.control}
+                name="inspectionDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Inspection Date:</FormLabel>
+                    <FormControl>
+                      <Input type={"date"} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="year"
