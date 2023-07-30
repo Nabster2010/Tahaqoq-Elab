@@ -108,7 +108,7 @@ const ColorUpdateForm = ({ color }: { color: Color }) => {
             >
               <Button
                 disabled={isPending}
-                className={cn("w-full sm:w-auto", !isAdminUser && "ml-auto")}
+                className={cn("w-full sm:w-auto ml-auto")}
                 type="submit"
               >
                 {isPending && (

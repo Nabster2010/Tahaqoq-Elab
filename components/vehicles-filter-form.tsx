@@ -72,7 +72,9 @@ const VehiclesFilterForm = () => {
             Search:{" "}
           </Label>
           <div className="flex rounded-md focus-within:ring-2 ring-ring ring-offset-2 ring-offset-background ">
-            <div className="flex-1 ">
+            <div className="relative flex-1 ">
+              <Icons.search className="absolute w-6 h-6 text-muted-foreground top-2 bottom-2 left-2" />
+
               <Input
                 id="search"
                 type={"search"}
@@ -80,7 +82,7 @@ const VehiclesFilterForm = () => {
                 value={filter.search}
                 name="search"
                 placeholder={"Search"}
-                className="rounded-r-none outline-none ring-0 focus-visible:ring-0 "
+                className="pl-10 rounded-r-none outline-none ring-0 focus-visible:ring-0"
               />
             </div>
             <div className="flex items-end ">
@@ -122,6 +124,7 @@ const VehiclesFilterForm = () => {
 
             <Input
               id="from"
+              className="lg:max-w-[130px] "
               onChange={handleChange}
               value={filter.from}
               type={"date"}
@@ -136,6 +139,7 @@ const VehiclesFilterForm = () => {
             <Input
               id="to"
               onChange={handleChange}
+              className="lg:max-w-[130px] "
               value={filter.to}
               type={"date"}
               name="to"
@@ -143,7 +147,7 @@ const VehiclesFilterForm = () => {
             />
           </div>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex space-x-1">
           <div className="flex-1 ">
             <Label variant={"optional"}>Sort By:</Label>
             <Select
@@ -154,16 +158,16 @@ const VehiclesFilterForm = () => {
               }
               defaultValue={String(filter.sortby)}
             >
-              <SelectTrigger className="min-w-[150px]">
+              <SelectTrigger className="min-w-[110px]">
                 <SelectValue placeholder="order by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="id">Vehicle No</SelectItem>
+                <SelectItem value="id">No</SelectItem>
                 <SelectItem value="createdAt">Date</SelectItem>
                 <SelectItem value="port">Port</SelectItem>
                 <SelectItem value="customer">Customer</SelectItem>
                 <SelectItem value="broker">Broker</SelectItem>
-                <SelectItem value="paymentType">Payment Type</SelectItem>
+                <SelectItem value="paymentType">Payment</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -189,7 +193,9 @@ const VehiclesFilterForm = () => {
             </Select>
           </div>
           <div className="flex-1">
-            <Label variant={"optional"}>Page Size:</Label>
+            <Label className="whitespace-nowrap" variant={"optional"}>
+              Page Size:
+            </Label>
             <Select
               name="pageSize"
               value={filter.pageSize}
@@ -198,7 +204,7 @@ const VehiclesFilterForm = () => {
               }
               defaultValue={String(filter.pageSize)}
             >
-              <SelectTrigger className="min-w-[80px]">
+              <SelectTrigger className="">
                 <SelectValue placeholder="Per Page" />
               </SelectTrigger>
               <SelectContent>
@@ -215,7 +221,7 @@ const VehiclesFilterForm = () => {
 
         <div className="flex ml-auto space-x-2 ">
           <Button title="Search" type="submit">
-            <Icons.search className="w-6 h-6" />
+            Search
           </Button>
           <Button
             title="Clear Filters"
@@ -223,8 +229,7 @@ const VehiclesFilterForm = () => {
             type="button"
             onClick={resetForm}
           >
-            Clear
-            <Icons.close className="w-5 h-5 ml-2" />
+            <Icons.close className="w-4 h-4" />
           </Button>
         </div>
       </div>

@@ -13,14 +13,14 @@ import QRCode from "qrcode";
 
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
   const finalResult = getFinalResult(vehicle);
-  const inspectionDate = vehicle.vehicleInfo.inspectionDate
-    ? new Date(vehicle?.vehicleInfo.inspectionDate)
-    : vehicle.createdAt;
+  // const inspectionDate = vehicle.vehicleInfo.inspectionDate
+  //   ? new Date(vehicle?.vehicleInfo.inspectionDate)
+  //   : vehicle.createdAt;
 
   const data = `
   Company Name : ${siteConfig.title}
   Report Number : ${slugify(vehicle.id)}
-  Inspection Date : ${englishDateFormat(inspectionDate)}
+  Inspection Date : ${englishDateFormat(vehicle.createdAt)}
   Vin : ${vehicle.vin}
   Result : ${finalResult}
   `;
@@ -116,7 +116,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                     { width: "73%", fontSize: "9.5px", borderRight: "none" },
                   ]}
                 >
-                  <Text>{englishDateFormat(inspectionDate)}</Text>
+                  <Text>{englishDateFormat(vehicle.createdAt)}</Text>
                 </View>
               </View>
               <View style={styles.tableRow}>
@@ -347,7 +347,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
         </View>
         {/* الختم والتوقيع */}
-        <View style={[styles.row, { marginTop: 10 }]}>
+        <View style={[styles.row, { marginTop: 10, gap: 100 }]}>
           <View>
             <Image
               style={{ width: 180 }}
@@ -356,7 +356,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
           <View>
             <Image
-              style={{ width: 200 }}
+              style={{ width: 180 }}
               src={`/images/sign-${siteConfig.branch}.jpeg`}
             />
           </View>

@@ -10,7 +10,7 @@ export const siteConfig = {
   phone: "0502956801",
   email: "info@tahaqoq.com",
   description: "VEHICLE INSPECTION CENTER",
-  manager: "عبدالعزيز بانواس",
+  manager: "احمد عثمان الغامدي",
   url: "https://tahaqoq.com/",
   inspectionCenter: "مختبر التحقق الدولية لفحص السيارات بجدة",
   reportLeadingChars: "TJ",
