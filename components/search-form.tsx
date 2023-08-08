@@ -5,6 +5,7 @@ import React from "react";
 import { Icons } from "./icons";
 import { Button, buttonVariants } from "./ui/button";
 import { Input } from "./ui/input";
+import { debounce } from "@/lib/debounce";
 
 const SearchForm = () => {
   const path = usePathname();
@@ -14,6 +15,7 @@ const SearchForm = () => {
   const [search, setSearch] = React.useState(
     decodeURIComponent(searchParams?.get("search") ?? "")
   );
+  const debouncedSetSearch = debounce(setSearch, 500);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +34,7 @@ const SearchForm = () => {
         <Input
           id="search"
           type={"text"}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => debouncedSetSearch(e.target.value)}
           value={search}
           className="block w-full pl-10 md:w-[400px]"
           name="search"
