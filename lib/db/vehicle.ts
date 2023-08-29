@@ -212,14 +212,15 @@ export async function createVehicle(
           message: "VIN already exists",
         },
       };
+    } else {
+      const newVehicle = await db.vehicle.create({
+        data: {
+          ...vehicle,
+          userId: userId,
+        },
+      });
+      return { newVehicle };
     }
-    const newVehicle = await db.vehicle.create({
-      data: {
-        ...vehicle,
-        userId: userId,
-      },
-    });
-    return { newVehicle };
   } catch (error: any) {
     console.log("error creating vehicle");
     console.log(error);
