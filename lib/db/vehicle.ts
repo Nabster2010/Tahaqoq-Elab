@@ -201,6 +201,18 @@ export async function createVehicle(
   userId: string
 ) {
   try {
+    const vinExists = await db.vehicle.findFirst({
+      where: {
+        vin: vehicle.vin,
+      },
+    });
+    if (vinExists) {
+      return {
+        error: {
+          message: "VIN already exists",
+        },
+      };
+    }
     const newVehicle = await db.vehicle.create({
       data: {
         ...vehicle,

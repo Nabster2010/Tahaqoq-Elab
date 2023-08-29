@@ -82,9 +82,7 @@ const VehicleCreateForm = ({ customers, brokers }: VehicleCreateFormProps) => {
               <ToastDesc
                 error
                 msg={
-                  res.error && res.error?.code === "P2002"
-                    ? "Vin Already Exist"
-                    : null
+                  res.error && res?.error?.message ? res.error.message : null
                 }
               >
                 Error Creating Vehicle!
