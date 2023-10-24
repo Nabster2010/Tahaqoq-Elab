@@ -230,7 +230,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 color: vehicle?.emissionTest?.result === "FAIL" ? "red" : "",
               }}
             >
-              {vehicle?.emissionTest?.result}
+              {vehicle?.emissionTest?.result === "FAIL" ? "فشل" : "اجتياز"}
             </Text>
           </View>
         </View>
@@ -457,7 +457,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 color: vehicle?.highBeamLevel?.result === "FAIL" ? "red" : "",
               }}
             >
-              {vehicle?.highBeamLevel?.result}
+              {vehicle?.highBeamLevel?.result === "FAIL" ? "فشل" : "اجتياز"}
             </Text>
           </View>
         </View>
@@ -640,7 +640,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               }}
             >
               {" "}
-              {vehicle?.sideSlip?.result}{" "}
+              {vehicle?.sideSlip?.result === "FAIL" ? "فشل" : "اجتياز"}{" "}
             </Text>
           </View>
         </View>
@@ -775,7 +775,7 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
                 color: vehicle?.suspensionTest?.result === "FAIL" ? "red" : "",
               }}
             >
-              {vehicle?.suspensionTest?.result}
+              {vehicle?.suspensionTest?.result === "FAIL" ? "فشل" : "اجتياز"}
             </Text>
           </View>
         </View>
@@ -1002,10 +1002,10 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           >
             <Text
               style={{
-                color: vehicle.brakeTest.result === "FAIL" ? "red" : "",
+                color: vehicle?.brakeTest?.result === "FAIL" ? "red" : "",
               }}
             >
-              {vehicle.brakeTest.result}
+              {vehicle?.brakeTest?.result === "FAIL" ? "فشل" : "اجتياز"}
             </Text>
           </View>
         </View>
