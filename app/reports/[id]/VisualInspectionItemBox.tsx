@@ -86,7 +86,7 @@ const VisualInspectionItemBox = ({
             },
           ]}
         >
-          {result}
+          {result === "FAIL" ? "فشل" : "اجتياز"}
         </Text>
       </View>
     </View>
