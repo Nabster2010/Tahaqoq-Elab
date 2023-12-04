@@ -1134,6 +1134,12 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             {item}
           </Text>
         ))}
+        {vehicle.visualInspection.fuelEconomy === "FAIL" && (
+          <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+            المركبة غير مطابقة لمعيار اقتصاد الوقود وذلك حسب ما تشير إليه بيانات
+            موقع بطاقة كفاءة الطاقة السعودية.
+          </Text>
+        )}
       </View>
     </View>
   );
