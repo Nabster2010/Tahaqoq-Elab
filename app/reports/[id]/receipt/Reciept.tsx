@@ -14,9 +14,9 @@ import {
   PDFViewer,
   Font,
 } from "@react-pdf/renderer";
-import Footer from "../Footer";
 import Header from "../Header";
 import { styles } from "../styles";
+import FooterReceipt from "./FooterReceipt";
 Font.register({
   family: "Cairo",
   fonts: [
@@ -51,7 +51,7 @@ function Receipt({ vehicle }: { vehicle: ExtendedVehicle }) {
             memo={true}
           />
           <ReceiptInfo vehicle={vehicle} />
-          <Footer />
+          <FooterReceipt />
         </Page>
       </Document>
     </PDFViewer>

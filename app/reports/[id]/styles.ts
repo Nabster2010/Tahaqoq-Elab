@@ -115,7 +115,7 @@ export const styles = StyleSheet.create({
   },
 
   footer: {
-    paddingTop: 5,
+    paddingTop: 3,
     display: "flex",
     flexDirection: "row-reverse",
     justifyContent: "space-between",
