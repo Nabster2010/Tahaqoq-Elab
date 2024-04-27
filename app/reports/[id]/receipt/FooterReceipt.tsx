@@ -1,7 +1,7 @@
 import { siteConfig } from "@/config/site";
 import { Text, View, Image } from "@react-pdf/renderer";
-import { styles } from "./styles";
-const Footer = () => {
+import { styles } from "../styles";
+const FooterReceipt = () => {
   return (
     <View style={{ marginTop: "auto" }} fixed>
       <View style={[styles.dividerLG]} />
@@ -34,7 +34,7 @@ const Footer = () => {
             <Text
               style={{ fontFamily: "Cairo", fontSize: 8, fontWeight: "medium" }}
             >
-              <Text>{" 3.1.7- ن"}</Text>
+              <Text>{" 4.1.7- ن"}</Text>
             </Text>
           </View>
         </View>
@@ -99,4 +99,4 @@ const Footer = () => {
     </View>
   );
 };
-export default Footer;
+export default FooterReceipt;
