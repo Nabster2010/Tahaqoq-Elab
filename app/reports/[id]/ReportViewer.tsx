@@ -45,6 +45,7 @@ const ReportViewer = ({ vehicle }: { vehicle: ExtendedVehicle }) => (
       document={<Report vehicle={vehicle as ExtendedVehicle} />}
       fileName={slugify(vehicle.id)}
     >
+      {/* @ts-ignore */}
       {({ blob, url, loading, error }) => (
         <Button
           disabled={loading}
