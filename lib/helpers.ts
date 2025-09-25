@@ -222,6 +222,11 @@ export const defaultModelYear = (vin: string) => {
     ["n", "2022"],
     ["p", "2023"],
     ["r", "2024"],
+    ["s", "2025"],
+    ["t", "2026"],
+    ["v", "2027"],
+    ["w", "2028"],
+    ["x", "2029"],
   ]);
 
   return models.get(letter);
