@@ -184,7 +184,7 @@ export async function getVehicleById(id: number) {
         suspensionTest: true,
         visualInspection: true,
         customer: {
-          select: { name: true, phone: true },
+          select: { name: true, phone: true, customerType: true },
         },
         user: { select: { name: true, email: true } },
       },
