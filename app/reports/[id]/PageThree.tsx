@@ -1,7 +1,8 @@
 "use client";
+
+import { styles } from "./styles";
 import { ExtendedVehicle } from "@/types";
 import { Text, View } from "@react-pdf/renderer";
-import { styles } from "./styles";
 
 const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
   return (
@@ -1107,39 +1108,6 @@ const PageThree = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
             }}
           ></View>
         </View>
-      </View>
-      <View
-        style={{
-          border: "1px solid #cbd5e1",
-          marginTop: 20,
-          paddingVertical: 10,
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-end",
-          paddingHorizontal: 10,
-          minHeight: 100,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 12,
-            fontWeight: "medium",
-          }}
-        >
-          ملاحظات:
-        </Text>
-
-        {vehicle.vehicleInfo.remarks?.split("\n").map((item, index) => (
-          <Text key={item + index} style={{ fontSize: 10, fontWeight: "bold" }}>
-            {item}
-          </Text>
-        ))}
-        {vehicle.visualInspection.fuelEconomy === "FAIL" && (
-          <Text style={{ fontSize: 10, fontWeight: "bold" }}>
-            المركبة غير مطابقة لمعيار اقتصاد الوقود وذلك حسب ما تشير إليه بيانات
-            موقع بطاقة كفاءة الطاقة السعودية.
-          </Text>
-        )}
       </View>
     </View>
   );
