@@ -1,4 +1,6 @@
 "use client";
+
+import { styles } from "./styles";
 import { siteConfig } from "@/config/site";
 import {
   arabicDateFormat,
@@ -8,7 +10,6 @@ import {
 } from "@/lib/helpers";
 import { ExtendedVehicle } from "@/types";
 import { Image, Text, View } from "@react-pdf/renderer";
-import { styles } from "./styles";
 import QRCode from "qrcode";
 
 const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
@@ -296,7 +297,7 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
       <View style={styles.column}>
         {/* نتيجة الفحص */}
 
-        <View style={[styles.row, { gap: 0, width: "40%", marginTop: 80 }]}>
+        <View style={[styles.row, { gap: 0, width: "40%", marginTop: 30 }]}>
           <View
             style={[
               styles.tableHead,
@@ -321,6 +322,47 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               {finalResult === "PASS" ? "مطابق" : "غيرمطابق"}
             </Text>
           </View>
+        </View>
+        {/* ملاحظات */}
+        <View
+          style={{
+            border: "1px solid #cbd5e1",
+            marginTop: 20,
+            paddingVertical: 10,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-end",
+            paddingHorizontal: 10,
+            minHeight: 100,
+            width: "100%",
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: "medium",
+            }}
+          >
+            {": ملاحظات"}
+          </Text>
+
+          {vehicle.vehicleInfo.remarks?.split("\n").map((item, index) => (
+            <Text
+              key={item + index}
+              style={{ fontSize: 10, fontWeight: "bold" }}
+            >
+              {item}
+            </Text>
+          ))}
+          {vehicle.visualInspection.fuelEconomy === "FAIL" && (
+            <View>
+              <Text style={{ fontSize: 10, fontWeight: "bold" }}>
+                . المركبة غير مطابقة لمعيار اقتصاد الوقود وذلك حسب ما تشير إليه
+                بيانات موقع بطاقة كفاءة الطاقة السعودية
+              </Text>
+            </View>
+          )}
         </View>
 
         {/* المدير الفني */}
@@ -347,12 +389,16 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
           </View>
         </View>
         {/* الختم والتوقيع */}
-        <View style={[styles.row, { marginTop: 10, gap: 100 }]}>
+        <View style={[styles.row, { marginTop: 10, gap: 30 }]}>
           <View>
             <Image
               style={{ width: 180 }}
               src={`/images/stamp-${siteConfig.branch}.jpeg`}
             />
+          </View>
+          {/* qr code */}
+          <View style={[styles.qrContainer, { marginTop: 20 }]}>
+            <Image src={result} style={[styles.qrImg]} />
           </View>
           <View>
             <Image
@@ -360,10 +406,6 @@ const FirstPage = ({ vehicle }: { vehicle: ExtendedVehicle }) => {
               src={`/images/sign-${siteConfig.branch}.jpeg`}
             />
           </View>
-        </View>
-        {/* qr code */}
-        <View style={[styles.qrContainer]}>
-          <Image src={result} style={[styles.qrImg]} />
         </View>
       </View>
     </View>
