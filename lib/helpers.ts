@@ -71,7 +71,6 @@ export const getVisualInspectionResult = (
   const {
     vehicleId,
     id,
-    modifiedVehicleId,
     createdAt,
     updatedAt,
     userId,
