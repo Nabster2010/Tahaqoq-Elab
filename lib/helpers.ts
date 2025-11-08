@@ -3,6 +3,7 @@ import { testLimits } from "@/config/testConfig";
 import { ExtendedVehicle } from "@/types";
 import {
   Brake,
+  Customer,
   Emission,
   HighBeamLevel,
   SideSlip,
@@ -61,15 +62,29 @@ export const getTestStatus = (test: any) => {
 };
 
 export const getVisualInspectionResult = (
-  visualInspectionResults: VisualInspection | null
+  visualInspectionResults: VisualInspection | null,
+  customer: Customer
 ) => {
   if (visualInspectionResults === null) {
     return "INCOMPLETE";
   }
-  const { vehicleId, createdAt, updatedAt, userId, ...tests } =
-    visualInspectionResults;
-  const result = Object.values(tests).every((test) => test === "PASS");
-  return result ? "PASS" : "FAIL";
+  const {
+    vehicleId,
+    id,
+    modifiedVehicleId,
+    createdAt,
+    updatedAt,
+    userId,
+    ...tests
+  } = visualInspectionResults;
+  const { customerType } = customer;
+  const { fuelEconomy, ...otherTests } = tests;
+
+  const fuelEconomyResult =
+    fuelEconomy === "FAIL" && customerType === "COMPANY" ? "FAIL" : "PASS";
+  const result = Object.values(otherTests).every((test) => test === "PASS");
+  const finalResult = result && fuelEconomyResult === "PASS" ? "PASS" : "FAIL";
+  return finalResult;
 };
 
 export const getBrakeTestResult = (brakeTest: Partial<Brake>) => {
@@ -147,7 +162,10 @@ export const getAppliedTests = (vehicle: ExtendedVehicle) => {
     sideSlip: getTestStatus(vehicle.sideSlip),
     suspension: getTestStatus(vehicle.suspensionTest),
     brake: getTestStatus(vehicle.brakeTest),
-    visualInspection: getVisualInspectionResult(vehicle.visualInspection),
+       visualInspection: getVisualInspectionResult(
+      vehicle.visualInspection,
+      vehicle.customer as any
+    ),
   };
 };
 
